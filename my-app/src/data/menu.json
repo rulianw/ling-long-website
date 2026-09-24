@@ -1,0 +1,814 @@
+{
+  "title": "Menukaart Ling Long",
+  "description": "alle items van het menu 2026",
+  "valid_from": "2026-02-01",
+  "items": [
+    {
+      "id": 1,
+      "name": "Tomatensoep",
+      "price": 3.65,
+      "category": "Soepen",
+      "description": ""
+    },
+    {
+      "id": 2,
+      "name": "Kippensoep",
+      "price": 3.65,
+      "category": "Soepen",
+      "description": ""
+    },
+    {
+      "id": 3,
+      "name": "Haaievinnensoep (met krab)",
+      "price": 4.65,
+      "category": "Soepen",
+      "description": ""
+    },
+    {
+      "id": 4,
+      "name": "Wantonsoep",
+      "price": 5.2,
+      "category": "Soepen",
+      "description": ""
+    },
+    {
+      "id": 5,
+      "name": "Sun La soep",
+      "price": 5.8,
+      "category": "Soepen",
+      "description": "met ossenhaas en groenten en een pittige smaak"
+    },
+    {
+      "id": 6,
+      "name": "Soep \"Ling Long\"",
+      "price": 5.8,
+      "category": "Soepen",
+      "description": "met chinese garnalen, vis, kipfilet, groente en champignons"
+    },
+    {
+      "id": 7,
+      "name": "Kroepoek",
+      "price": 3.2,
+      "category": "Voor- en Bijgerechten",
+      "description": ""
+    },
+    {
+      "id": 8,
+      "name": "Loempia",
+      "price": 5.7,
+      "category": "Voor- en Bijgerechten",
+      "description": ""
+    },
+    {
+      "id": 9,
+      "name": "Loempia Speciaal",
+      "price": 7.0,
+      "category": "Voor- en Bijgerechten",
+      "description": "met 1st. saté en atjar"
+    },
+    {
+      "id": 10,
+      "name": "Loempia met babi pangang",
+      "price": 8.0,
+      "category": "Voor- en Bijgerechten",
+      "description": ""
+    },
+    {
+      "id": "11a",
+      "name": "Loempia Ling Long",
+      "price": 8.5,
+      "category": "Voor- en Bijgerechten",
+      "description": "belegd met kipfilet, champignons en groenten"
+    },
+    {
+      "id": "11b",
+      "name": "Loempia Kip",
+      "price": 5.7,
+      "category": "Voor- en Bijgerechten",
+      "description": "gevuld met kipfilet en groenten"
+    },
+    {
+      "id": 12,
+      "name": "Chinese loempias (4 st)",
+      "price": 6.1,
+      "category": "Voor- en Bijgerechten",
+      "description": "gevuld met tja sieuw en mihoen"
+    },
+    {
+      "id": "13a",
+      "name": "Kerrie mini loempias (8 st.)",
+      "price": 3.6,
+      "category": "Voor- en Bijgerechten",
+      "description": ""
+    },
+    {
+      "id": "13b",
+      "name": "Lenterolletjes (8 st.)",
+      "price": 3.6,
+      "category": "Voor- en Bijgerechten",
+      "description": ""
+    },
+    {
+      "id": 14,
+      "name": "Pangsit Goreng (6 st.)",
+      "price": 4.75,
+      "category": "Voor- en Bijgerechten",
+      "description": ""
+    },
+    {
+      "id": 15,
+      "name": "Gebakken Banaan (5 st.)",
+      "price": 3.9,
+      "category": "Voor- en Bijgerechten",
+      "description": ""
+    },
+    {
+      "id": 16,
+      "name": "Saté Babi (varkens) of Ajam (kip) (4 st.)",
+      "price": 6.7,
+      "category": "Voor- en Bijgerechten",
+      "description": ""
+    },
+    {
+      "id": 17,
+      "name": "Kippenpoten (2 st.)",
+      "price": 6.9,
+      "category": "Voor- en Bijgerechten",
+      "description": ""
+    },
+    {
+      "id": 18,
+      "name": "Spare-ribs (5 st.)",
+      "price": 6.7,
+      "category": "Voor- en Bijgerechten",
+      "description": ""
+    },
+    {
+      "id": 19,
+      "name": "Gebakken garnalen (4 st.)",
+      "price": 6.7,
+      "category": "Voor- en Bijgerechten",
+      "description": ""
+    },
+    {
+      "id": 20,
+      "name": "Witte Rijst",
+      "price": 3.6,
+      "category": "Voor- en Bijgerechten",
+      "description": ""
+    },
+    {
+      "id": 21,
+      "name": "Satésaus",
+      "price": 3.2,
+      "category": "Voor- en Bijgerechten",
+      "description": ""
+    },
+    {
+      "id": 22,
+      "name": "Diverse sauzen",
+      "price": 3.2,
+      "category": "Voor- en Bijgerechten",
+      "description": ""
+    },
+    {
+      "id": 23,
+      "name": "Atjar",
+      "price": 3.2,
+      "category": "Voor- en Bijgerechten",
+      "description": ""
+    },
+    {
+      "id": 28,
+      "name": "Goreng",
+      "price": 6.8,
+      "category": "Nasi/Bami",
+      "description": "met ei & ham"
+    },
+    {
+      "id": 29,
+      "name": "Nasi Kerrie",
+      "price": 8.2,
+      "category": "Nasi/Bami",
+      "description": "met sambal, kipfilet en kerrie"
+    },
+    {
+      "id": 30,
+      "name": "Speciaal",
+      "price": 10.7,
+      "category": "Nasi/Bami",
+      "description": "met kip en saté"
+    },
+    {
+      "id": 31,
+      "name": "\"Ling Long\" Speciaal",
+      "price": 16.4,
+      "category": "Nasi/Bami",
+      "description": "tjap tjoi, babi pangang, daging roedjak en saté"
+    },
+    {
+      "id": 32,
+      "name": "Royal",
+      "price": 15.4,
+      "category": "Nasi/Bami",
+      "description": "foe yong hai, babi pangang, koe loe yuk en saté"
+    },
+    {
+      "id": 33,
+      "name": "Nasi/Bami met runderhaas en groenten",
+      "price": 13.8,
+      "category": "Nasi/Bami",
+      "description": ""
+    },
+    {
+      "id": 34,
+      "name": "Nasi/Bami met chinese garnalen en groenten",
+      "price": 13.8,
+      "category": "Nasi/Bami",
+      "description": ""
+    },
+    {
+      "id": 35,
+      "name": "Nasi Yan Zhou",
+      "price": 12.2,
+      "category": "Nasi/Bami",
+      "description": "tja sieuw, groenten en kleine garnaaltjes"
+    },
+    {
+      "id": 36,
+      "name": "Mihoen/Chinese Bami met varkenshaas en groenten",
+      "price": 12.2,
+      "category": "Mihoen/Chinese Bami",
+      "description": ""
+    },
+    {
+      "id": 37,
+      "name": "Mihoen/Chinese Bami met kipfilet en groenten",
+      "price": 12.2,
+      "category": "Mihoen/Chinese Bami",
+      "description": ""
+    },
+    {
+      "id": 38,
+      "name": "Mihoen/Chinese Bami met ossenhaas en groenten",
+      "price": 15.2,
+      "category": "Mihoen/Chinese Bami",
+      "description": ""
+    },
+    {
+      "id": 39,
+      "name": "Mihoen/Chinese Bami met Chinese garnalen en groenten",
+      "price": 14.7,
+      "category": "Mihoen/Chinese Bami",
+      "description": ""
+    },
+    {
+      "id": 40,
+      "name": "\"Ling Long\" Speciaal",
+      "price": 20.5,
+      "category": "Mihoen/Chinese Bami",
+      "description": "tjap tjoi, babi pangang, daging roedjak en saté"
+    },
+    {
+      "id": 41,
+      "name": "Royal",
+      "price": 19.5,
+      "category": "Mihoen/Chinese Bami",
+      "description": "foe yong hoi, babi pangang, koe loe yuk en saté"
+    },
+    {
+      "id": 42,
+      "name": "Sin Tjauw",
+      "price": 15.2,
+      "category": "Mihoen/Chinese Bami",
+      "description": "met tja sieuw, garnalen, groenten en kerriesaus"
+    },
+    {
+      "id": 43,
+      "name": "Foe Yong Hai met varkensvlees",
+      "price": 11.3,
+      "category": "Foe Yong Hai (ei)",
+      "description": ""
+    },
+    {
+      "id": 44,
+      "name": "Foe Yong Hai met kipfilet",
+      "price": 11.3,
+      "category": "Foe Yong Hai (ei)",
+      "description": ""
+    },
+    {
+      "id": 45,
+      "name": "Foe Yong Hai met Chinese garnalen",
+      "price": 15.3,
+      "category": "Foe Yong Hai (ei)",
+      "description": ""
+    },
+    {
+      "id": 46,
+      "name": "Tjap Tjoi met varkenshaas",
+      "price": 11.3,
+      "category": "Tjap Tjoi (groenten)",
+      "description": ""
+    },
+    {
+      "id": 47,
+      "name": "Tjap Tjoi met kipfilet",
+      "price": 11.3,
+      "category": "Tjap Tjoi (groenten)",
+      "description": ""
+    },
+    {
+      "id": 48,
+      "name": "Tjap Tjoi met ossenhaas",
+      "price": 15.3,
+      "category": "Tjap Tjoi (groenten)",
+      "description": ""
+    },
+    {
+      "id": 49,
+      "name": "Tjap Tjoi met Chinese garnalen",
+      "price": 15.3,
+      "category": "Tjap Tjoi (groenten)",
+      "description": ""
+    },
+    {
+      "id": 50,
+      "name": "Tjao Tja Zhei",
+      "price": 15.8,
+      "category": "Tjap Tjoi (groenten)",
+      "description": "diverse groenten met 3 soorten vlees"
+    },
+    {
+      "id": 51,
+      "name": "Foe Yong Hai/Tjap Tjoi zonder vlees",
+      "price": 10.2,
+      "category": "Vegetarisch",
+      "description": ""
+    },
+    {
+      "id": 52,
+      "name": "Tau Fu met groenten en champignons",
+      "price": 11.2,
+      "category": "Vegetarisch",
+      "description": ""
+    },
+    {
+      "id": 53,
+      "name": "Ma Po Tau Fu",
+      "price": 12.5,
+      "category": "Vegetarisch",
+      "description": "taufu met groenten in pittige szechuansaus"
+    },
+    {
+      "id": 54,
+      "name": "Kip met kerrie- of ketjapsaus",
+      "price": 12.8,
+      "category": "Kip",
+      "description": ""
+    },
+    {
+      "id": 55,
+      "name": "Kip met ananas of champignons",
+      "price": 12.8,
+      "category": "Kip",
+      "description": ""
+    },
+    {
+      "id": 56,
+      "name": "Koe Loe Kai",
+      "price": 13.8,
+      "category": "Kip",
+      "description": "gebakken kipballetjes met zoetzure saus"
+    },
+    {
+      "id": 57,
+      "name": "Lah Tja Kai",
+      "price": 13.3,
+      "category": "Kip",
+      "description": "in sambal- en chilisaus"
+    },
+    {
+      "id": 59,
+      "name": "Tau Si Kai",
+      "price": 13.8,
+      "category": "Kip",
+      "description": "in geurige zwarte sojabonensaus"
+    },
+    {
+      "id": 60,
+      "name": "Yu Xian Kai",
+      "price": 14.3,
+      "category": "Ling Long Kip specialiteiten",
+      "description": "in lichte knoflooksaus"
+    },
+    {
+      "id": 61,
+      "name": "Kon Bao Kai",
+      "price": 14.5,
+      "category": "Ling Long Kip specialiteiten",
+      "description": "met cashewnoten in pittige kruidensaus"
+    },
+    {
+      "id": 62,
+      "name": "Tian La Kai",
+      "price": 15.5,
+      "category": "Ling Long Kip specialiteiten",
+      "description": "licht gebakken kipblokjes in pittige zoetzure saus"
+    },
+    {
+      "id": 63,
+      "name": "Zha La Kai",
+      "price": 15.5,
+      "category": "Ling Long Kip specialiteiten",
+      "description": "licht gebakken kipblokjes gekruid met chilisaus"
+    },
+    {
+      "id": 64,
+      "name": "Babi Pangang",
+      "price": 14.5,
+      "category": "Varkensvlees",
+      "description": ""
+    },
+    {
+      "id": "64a",
+      "name": "Babi ketjap",
+      "price": 15.0,
+      "category": "Varkensvlees",
+      "description": ""
+    },
+    {
+      "id": 65,
+      "name": "Babi Spek",
+      "price": 15.5,
+      "category": "Varkensvlees",
+      "description": "krokante speenvarken"
+    },
+    {
+      "id": 66,
+      "name": "Tja Sieuw",
+      "price": 15.5,
+      "category": "Varkensvlees",
+      "description": "geroosterde, gemarineerde, magere varkensvlees"
+    },
+    {
+      "id": 67,
+      "name": "Koe Loe Yuk",
+      "price": 13.2,
+      "category": "Varkensvlees",
+      "description": ""
+    },
+    {
+      "id": 68,
+      "name": "Koe Loe Yuk met kerrie- of ketjapsaus",
+      "price": 13.2,
+      "category": "Varkensvlees",
+      "description": ""
+    },
+    {
+      "id": 69,
+      "name": "Tau Si Yuk",
+      "price": 13.2,
+      "category": "Varkensvlees",
+      "description": "in geurige, zwarte sojabonensaus"
+    },
+    {
+      "id": 70,
+      "name": "Yu Xian Yuk",
+      "price": 14.0,
+      "category": "Varkensvlees",
+      "description": "in lichte knoflooksaus"
+    },
+    {
+      "id": 71,
+      "name": "Kon Bao Yuk",
+      "price": 14.5,
+      "category": "Varkensvlees",
+      "description": "met cashewnoten in pittige kruidensaus"
+    },
+    {
+      "id": 72,
+      "name": "Ma La Rou Si",
+      "price": 14.8,
+      "category": "Ling Long Varkensvlees specialiteiten",
+      "description": "varkenshaas met pittige sichuanese pepersaus"
+    },
+    {
+      "id": 73,
+      "name": "He Jiao You",
+      "price": 14.8,
+      "category": "Ling Long Varkensvlees specialiteiten",
+      "description": "varkenshaas met geurige, zwarte pepersaus"
+    },
+    {
+      "id": 74,
+      "name": "Si Jiao Pai Gu",
+      "price": 14.8,
+      "category": "Ling Long Varkensvlees specialiteiten",
+      "description": "spare-ribs met tausi- en kruidensaus"
+    },
+    {
+      "id": 75,
+      "name": "Ossenhaas met kerrie- of ketjapsaus",
+      "price": 15.8,
+      "category": "Ossenhaas",
+      "description": ""
+    },
+    {
+      "id": 76,
+      "name": "Ossenhaas met champignons of broccoli",
+      "price": 15.8,
+      "category": "Ossenhaas",
+      "description": ""
+    },
+    {
+      "id": 78,
+      "name": "Tau Si Niu Rou",
+      "price": 16.8,
+      "category": "Ossenhaas",
+      "description": "met zwarte sojabonensaus"
+    },
+    {
+      "id": 79,
+      "name": "Yu Xian Niu Rou",
+      "price": 16.8,
+      "category": "Ossenhaas",
+      "description": "met gember in lichte knoflooksaus"
+    },
+    {
+      "id": 80,
+      "name": "Kon Bao Niu Rou",
+      "price": 17.3,
+      "category": "Ossenhaas",
+      "description": "met cashewnoten in pittige kruidensaus"
+    },
+    {
+      "id": 81,
+      "name": "San Yuk",
+      "price": 17.3,
+      "category": "Ling Long Ossenhaas Specialiteiten",
+      "description": "ossenhaas, varkenshaas en kipfilet in tepansaus"
+    },
+    {
+      "id": 82,
+      "name": "He Jiao Niu Rou",
+      "price": 17.3,
+      "category": "Ling Long Ossenhaas Specialiteiten",
+      "description": "ossenhaas met geurig zwarte pepersaus"
+    },
+    {
+      "id": 84,
+      "name": "Mau Bau",
+      "price": 17.3,
+      "category": "Ling Long Ossenhaas Specialiteiten",
+      "description": "kleine biefstuk met champignons in ketjap en oestersaus"
+    },
+    {
+      "id": 85,
+      "name": "Geroosterde Pekingeend",
+      "price": 16.3,
+      "category": "Eend",
+      "description": "met pikante saus apart"
+    },
+    {
+      "id": 86,
+      "name": "Geroosterde Pekingeend met ananas in fruitige saus",
+      "price": 16.7,
+      "category": "Eend",
+      "description": ""
+    },
+    {
+      "id": 88,
+      "name": "Gepaneerde Chinese garnalen",
+      "price": 15.8,
+      "category": "Garnalen",
+      "description": "10 st. met zoetzuresaus"
+    },
+    {
+      "id": 90,
+      "name": "Tau Si Xia",
+      "price": 16.3,
+      "category": "Garnalen",
+      "description": "met geurige, zwarte sojabonensaus"
+    },
+    {
+      "id": 91,
+      "name": "Yu Xian Xia",
+      "price": 16.3,
+      "category": "Garnalen",
+      "description": "in lichte knoflooksaus"
+    },
+    {
+      "id": 92,
+      "name": "Kon Bao Xia",
+      "price": 16.8,
+      "category": "Garnalen",
+      "description": "met cashewnoten in pittige kruidensaus"
+    },
+    {
+      "id": 93,
+      "name": "Jia Yian Xia",
+      "price": 17.5,
+      "category": "Ling Long Garnalen Specialiteiten",
+      "description": "met rode peper in geurige droge smaak"
+    },
+    {
+      "id": 94,
+      "name": "Ma Xian Xia",
+      "price": 17.5,
+      "category": "Ling Long Garnalen Specialiteiten",
+      "description": "licht gebakken garnalen in chilisaus"
+    },
+    {
+      "id": 97,
+      "name": "Zalm met ananas in zoetzure saus",
+      "price": 18.5,
+      "category": "Ling Long Vis Specialiteiten",
+      "description": ""
+    },
+    {
+      "id": 98,
+      "name": "Jian Sao Zalm",
+      "price": 18.5,
+      "category": "Ling Long Vis Specialiteiten",
+      "description": "gebakken zalmfilet met boter, oester en pittige hoisinsaus"
+    },
+    {
+      "id": 99,
+      "name": "San Xian Po",
+      "price": 18.5,
+      "category": "Ling Long Vis Specialiteiten",
+      "description": "garnalen, inktvis en kipfilet in lichte knoflooksaus"
+    },
+    {
+      "id": 101,
+      "name": "Gado Gado",
+      "price": 10.3,
+      "category": "Indische gerechten",
+      "description": ""
+    },
+    {
+      "id": 102,
+      "name": "Nasi/Bami rames",
+      "price": 12.3,
+      "category": "Indische gerechten",
+      "description": ""
+    },
+    {
+      "id": 103,
+      "name": "Nasi/Bami rames speciaal",
+      "price": 15.0,
+      "category": "Indische gerechten",
+      "description": "met kip en saté"
+    },
+    {
+      "id": 104,
+      "name": "Ajam pangang",
+      "price": 13.8,
+      "category": "Indische gerechten",
+      "description": "gebraden kip met pikante saus"
+    },
+    {
+      "id": 105,
+      "name": "Daging Roedjak",
+      "price": 15.3,
+      "category": "Indische gerechten",
+      "description": "gekruid rundvlees met speciale sambalsaus"
+    },
+    {
+      "id": 106,
+      "name": "Daging Smoor",
+      "price": 15.3,
+      "category": "Indische gerechten",
+      "description": "gekruid rundvlees in kerriesaus"
+    },
+    {
+      "id": 107,
+      "name": "Chinese Rijsttafel",
+      "price": null,
+      "category": "Rijsttafels",
+      "description": "incl. witte rijst; babi pangang, koe loe yuk, foe yong hai, tjap tjoi, kipfilet met champignons, saté, chinese loempias en kroepoek",
+      "variants": [
+        {
+          "label": "Voor 2 personen",
+          "price": 31.0
+        },
+        {
+          "label": "Voor 4 personen",
+          "price": 60.0
+        }
+      ]
+    },
+    {
+      "id": 108,
+      "name": "Indische Rijsttafel",
+      "price": null,
+      "category": "Rijsttafels",
+      "description": "incl. witte rijst; daging roedjak, daging smoor, kip kerrie, ajam pangang, gado gado, foe yong hai, gebakken banaan, atjar, saté en kroepoek",
+      "variants": [
+        {
+          "label": "Voor 2 personen",
+          "price": 34.0
+        },
+        {
+          "label": "Voor 4 personen",
+          "price": 65.0
+        }
+      ]
+    },
+    {
+      "id": 109,
+      "name": "Ling Long Rijsttafel",
+      "price": null,
+      "category": "Rijsttafels",
+      "description": "incl. witte rijst; babi pangang, tjap tjoi, babi spek, kipfilet in konbaosaus, tomatensoep, gebakken garnalen, saté en kroepoek",
+      "variants": [
+        {
+          "label": "Voor 2 personen",
+          "price": 35.0
+        },
+        {
+          "label": "Voor 4 personen",
+          "price": 68.0
+        }
+      ]
+    },
+    {
+      "id": 110,
+      "name": "Voordeel Combinatie Menu",
+      "price": null,
+      "category": "Voordeel Combinatie Menu",
+      "description": "Kies en combineer uit de 21 gerechten in 'choices'",
+      "variants": [
+        {
+          "label": "A. 1 Gerecht (halve bak) + halve bak witte rijst",
+          "price": 8.6
+        },
+        {
+          "label": "B. 1 Gerecht (kleine bak)",
+          "price": 10.5
+        },
+        {
+          "label": "C. 2 Gerechten (halve bak)",
+          "price": 14.0
+        },
+        {
+          "label": "D. 3 Gerechten (kleine bakjes) + kroepoek",
+          "price": 27.5
+        }
+      ],
+      "choices": [
+        "Babi Pangang",
+        "Tja Sieuw",
+        "Babi Spek",
+        "Koe Loe Yuk",
+        "Yu Xian Yuk",
+        "Vlees ketjapsaus",
+        "Vlees zwarte pepersaus",
+        "Tjap Tjoi",
+        "Gado Gado",
+        "Taufu groenten",
+        "Foe Yong Hai",
+        "Daging Smoor",
+        "Daging Roedjak",
+        "Gebakken garnalen",
+        "Kip saté",
+        "Kip kerrie",
+        "Kip met champignons",
+        "Kip met tausisaus",
+        "Kip met ananas",
+        "Szechuan kip",
+        "Konbao kip"
+      ]
+    }
+  ],
+  "extras": {
+    "description": "Bij alle hoofdgerechten: niet bij de genoemde prijs inbegrepen",
+    "items": [
+      {
+        "name": "Witte Rijst",
+        "price": 0.8
+      },
+      {
+        "name": "Bami of Nasi",
+        "price": 1.5
+      },
+      {
+        "name": "Grote Bami of Nasi",
+        "price": 3.2
+      },
+      {
+        "name": "Mihoen & Chin. Bami",
+        "price": 3.5
+      },
+      {
+        "name": "Grote Mihoen of Chin. Bami",
+        "price": 6.5
+      },
+      {
+        "name": "Saus apart",
+        "price": 1.0
+      }
+    ]
+  }
+}
