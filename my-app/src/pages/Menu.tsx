@@ -6,11 +6,14 @@ const items = menuData.items as MenuItem[]
 console.log(items);
 
 export default function Menu() {
-    const [order, setOrder] = useState([]);
+    const [order, setOrder] = useState<[OrderLine[]]>([{
+        key: string | null,
+        name: string | null,
+        price: number | null,
+        quantity: number | null,
+    }]);
 
-    const totalPrice = order.map(item => totalPrice+=item.price)
-
-
+    const totalPrice = order.reduce((accumulator, currentValue) =>  accumulator + currentValue, 0)
 
     function addToOrder(id, order){
 
