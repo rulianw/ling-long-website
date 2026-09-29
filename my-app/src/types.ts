@@ -1,9 +1,9 @@
 export type Variant = { label: string; price: number }
 
 export type MenuItem = {
-  id: number | string
+  id: number 
   name: string
-  price: number | null
+  price: number
   category: string
   description: string
   variants?: Variant[]
@@ -11,7 +11,7 @@ export type MenuItem = {
 }
 
 export type OrderLine = {
-  key: string
+  id: number
   name: string
   price: number
   quantity: number
