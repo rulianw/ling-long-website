@@ -17,8 +17,9 @@ export type MenuItem = {
 export type OrderLine = {
   id: number | string
   name: string
-  price: number | null             
+  basePrice: number
+  extrasPrice: number
   quantity: number
-  variant?: string           
+  variant?: string
   extras?: Extra[]
 }

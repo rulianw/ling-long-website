@@ -182,10 +182,14 @@
     "description": "Bij alle hoofdgerechten: niet bij de genoemde prijs inbegrepen",
     "items": [
       { "name": "Witte Rijst", "price": 0.8, "image": "" },
-      { "name": "Bami of Nasi", "price": 1.5, "image": "" },
-      { "name": "Grote Bami of Nasi", "price": 3.2, "image": "" },
-      { "name": "Mihoen & Chin. Bami", "price": 3.5, "image": "" },
-      { "name": "Grote Mihoen of Chin. Bami", "price": 6.5, "image": "" }
+      { "name": "Bami", "price": 1.5, "image": "" },
+      { "name": "Nasi", "price": 1.5, "image": ""},
+      { "name": "Grote Bami", "price": 3.2, "image": "" },
+      { "name": "Grote Nasi", "price": 1.5, "image": "" },
+      { "name": "Mihoen", "price": 3.5, "image": "" },
+      { "name": "Chin. Bami", "price": 3.5, "image": "" },
+      { "name": "Grote Mihoen", "price": 6.5, "image": "" },
+      { "name": "Grote Chin.Bami", "price": 6.5, "image": "" }
     ]
   }
 }

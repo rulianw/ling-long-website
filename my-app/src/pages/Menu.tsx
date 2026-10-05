@@ -12,7 +12,7 @@ export default function Menu() {
     const [order, setOrder] = useState<OrderLine[]>([]) //is dit iets van alleen het menu of zal ik het over andere applicaties willen gebruiken
     const [tempExtras, setTempExtras] = useState<Extra[]>([])
     const totalPrice = convertToEuro(
-        order.reduce((total, x) => total + x.price * x.quantity, 0)
+        order.reduce((total, x) => total + (x.basePrice + x.extrasPrice) * x.quantity, 0)
     )
 
     function convertToEuro(number: number) {
@@ -43,21 +43,19 @@ export default function Menu() {
     // If it already exists, increase quantity.
     // Otherwise add a new item to the order array.
     function addToOrder(newItem: MenuItem, variant?: Variant, extras?: Extra[]) {
-        
-        setTempExtras([]);
-        setPending(null);
+        setTempExtras([])
+        setPending(null)
 
-        const id = variant
-            ? `${newItem.id}-${variant.name}`
-            : newItem.id
+        // Every combination of dish, variant and extras gets its own id
+        const extrasKey = (extras ?? []).map((extra) => extra.name).sort().join('+')
+        const id = [newItem.id, variant?.name, extrasKey].filter(Boolean).join('-')
 
         const name = variant
             ? `${newItem.name} - ${variant.name}`
             : newItem.name
 
-        const price = variant
-            ? variant.price
-            : newItem.price
+        const basePrice = (variant ? variant.price : newItem.price) ?? 0
+        const extrasPrice = (extras ?? []).reduce((total, extra) => total + extra.price, 0)
 
         const foundItem = order.find((item) => item.id === id)
 
@@ -65,12 +63,8 @@ export default function Menu() {
             setOrder(
                 order.map((item) => {
                     if (item.id === id) {
-                        return {
-                            ...item,
-                            quantity: item.quantity + 1,
-                        }
+                        return { ...item, quantity: item.quantity + 1 }
                     }
-
                     return item
                 })
             )
@@ -80,7 +74,8 @@ export default function Menu() {
                 {
                     id: id,
                     name: name,
-                    price: price,
+                    basePrice: basePrice,
+                    extrasPrice: extrasPrice,
                     quantity: 1,
                     extras: extras,
                 },
@@ -124,7 +119,6 @@ export default function Menu() {
         }
     }
 
-    console.log('pending: ' + pending)
     return (
         <div>
             {items.map((item) => (
@@ -166,7 +160,16 @@ export default function Menu() {
                 {order.map((item) => (
                     <div key={item.id}>
                         <span>
-                            {item.name} x {item.quantity}
+                            {item.name} x {item.quantity} ({convertToEuro(item.basePrice)})
+                            {item.extras && item.extras.length > 0 && (
+                                <ul>
+                                    {item.extras.map((extra) => (
+                                        <li key={extra.name}>
+                                            {extra.name} {convertToEuro(extra.price)}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
 
                             <button
                                 onClick={() =>
@@ -186,7 +189,7 @@ export default function Menu() {
                         </span>
 
                         <span>
-                            {convertToEuro(item.price * item.quantity)}
+                            {convertToEuro((item.basePrice + item.extrasPrice) * item.quantity)}
                         </span>
                     </div>
                 ))}
@@ -194,30 +197,40 @@ export default function Menu() {
                 <h3>Totaal: {totalPrice}</h3>
             </div>
 
-            {pending && (
+            <div>
+                {pending && (
+                    <div>
+                        <h2>{pending.item.name}</h2>
+                        {pending.variant && <p>{pending.variant.name}</p>}
 
-                <div>
-                    {pending && (
-                        <div>
-                            <h2>{pending.item.name}</h2>
-                            {pending.variant && <p>{pending.variant.name}</p>}
+                        {Array.from({ length: getMaxExtras(pending.item, pending.variant) }).map((_, i) => (
+                            <select key={i} onChange={(e) => {
+                                const chosen = extras.find((extra) => extra.name === e.target.value)
+                                const extrasAllowed = getMaxExtras(pending.item, pending.variant) > 1
+                                if (chosen && !extrasAllowed) {
+                                    setTempExtras([chosen])
+                                }
+                                else if (chosen && extrasAllowed) {
+                                    setTempExtras([...tempExtras, chosen])
+                                }
+                                else {
+                                    setTempExtras([...tempExtras, { name: "Geen Keuze", price: 0 }])
+                                }
+                            }}>
+                                <option value="">Geen Keuze</option>
+                                {extras.map((extra) =>
+                                <option value={extra.name}>{extra.name} {convertToEuro(extra.price)}</option>)}
+                            </select>
+                        ))}
 
-                            {Array.from({ length: getMaxExtras(pending.item, pending.variant) }).map((_, i) => (
-                                <select key={i}>
-                                    <option value="">Geen Keuze</option>
-                                    {extras.map((extra) =>
-                                    <option value={extra.name}>{extra.name} {convertToEuro(extra.price)}</option>)}
-                                </select>
-                            ))}
-
-                            <button onClick={() => setPending(null)}>Cancel</button>
-                            <button onClick={() => addToOrder(pending.item, pending.variant, tempExtras)}>Submit</button>
-                    
-                        </div>
-                    )}
-                </div>
+                        <button onClick={() => setPending(null)}>Cancel</button>
+                        <button onClick={() => addToOrder(pending.item, pending.variant, tempExtras)}>Submit</button>
                 
-            )}
+                    </div>
+                )}
+            </div>
+                
+            
         </div>
     )
 }
