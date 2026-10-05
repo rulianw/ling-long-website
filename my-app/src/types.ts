@@ -1,4 +1,4 @@
-export type Variant = { label: string; price: number; maxExtras?: number }
+export type Variant = { name: string; price: number; maxExtras?: number }
 
 export type Extra = { name: string; price: number }
 
@@ -17,7 +17,7 @@ export type MenuItem = {
 export type OrderLine = {
   id: number | string
   name: string
-  price: number              
+  price: number | null             
   quantity: number
   variant?: string           
   extras?: Extra[]

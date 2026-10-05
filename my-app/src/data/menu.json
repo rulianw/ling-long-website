@@ -109,8 +109,8 @@
       "image": "",
       "allowsExtras": true,
       "variants": [
-        { "label": "Voor 2 personen", "price": 31.0, "maxExtras": 2 },
-        { "label": "Voor 4 personen", "price": 60.0, "maxExtras": 4 }
+        { "name": "Voor 2 personen", "price": 31.0, "maxExtras": 2 },
+        { "name": "Voor 4 personen", "price": 60.0, "maxExtras": 4 }
       ]
     },
     {
@@ -122,8 +122,8 @@
       "image": "",
       "allowsExtras": true,
       "variants": [
-        { "label": "Voor 2 personen", "price": 34.0, "maxExtras": 2 },
-        { "label": "Voor 4 personen", "price": 65.0, "maxExtras": 4 }
+        { "name": "Voor 2 personen", "price": 34.0, "maxExtras": 2 },
+        { "name": "Voor 4 personen", "price": 65.0, "maxExtras": 4 }
       ]
     },
     {
@@ -135,8 +135,8 @@
       "image": "",
       "allowsExtras": true,
       "variants": [
-        { "label": "Voor 2 personen", "price": 35.0, "maxExtras": 2 },
-        { "label": "Voor 4 personen", "price": 68.0, "maxExtras": 4 }
+        { "name": "Voor 2 personen", "price": 35.0, "maxExtras": 2 },
+        { "name": "Voor 4 personen", "price": 68.0, "maxExtras": 4 }
       ]
     },
     {
@@ -148,10 +148,10 @@
       "image": "",
       "allowsExtras": true,
       "variants": [
-        { "label": "A. 1 Gerecht (halve bak) + halve bak witte rijst", "price": 8.6, "maxExtras": 0 },
-        { "label": "B. 1 Gerecht (kleine bak)", "price": 10.5, "maxExtras": 1 },
-        { "label": "C. 2 Gerechten (halve bak)", "price": 14.0, "maxExtras": 1 },
-        { "label": "D. 3 Gerechten (kleine bakjes) + kroepoek", "price": 27.5, "maxExtras": 2 }
+        { "name": "A. 1 Gerecht (halve bak) + halve bak witte rijst", "price": 8.6, "maxExtras": 0 },
+        { "name": "B. 1 Gerecht (kleine bak)", "price": 10.5, "maxExtras": 1 },
+        { "name": "C. 2 Gerechten (halve bak)", "price": 14.0, "maxExtras": 1 },
+        { "name": "D. 3 Gerechten (kleine bakjes) + kroepoek", "price": 27.5, "maxExtras": 2 }
       ],
       "choices": [
         "Babi Pangang",
@@ -185,8 +185,7 @@
       { "name": "Bami of Nasi", "price": 1.5, "image": "" },
       { "name": "Grote Bami of Nasi", "price": 3.2, "image": "" },
       { "name": "Mihoen & Chin. Bami", "price": 3.5, "image": "" },
-      { "name": "Grote Mihoen of Chin. Bami", "price": 6.5, "image": "" },
-      { "name": "Saus apart", "price": 1.0, "image": "" }
+      { "name": "Grote Mihoen of Chin. Bami", "price": 6.5, "image": "" }
     ]
   }
 }
