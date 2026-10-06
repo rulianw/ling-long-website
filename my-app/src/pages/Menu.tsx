@@ -1,50 +1,71 @@
 import { useState } from 'react'
 import menuData from '../data/menu.json'
-import type { MenuItem, OrderLine, Extra, Variant } from '../types'
+import type { MenuItem, OrderLine, Extra, Variant, Pending } from '../types'
 
 const items = menuData.items as MenuItem[]
 const extras = menuData.extras.items as Extra[]
 
+
+
 export default function Menu() {
-    type Pending = { item: MenuItem; variant?: Variant }
+    const [pendingItem, setPendingItem] = useState<Pending | null>(null)
+    const [order, setOrder] = useState<OrderLine[]>([])
+    const [selectedExtras, setSelectedExtras] = useState<Extra[]>([])
 
-    const [pending, setPending] = useState<Pending | null>(null)
-    const [order, setOrder] = useState<OrderLine[]>([]) //is dit iets van alleen het menu of zal ik het over andere applicaties willen gebruiken
-    const [tempExtras, setTempExtras] = useState<Extra[]>([])
-    const totalPrice = convertToEuro(
-        order.reduce((total, x) => total + (x.basePrice + x.extrasPrice) * x.quantity, 0)
-    )
-
-    function convertToEuro(number: number) {
+    /*
+         ∧＿∧
+        (・◦・)   ✧･ﾟ:*      h e l p e r  
+        /づ~ ♡･ﾟ:*:･★‧₊˚       f u n c t i o n s
+    */
+    
+    function formatPrice(number: number) {
         return new Intl.NumberFormat('nl-NL', {
             style: 'currency',
             currency: 'EUR',
         }).format(number)
     }
 
-    //Before adding to the order it will check whether extras can be added
-    //If so, it will open a pop up menu through pending so extras can be chosen
-    //otherwise it will just add the item to the order as it is
-    function handleAdd(item: MenuItem, variant?: Variant) {
-        const maxExtras:number = getMaxExtras(item, variant)
-        if (maxExtras >= 0) {
-            setPending({ item, variant })
-        } else {
-            addToOrder(item, variant)
-        }
-    }
-
-    //Function to check whether there are extras in an item, returns the amount of extras allowed
+    /* Returns:
+        -1 = extras are not allowed
+        0 = extras are allowed but free
+        1+ = extras are allowed and paid
+    */
     function getMaxExtras(item: MenuItem, variant?: Variant): number {
         return variant?.maxExtras ?? (item.allowsExtras ? 1 : -1)
     }
 
-    // Add new item into the order.
-    // If it already exists, increase quantity.
-    // Otherwise add a new item to the order array.
+    const extrasAreFree = pendingItem && getMaxExtras(pendingItem.item, pendingItem.variant) === 0
+    const visibleExtras = extrasAreFree 
+        ? extras.slice(0, 3) 
+        : extras
+
+    const totalPrice = formatPrice(
+        order.reduce((total, x) => total + (x.basePrice + x.extrasPrice) * x.quantity, 0)
+    )
+
+    /*
+         ∧＿∧
+        (・◦・)   ✧･ﾟ:*      h a n d l i n g 
+        /づ~ ♡･ﾟ:*:･★‧₊˚               i t e m s
+    */
+
+    //TODO: Edit or delete the selected extras submitted item
+    function handleExtrasChange(index: number, extra: Extra) {
+        return;
+    }
+
+    //Checks extras before adding to order
+    function handleAdd(item: MenuItem, variant?: Variant) {
+        const maxExtras = getMaxExtras(item, variant)
+        if (maxExtras === -1) {
+            addToOrder(item, variant)
+            return
+        } 
+        setPendingItem({ item, variant })
+    }
+
+    //Checks if item is already in order, if so increase quantity, else add to order
     function addToOrder(newItem: MenuItem, variant?: Variant, extras?: Extra[]) {
-        setTempExtras([])
-        setPending(null)
 
         // Every combination of dish, variant and extras gets its own id
         const extrasKey = (extras ?? []).map((extra) => extra.name).sort().join('+')
@@ -54,23 +75,21 @@ export default function Menu() {
             ? `${newItem.name} - ${variant.name}`
             : newItem.name
 
-        const basePrice = (variant ? variant.price : newItem.price) ?? 0
+        const basePrice = (variant?.price ?? newItem.price) ?? 0
         const extrasPrice = (extras ?? []).reduce((total, extra) => total + extra.price, 0)
 
-        const foundItem = order.find((item) => item.id === id)
-
-        if (foundItem) {
-            setOrder(
-                order.map((item) => {
-                    if (item.id === id) {
-                        return { ...item, quantity: item.quantity + 1 }
-                    }
-                    return item
-                })
-            )
-        } else {
-            setOrder([
-                ...order,
+        setOrder((prevOrder) => {
+            const foundItem = prevOrder.find((item) => item.id === id)
+            if (foundItem) {
+                return prevOrder.map((item) =>
+                    item.id === id
+                        ? { ...item, quantity: item.quantity + 1 }
+                        : item
+                )
+            }
+        
+            return [
+                ...prevOrder,
                 {
                     id: id,
                     name: name,
@@ -78,159 +97,209 @@ export default function Menu() {
                     extrasPrice: extrasPrice,
                     quantity: 1,
                     extras: extras,
-                },
-            ])
-        }
+                }
+            ]
+        })
+        //reset popup state
+        setSelectedExtras([])
+        setPendingItem(null)
     }
 
-    // Checks boolean:
-    // true = increase quantity
-    // false = decrease quantity
-    function increaseQuantity(increase: boolean, itemId: number | string) {
-        if (increase) {
-            setOrder(
-                order.map((item) => {
-                    if (item.id === itemId) {
-                        return {
-                            ...item,
-                            quantity: item.quantity + 1,
-                        }
-                    }
-
-                    return item
-                })
-            )
-        } else {
-            setOrder(
-                order
-                    .map((item) => {
-                        if (item.quantity >= 1 && item.id === itemId) {
-                            return {
-                                ...item,
-                                quantity: item.quantity - 1,
-                            }
-                        }
-
-                        return item
-                    })
-                    .filter((item) => item.quantity >= 1)
-                    //niet filteren maar splicen? 
-            )
-        }
+    // Increases or decreases selected item
+    function changeQuantity(itemId: number | string, delta: number) {
+        setOrder((prevOrder) => {
+            return prevOrder.map((item) => {
+                if (item.id === itemId) {
+                    return { ...item, quantity: item.quantity + delta };
+                }
+                return item;
+            }).filter((item) => item.quantity > 0);
+        })
     }
 
     return (
         <div>
-            {items.map((item) => (
-                <div key={item.id}>
-                    <h2>{item.name}</h2>
+        {/*    
+             ∧＿∧
+            (・◦・)   ✧･ﾟ:*      m e n u 
+            /づ~ ♡･ﾟ:*:･★‧₊˚       i t e m s               
+        */}
+            <section>
+                {items.map((item) => (
+                    <div key={item.id}>
+                        <h2>{item.name}</h2>
 
-                    {item.variants ? (
-                        item.variants.map((variant) => (
-                            <div key={variant.name}>
-                                <h3>{variant.name}</h3>
+                        {item.variants?.length 
+                        ? (
+                            item.variants.map((variant) => (
+                                <div key={variant.name}>
+                                    <h3>{variant.name}</h3>
 
-                                <p>{convertToEuro(variant.price)}</p>
+                                    <p>{formatPrice(variant.price)}</p>
 
-                                <button
-                                    onClick={() => handleAdd(item, variant)}
-                                >
+                                    <button onClick={() => handleAdd(item, variant)}>
+                                        Add item
+                                    </button>
+                                </div>
+                            ))
+                        ) : (
+                            <div>
+                                <p>{formatPrice(item.price)}</p>
+
+                                <button onClick={() => handleAdd(item)}>
                                     Add item
                                 </button>
                             </div>
-                        ))
-                    ) : (
-                        <>
-                            <p>{convertToEuro(item.price)}</p>
-
-
-                            <button
-                                onClick={() => handleAdd(item)}
-                            >
-                                Add item
-                            </button>
-                        </>
-                    )}
-                </div>
-            ))}
-
-            <div>
-                <h2>Uw Bestelling</h2>
-
-                {order.map((item) => (
-                    <div key={item.id}>
-                        <span>
-                            {item.name} x {item.quantity} ({convertToEuro(item.basePrice)})
-                            {item.extras && item.extras.length > 0 && (
-                                <ul>
-                                    {item.extras.map((extra) => (
-                                        <li key={extra.name}>
-                                            {extra.name} {convertToEuro(extra.price)}
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
-
-                            <button
-                                onClick={() =>
-                                    increaseQuantity(true, item.id)
-                                }
-                            >
-                                add 1
-                            </button>
-
-                            <button
-                                onClick={() =>
-                                    increaseQuantity(false, item.id)
-                                }
-                            >
-                                delete 1
-                            </button>
-                        </span>
-
-                        <span>
-                            {convertToEuro((item.basePrice + item.extrasPrice) * item.quantity)}
-                        </span>
+                        )}
                     </div>
                 ))}
+            </section>
+
+        {/*    
+             ∧＿∧
+            (・◦・)   ✧･ﾟ:*      m e n u 
+            /づ~ ♡･ﾟ:*:･★‧₊˚         o r d e r             
+        */}
+            <section>
+                <h2>Uw Bestelling</h2>
+
+                {order.length === 0 ? (
+                    <p>Uw bestelling is leeg.</p>
+                ) : (
+                    order.map((item) => (
+                        <div key={item.id}>
+                            <div>
+                                {/* Item */}
+                                <strong>
+                                    {item.name} 
+                                </strong>
+                                {' x ' + item.quantity} {formatPrice(item.basePrice*item.quantity)}
+
+                                {/* Extras */}
+                                {item.extras && 
+                                    item.extras.length > 0 && (
+                                        <ul>
+                                            {item.extras.map((extra) => (
+                                                <li key={extra.name}>
+                                                    {extra.name}{' '} 
+                                                    ({formatPrice(extra.price)})
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )
+                                }
+
+                                {/* Quantity buttons */}
+                                <button
+                                    onClick={() =>
+                                        changeQuantity(item.id, 1)
+                                    }
+                                >
+                                    +1
+                                </button>
+
+                                <button
+                                    onClick={() =>
+                                        changeQuantity(item.id, -1)
+                                    }
+                                >
+                                    -1
+                                </button>
+                            </div>
+
+                            <span>
+                                {formatPrice((item.basePrice + item.extrasPrice) * item.quantity)}
+                            </span>
+                        </div>
+                    ))
+                )}
 
                 <h3>Totaal: {totalPrice}</h3>
-            </div>
+            </section>
 
-            <div>
-                {pending && (
-                    <div>
-                        <h2>{pending.item.name}</h2>
-                        {pending.variant && <p>{pending.variant.name}</p>}
+        {/*    
+             ∧＿∧
+            (・◦・)   ✧･ﾟ:*      p e n d i n g 
+            /づ~ ♡･ﾟ:*:･★‧₊˚       i t e m s               
+        */}
+            {pendingItem && (
+                <section>
+                    <h2>{pendingItem.item.name}</h2>
 
-                        {Array.from({ length: getMaxExtras(pending.item, pending.variant) }).map((_, i) => (
-                            <select key={i} onChange={(e) => {
-                                const chosen = extras.find((extra) => extra.name === e.target.value)
-                                const extrasAllowed = getMaxExtras(pending.item, pending.variant) > 1
-                                if (chosen && !extrasAllowed) {
-                                    setTempExtras([chosen])
+                    {pendingItem.variant && <p>{pendingItem.variant.name}</p>}
+
+                    {Array.from({ length: Math.max(1, getMaxExtras(pendingItem.item, pendingItem.variant)) }).map((_, i) => (
+                        <select 
+                            key={i} 
+                            value={selectedExtras[i]?.name || ''} 
+                            onChange={(e) => {
+                                const chosen = extras.find((extra) => extra.name === e.target.value)                               
+
+                                if(chosen && extrasAreFree) {
+                                    setSelectedExtras([{...chosen, price: 0}])
                                 }
-                                else if (chosen && extrasAllowed) {
-                                    setTempExtras([...tempExtras, chosen])
+                                
+                                else if (chosen && !(getMaxExtras(pendingItem.item, pendingItem.variant) > 1)) {
+                                    setSelectedExtras([chosen])
                                 }
+
+                                else if (chosen && getMaxExtras(pendingItem.item, pendingItem.variant) > 1) {
+                                    setSelectedExtras((prev) => {
+                                        const next = [...prev];
+                                        next[i] = chosen;
+                                        return next;
+                                    })
+                                }
+
                                 else {
-                                    setTempExtras([...tempExtras, { name: "Geen Keuze", price: 0 }])
+                                    setSelectedExtras((prev) => {
+                                        const next = [...prev];
+                                        next[i] = { name: '', price: 0 };
+                                        return next;
+                                    })
                                 }
-                            }}>
-                                <option value="">Geen Keuze</option>
-                                {extras.map((extra) =>
-                                <option value={extra.name}>{extra.name} {convertToEuro(extra.price)}</option>)}
-                            </select>
-                        ))}
+                            }}
+                        >
+                            <option value="">Geen Keuze</option>
 
-                        <button onClick={() => setPending(null)}>Cancel</button>
-                        <button onClick={() => addToOrder(pending.item, pending.variant, tempExtras)}>Submit</button>
-                
-                    </div>
-                )}
-            </div>
-                
-            
+                            {visibleExtras.map((extra) =>
+                                <option 
+                                    key = {extra.name}
+                                    value={extra.name}
+                                > 
+                                    {extra.name} 
+                                    {!extrasAreFree && formatPrice(extra.price)}
+                                </option>)}
+                        </select>
+                    ))}
+
+                    {/*Cancel*/}
+                    <button 
+                        onClick={() => {
+                            setPendingItem(null) 
+                            setSelectedExtras([])
+                        }}
+                    >
+                            Cancel
+                    </button>
+                    
+                    {/*Submit*/}
+                    <button 
+                        onClick={() => 
+                            addToOrder(
+                                pendingItem.item, 
+                                pendingItem.variant, 
+                                selectedExtras.filter((x) => 
+                                    x != null &&
+                                    x.name != ''
+                                )
+                            )
+                        }
+                    >
+                        Submit
+                    </button>
+                </section>
+            )}
         </div>
     )
 }

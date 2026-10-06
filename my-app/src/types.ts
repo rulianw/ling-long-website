@@ -23,3 +23,8 @@ export type OrderLine = {
   variant?: string
   extras?: Extra[]
 }
+
+export type Pending = { 
+  item: MenuItem
+  variant?: Variant 
+}
