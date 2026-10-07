@@ -1,6 +1,6 @@
 export type Variant = { name: string; price: number; maxExtras?: number }
 
-export type Extra = { name: string; price: number }
+export type Extra = { name: string; price: number; quantity: number }
 
 export type MenuItem = {
   id: number | string       
@@ -16,6 +16,7 @@ export type MenuItem = {
 
 export type OrderLine = {
   id: number | string
+  item: MenuItem
   name: string
   basePrice: number
   extrasPrice: number

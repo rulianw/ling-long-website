@@ -3,7 +3,10 @@ import menuData from '../data/menu.json'
 import type { MenuItem, OrderLine, Extra, Variant, Pending } from '../types'
 
 const items = menuData.items as MenuItem[]
-const extras = menuData.extras.items as Extra[]
+const extras = menuData.extras.items.map((extra) => ({
+    ...extra,
+    quantity: 1,
+}))
 
 
 
@@ -40,7 +43,7 @@ export default function Menu() {
         : extras
 
     const totalPrice = formatPrice(
-        order.reduce((total, x) => total + (x.basePrice + x.extrasPrice) * x.quantity, 0)
+        order.reduce((total, x) => total + (x.basePrice * x.quantity + x.extrasPrice), 0)
     )
 
     /*
@@ -51,7 +54,7 @@ export default function Menu() {
 
     //TODO: Edit or delete the selected extras submitted item
     function handleExtrasChange(index: number, extra: Extra) {
-        return;
+        
     }
 
     //Checks extras before adding to order
@@ -66,54 +69,144 @@ export default function Menu() {
 
     //Checks if item is already in order, if so increase quantity, else add to order
     function addToOrder(newItem: MenuItem, variant?: Variant, extras?: Extra[]) {
-
-        // Every combination of dish, variant and extras gets its own id
-        const extrasKey = (extras ?? []).map((extra) => extra.name).sort().join('+')
-        const id = [newItem.id, variant?.name, extrasKey].filter(Boolean).join('-')
-
         const name = variant
             ? `${newItem.name} - ${variant.name}`
             : newItem.name
 
-        const basePrice = (variant?.price ?? newItem.price) ?? 0
-        const extrasPrice = (extras ?? []).reduce((total, extra) => total + extra.price, 0)
+        const basePrice = variant?.price ?? newItem.price ?? 0
+
+        //ID based on the dish + variant + extras
+        const selectedExtras = (extras ?? []).map((extra) => ({
+            ...extra,
+            quantity: 1,
+        }))
+
+        const extrasKey = selectedExtras
+            .map((extra) => extra.name)
+            .sort()
+            .join('+')
+
+        const id = [
+            newItem.id,
+            variant?.name,
+            extrasKey,
+        ]
+            .filter(Boolean)
+            .join('-')
 
         setOrder((prevOrder) => {
-            const foundItem = prevOrder.find((item) => item.id === id)
-            if (foundItem) {
+            const existingItem = prevOrder.find(
+                (item) => item.id === id
+            )
+
+            // Calculate the price of the extras
+            const extrasPrice = selectedExtras.reduce(
+                (total, extra) =>
+                    total + extra.price,
+                0
+            )
+
+            if (existingItem) {
                 return prevOrder.map((item) =>
                     item.id === id
-                        ? { ...item, quantity: item.quantity + 1 }
+                        ? {
+                            ...item,
+                            quantity: item.quantity + 1,
+                            extras: item.extras?.map((extra) => ({
+                                ...extra,
+                                quantity: extra.quantity + 1,
+                            })),
+                            extrasPrice:
+                                item.extrasPrice + extrasPrice,
+                        }
                         : item
                 )
             }
-        
+
             return [
                 ...prevOrder,
                 {
-                    id: id,
-                    name: name,
-                    basePrice: basePrice,
-                    extrasPrice: extrasPrice,
+                    id,
+                    item: newItem,
+                    name,
+                    basePrice,
+                    extrasPrice,
                     quantity: 1,
-                    extras: extras,
-                }
+                    variant: variant?.name,
+                    extras: selectedExtras,
+                },
             ]
         })
-        //reset popup state
+
         setSelectedExtras([])
         setPendingItem(null)
     }
 
     // Increases or decreases selected item
     function changeQuantity(itemId: number | string, delta: number) {
+        const orderItem = order.find(
+            (item) => item.id === itemId
+        )
+        if (!orderItem) return
+
+        if (delta === 1) {
+            const menuItem = orderItem.item
+
+            const variant = orderItem.variant
+                ? menuItem.variants?.find(
+                    (v) => v.name === orderItem.variant
+                )
+                : undefined
+            
+            //if the item has extras, open extras selection
+            if (getMaxExtras(menuItem, variant) !== -1) {
+                setSelectedExtras([])
+
+                setPendingItem({
+                    item: menuItem,
+                    variant: variant,
+                })
+                return
+            }
+        }
+
         setOrder((prevOrder) => {
-            return prevOrder.map((item) => {
-                if (item.id === itemId) {
-                    return { ...item, quantity: item.quantity + delta };
-                }
-                return item;
-            }).filter((item) => item.quantity > 0);
+            return prevOrder
+                .map((item) => {
+                    if (item.id !== itemId) {
+                        return item
+                    }
+
+                    const newQuantity =
+                        item.quantity + delta
+
+
+                    const newExtras = item.extras
+                        ?.map((extra) => ({
+                            ...extra,
+                            quantity:
+                                extra.quantity + delta,
+                        }))
+                        .filter(
+                            (extra) => extra.quantity > 0
+                        )
+
+                    const newExtrasPrice =
+                        (newExtras ?? []).reduce(
+                            (total, extra) =>
+                                total +
+                                extra.price * extra.quantity,
+                            0
+                        )
+
+                    return {
+                        ...item,
+                        quantity: newQuantity,
+                        extras: newExtras,
+                        extrasPrice: newExtrasPrice,
+                    }
+                })
+                .filter((item) => item.quantity > 0)
         })
     }
 
@@ -181,8 +274,8 @@ export default function Menu() {
                                         <ul>
                                             {item.extras.map((extra) => (
                                                 <li key={extra.name}>
-                                                    {extra.name}{' '} 
-                                                    ({formatPrice(extra.price)})
+                                                    {extra.name} x {extra.quantity} 
+                                                    ({formatPrice(extra.price*extra.quantity)})
                                                 </li>
                                             ))}
                                         </ul>
@@ -208,7 +301,7 @@ export default function Menu() {
                             </div>
 
                             <span>
-                                {formatPrice((item.basePrice + item.extrasPrice) * item.quantity)}
+                                {formatPrice((item.basePrice * item.quantity + item.extrasPrice))}
                             </span>
                         </div>
                     ))
