@@ -8,11 +8,8 @@
 
 ## To do after today
 - [ ] `MenuItem.price` can be `null` (`formatPrice(item.price)` is flagged by TypeScript)
-- [ ] Data: "Grote Nasi" costs €1,50 in the JSON, "Grote Bami" €3,20
 - [ ] Shared order state: the order will be shown on other pages (lift state up or React Context)
-- [ ] Ask the supervisor what they meant about removing lines (`filter` already builds a new array, `splice` would change the state)
 - [ ] Category buttons first, then the items of the chosen category
-- [ ] Images from `item.image` (only when it is not empty)
 - [ ] Tailwind styling
 
 ## Done

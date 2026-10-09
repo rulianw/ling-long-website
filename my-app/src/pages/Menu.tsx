@@ -52,11 +52,6 @@ export default function Menu() {
         /づ~ ♡･ﾟ:*:･★‧₊˚               i t e m s
     */
 
-    //TODO: Edit or delete the selected extras submitted item
-    function handleExtrasChange(index: number, extra: Extra) {
-        
-    }
-
     //Checks extras before adding to order
     function handleAdd(item: MenuItem, variant?: Variant) {
         const maxExtras = getMaxExtras(item, variant)
@@ -210,6 +205,9 @@ export default function Menu() {
         })
     }
 
+    //returns items of the selected category
+
+
     return (
         <div>
         {/*    
@@ -347,7 +345,7 @@ export default function Menu() {
                                 else {
                                     setSelectedExtras((prev) => {
                                         const next = [...prev];
-                                        next[i] = { name: '', price: 0 };
+                                        next[i] = { name: '', price: 0, quantity: 0 };
                                         return next;
                                     })
                                 }
@@ -396,3 +394,48 @@ export default function Menu() {
         </div>
     )
 }
+
+/* WORK IN PROGRESS: trying to integrate category buttons to filter menu items, but not working yet.
+
+const unfilteredCategories = items.map((item) => item.category)
+const categories = [...new Set(unfilteredCategories)]
+
+const [shownItems, setShownItems] = useState<MenuItem[]>([])
+
+
+{shownItems.length > 0 ? (
+	<>
+	<button onClick = { () => setShownItems([])}> {shownItems[0].category} </button>
+	{shownItems.map ((item) => (
+		<div key = {item.id}>
+		
+		<button onClick = handleAdd etc> 
+			{item.name}
+		</button>
+		</div>
+	))}
+	</>
+	
+
+)
+
+:
+
+(categories.map ((category) => (
+	<div key = {category}>
+		<button onClick = { () => setShownItems(returnItemsFromCategory(category))}>
+			<h2> {category} </h2>
+		</button>
+	</div>
+	)
+
+)}
+
+
+
+
+function returnItemsFromCategory(category){
+	return items.filter(item => item.category === category)
+}
+
+*/
