@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import menuData from '../data/menu.json'
 import type { MenuItem, OrderLine, Extra, Variant, Pending } from '../types'
+import { formatPrice, getOrderTotal } from '../utils/price'
+import { getMaxExtras } from '../utils/extras'
+import { addToOrder, changeQuantity } from '../utils/order'
 
 const items = menuData.items as MenuItem[]
 const extras = menuData.extras.items.map((extra) => ({
@@ -8,43 +11,17 @@ const extras = menuData.extras.items.map((extra) => ({
     quantity: 1,
 }))
 
-
-
 export default function Menu() {
     const [pendingItem, setPendingItem] = useState<Pending | null>(null)
     const [order, setOrder] = useState<OrderLine[]>([])
     const [selectedExtras, setSelectedExtras] = useState<Extra[]>([])
-
-    /*
-         ∧＿∧
-        (・◦・)   ✧･ﾟ:*      h e l p e r  
-        /づ~ ♡･ﾟ:*:･★‧₊˚       f u n c t i o n s
-    */
-    
-    function formatPrice(number: number) {
-        return new Intl.NumberFormat('nl-NL', {
-            style: 'currency',
-            currency: 'EUR',
-        }).format(number)
-    }
-
-    /* Returns:
-        -1 = extras are not allowed
-        0 = extras are allowed but free
-        1+ = extras are allowed and paid
-    */
-    function getMaxExtras(item: MenuItem, variant?: Variant): number {
-        return variant?.maxExtras ?? (item.allowsExtras ? 1 : -1)
-    }
 
     const extrasAreFree = pendingItem && getMaxExtras(pendingItem.item, pendingItem.variant) === 0
     const visibleExtras = extrasAreFree 
         ? extras.slice(0, 3) 
         : extras
 
-    const totalPrice = formatPrice(
-        order.reduce((total, x) => total + (x.basePrice * x.quantity + x.extrasPrice), 0)
-    )
+    const totalPrice = formatPrice(getOrderTotal(order))
 
     /*
          ∧＿∧
@@ -61,152 +38,6 @@ export default function Menu() {
         } 
         setPendingItem({ item, variant })
     }
-
-    //Checks if item is already in order, if so increase quantity, else add to order
-    function addToOrder(newItem: MenuItem, variant?: Variant, extras?: Extra[]) {
-        const name = variant
-            ? `${newItem.name} - ${variant.name}`
-            : newItem.name
-
-        const basePrice = variant?.price ?? newItem.price ?? 0
-
-        //ID based on the dish + variant + extras
-        const selectedExtras = (extras ?? []).map((extra) => ({
-            ...extra,
-            quantity: 1,
-        }))
-
-        const extrasKey = selectedExtras
-            .map((extra) => extra.name)
-            .sort()
-            .join('+')
-
-        const id = [
-            newItem.id,
-            variant?.name,
-            extrasKey,
-        ]
-            .filter(Boolean)
-            .join('-')
-
-        setOrder((prevOrder) => {
-            const existingItem = prevOrder.find(
-                (item) => item.id === id
-            )
-
-            // Calculate the price of the extras
-            const extrasPrice = selectedExtras.reduce(
-                (total, extra) =>
-                    total + extra.price,
-                0
-            )
-
-            if (existingItem) {
-                return prevOrder.map((item) =>
-                    item.id === id
-                        ? {
-                            ...item,
-                            quantity: item.quantity + 1,
-                            extras: item.extras?.map((extra) => ({
-                                ...extra,
-                                quantity: extra.quantity + 1,
-                            })),
-                            extrasPrice:
-                                item.extrasPrice + extrasPrice,
-                        }
-                        : item
-                )
-            }
-
-            return [
-                ...prevOrder,
-                {
-                    id,
-                    item: newItem,
-                    name,
-                    basePrice,
-                    extrasPrice,
-                    quantity: 1,
-                    variant: variant?.name,
-                    extras: selectedExtras,
-                },
-            ]
-        })
-
-        setSelectedExtras([])
-        setPendingItem(null)
-    }
-
-    // Increases or decreases selected item
-    function changeQuantity(itemId: number | string, delta: number) {
-        const orderItem = order.find(
-            (item) => item.id === itemId
-        )
-        if (!orderItem) return
-
-        if (delta === 1) {
-            const menuItem = orderItem.item
-
-            const variant = orderItem.variant
-                ? menuItem.variants?.find(
-                    (v) => v.name === orderItem.variant
-                )
-                : undefined
-            
-            //if the item has extras, open extras selection
-            if (getMaxExtras(menuItem, variant) !== -1) {
-                setSelectedExtras([])
-
-                setPendingItem({
-                    item: menuItem,
-                    variant: variant,
-                })
-                return
-            }
-        }
-
-        setOrder((prevOrder) => {
-            return prevOrder
-                .map((item) => {
-                    if (item.id !== itemId) {
-                        return item
-                    }
-
-                    const newQuantity =
-                        item.quantity + delta
-
-
-                    const newExtras = item.extras
-                        ?.map((extra) => ({
-                            ...extra,
-                            quantity:
-                                extra.quantity + delta,
-                        }))
-                        .filter(
-                            (extra) => extra.quantity > 0
-                        )
-
-                    const newExtrasPrice =
-                        (newExtras ?? []).reduce(
-                            (total, extra) =>
-                                total +
-                                extra.price * extra.quantity,
-                            0
-                        )
-
-                    return {
-                        ...item,
-                        quantity: newQuantity,
-                        extras: newExtras,
-                        extrasPrice: newExtrasPrice,
-                    }
-                })
-                .filter((item) => item.quantity > 0)
-        })
-    }
-
-    //returns items of the selected category
-
 
     return (
         <div>
@@ -235,8 +66,7 @@ export default function Menu() {
                             ))
                         ) : (
                             <div>
-                                <p>{formatPrice(item.price)}</p>
-
+                                {item.price !== null && <p>{formatPrice(item.price)}</p>}
                                 <button onClick={() => handleAdd(item)}>
                                     Add item
                                 </button>
@@ -299,7 +129,13 @@ export default function Menu() {
                             </div>
 
                             <span>
-                                {formatPrice((item.basePrice * item.quantity + item.extrasPrice))}
+                                {formatPrice((item.basePrice * item.quantity + 
+                                    (item.extras?.reduce(
+                                        (extraTotal, extra) =>
+                                            extraTotal + (extra.price * extra.quantity),
+                                            0
+                                    ) ?? 0)
+                                ))}
                             </span>
                         </div>
                     ))

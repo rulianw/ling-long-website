@@ -19,7 +19,6 @@ export type OrderLine = {
   item: MenuItem
   name: string
   basePrice: number
-  extrasPrice: number
   quantity: number
   variant?: string
   extras?: Extra[]
