@@ -1,0 +1,104 @@
+.hoofdpagina {
+  min-height: 100vh;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2.5rem;
+  background: var(--red);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hoofdpagina::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url('../assets/illustratie.png') no-repeat right bottom / auto 100%;
+  animation: image-in 1.2s ease-out both;
+}
+
+@keyframes image-in {
+  from {
+    opacity: 0;
+    transform: translateX(15%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.titel {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 0;
+  width: fit-content;
+  transition: transform 0.3s ease;
+}
+
+.titel-zh {
+writing-mode: vertical-rl;
+  color: var(--green);
+  font-size: 3.5rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  transition: letter-spacing 0.3s ease;
+}
+
+.titel-nl {
+  width: min-content; /* forces "Ling" / "Long" onto two lines */
+  color: var(--yellow);
+  font-size: 6rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0;
+  transition: letter-spacing 0.3s ease;
+}
+
+.titel:hover .titel-zh {
+  letter-spacing: -0.2em;
+}
+
+.titel:hover .titel-nl {
+  letter-spacing: -0.08em;
+}
+.omschrijving {
+  max-width: 14rem;
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
+.bestellen {
+  width: fit-content;
+}
+
+.bestellen p {
+  margin: 0 0 0.5rem;
+  color: var(--yellow);
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+.bestellen button {
+  padding: 0.75rem 1.75rem;
+  border: none;
+  border-radius: 12px;
+  background: var(--green);
+  color: var(--red);
+  font-family: inherit;
+  font-size: 2rem;
+  font-weight: 700;
+  box-shadow: -6px 6px 0 var(--yellow);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.bestellen button:hover {
+  transform: translate(-6px, 6px);
+  box-shadow: 0 0 0 var(--yellow);
+}

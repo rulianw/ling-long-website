@@ -1,12 +1,26 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&display=swap');
+
 :root {
   --white: #F5E9D3;
   --yellow: #D9B15A;
   --green: #307360;
   --red: #591117;
   --black: #231F1A;
+  --background: #1E1E1E;
 
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: 'Source Han Serif', 'Noto Serif SC', serif;
   --mono: ui-monospace, Consolas, monospace;
+}
 
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--white);
+  font-family: var(--heading);
 }

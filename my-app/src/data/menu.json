@@ -148,10 +148,10 @@
       "image": "",
       "allowsExtras": true,
       "variants": [
-        { "name": "A. 1 Gerecht (halve bak)", "price": 8.6, "maxExtras": 0 },
-        { "name": "B. 1 Gerecht (kleine bak)", "price": 10.5, "maxExtras": 1 },
-        { "name": "C. 2 Gerechten (halve bak)", "price": 14.0, "maxExtras": 1 },
-        { "name": "D. 3 Gerechten (kleine bakjes) + kroepoek", "price": 27.5, "maxExtras": 2 }
+        { "name": "A. 1 Gerecht (halve bak)", "price": 8.6, "maxExtras": 0, "choiceAmount": 1 },
+        { "name": "B. 1 Gerecht (kleine bak)", "price": 10.5, "maxExtras": 1, "choiceAmount": 1 },
+        { "name": "C. 2 Gerechten (halve bak)", "price": 14.0, "maxExtras": 1, "choiceAmount": 2 },
+        { "name": "D. 3 Gerechten (kleine bakjes) + kroepoek", "price": 27.5, "maxExtras": 2, "choiceAmount": 3}
       ],
       "choices": [
         "Babi Pangang",
@@ -178,6 +178,7 @@
       ]
     }
   ],
+
   "extras": {
     "description": "Bij alle hoofdgerechten: niet bij de genoemde prijs inbegrepen",
     "items": [
@@ -191,5 +192,24 @@
       { "name": "Grote Mihoen", "price": 6.5, "image": "" },
       { "name": "Grote Chin.Bami", "price": 6.5, "image": "" }
     ]
-  }
+  },
+  
+  "categories": [
+    { "name": "Soepen", "zh": "汤", "matches": ["Soepen"] },
+    { "name": "Bijgerechten", "zh": "配菜", "matches": ["Voor- en Bijgerechten"] },
+    { "name": "Nasi/Bami", "zh": "米饭/面条", "matches": ["Nasi/Bami"] },
+    { "name": "Mihoen/Chinese Bami", "zh": "米粉/中国面条", "matches": ["Mihoen/Chinese Bami"] },
+    { "name": "Foe Yong Hai", "zh": "芙蓉蛋", "matches": ["Foe Yong Hai (ei)"] },
+    { "name": "Tjap Tjoi", "zh": "什菜", "matches": ["Tjap Tjoi (groenten)"] },
+    { "name": "Vegetarisch", "zh": "素菜", "matches": ["Vegetarisch"] },
+    { "name": "Kip", "zh": "鸡", "matches": ["Kip", "Ling Long Kip specialiteiten"] },
+    { "name": "Varken", "zh": "猪肉", "matches": ["Varkensvlees", "Ling Long Varkensvlees specialiteiten"] },
+    { "name": "Ossenhaas", "zh": "牛里脊肉", "matches": ["Ossenhaas", "Ling Long Ossenhaas Specialiteiten"] },
+    { "name": "Eend", "zh": "鸭肉", "matches": ["Eend"] },
+    { "name": "Garnalen", "zh": "虾", "matches": ["Garnalen", "Ling Long Garnalen Specialiteiten"] },
+    { "name": "Vis", "zh": "鱼", "matches": ["Ling Long Vis Specialiteiten"] },
+    { "name": "Indisch", "zh": "印尼菜", "matches": ["Indische gerechten"] },
+    { "name": "Rijsttafel", "zh": "印尼饭桌", "matches": ["Rijsttafels"] },
+    { "name": "Voordeel Menu", "zh": "超值菜单", "matches": ["Voordeel Combinatie Menu"] }
+  ]
 }

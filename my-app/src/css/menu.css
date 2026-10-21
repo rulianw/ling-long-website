@@ -1,0 +1,237 @@
+.menu {
+  width: 100%;
+  min-height: 100vh;
+  padding: 6rem 2rem 3rem;
+  background: var(--red);
+  color: var(--white);
+}
+
+.categorieen {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem 1rem;
+  max-width: 28rem;
+  margin: 0 auto;
+}
+
+.categorie {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--white);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.categorie-icoon {
+  width: 3.5rem;
+  height: 3.5rem;
+  transition: transform 0.2s ease;
+}
+
+.categorie:hover .categorie-icoon {
+  transform: translateY(-4px) rotate(-4deg);
+}
+
+.categorie h2 {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.categorie-zh {
+  display: block;
+  margin-top: 0.15rem;
+  font-weight: 400;
+  color: var(--yellow);
+}
+
+/* ---------- animations ---------- */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.categorieen {
+  animation: fade-in 0.4s ease both;
+}
+
+.categorie-weergave {
+  animation: fade-in 0.4s ease both;
+}
+
+/* ---------- header of the open category ---------- */
+.categorie-kop {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  width: 9rem;
+  height: 9rem;
+  margin: 0 auto 3rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--black);
+  color: var(--white);
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.categorie-kop:active {
+  transform: scale(0.96);
+}
+
+.kop-icoon {
+  width: 4rem;
+  height: 4rem;
+  transition: opacity 0.25s ease;
+}
+
+.kop-icoon--hover {
+  position: absolute;
+  top: 1.1rem;
+  opacity: 0;
+}
+
+.categorie-kop:hover .kop-icoon--normaal {
+  opacity: 0;
+}
+
+.categorie-kop:hover .kop-icoon--hover {
+  opacity: 1;
+}
+
+.kop-naam {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.kop-zh {
+  color: var(--yellow);
+  font-size: 0.8rem;
+}
+
+/* ---------- cards ---------- */
+.kaarten {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem 2rem;
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 0 0.5rem;
+}
+
+.kaart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 14rem;
+  padding: 1rem 0.75rem;
+  border-radius: 12px;
+  background: var(--white);
+  color: var(--red);
+  box-shadow: -6px 6px 0 var(--yellow);
+  text-align: center;
+  animation: fade-up 0.45s ease both;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kaart-nummer {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--black);
+  color: var(--white);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.kaart-naam {
+  margin: 0;
+  color: var(--red);
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.3;
+  transition: opacity 0.25s ease;
+}
+
+.kaart-midden {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kaart-onder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: auto; /* pushes price and counter to the bottom of the card */
+}
+
+.kaart-hover p {
+  margin: 0;
+  color: var(--black);
+  font-size: 0.65rem;
+  line-height: 1.3;
+}
+
+.kaart-prijs {
+  margin: 0;
+  color: var(--green);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.teller {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  background: var(--black);
+  color: var(--white);
+  font-size: 0.85rem;
+}
+
+.teller-knop {
+  padding: 0 0.25rem;
+  border: none;
+  background: none;
+  color: var(--white);
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.teller-knop:hover {
+  color: var(--yellow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

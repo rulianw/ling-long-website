@@ -1,15 +1,16 @@
 # Menu page overview
 
-## Today's plan (7 October 2026)
-1. **Fix first:** adding the same dish twice breaks. The `map` in `addToOrder` has `{ }` but no `return`.
-2. **"+" and "−" on an order line:** "+" should open the popup again (to choose extras for the new portion); "−" should remove the extras of the last portion. Decide exactly what "−" does.
-3. **Dishes with two variations:** make the menu handle these as well (which dishes? see the question below).
-4. **Edit function** to change the extras of an order line.
+## Plan (21 October 2026)
+1. **Chinese names on the cards** (add a `zh` field per dish in `menu.json`, same idea as the categories)
+2. **Style the order section:** green box, "你的命令" title, girl illustration, total at the bottom right
+3. **Extras popup as an overlay** (now it appears at the bottom of the page)
+4. **Edit function** to change the extras of an order line
 
 ## To do after today
-- [ ] `MenuItem.price` can be `null` (`formatPrice(item.price)` is flagged by TypeScript)
+- [ ] Add the real assets: `kom.svg`, `kom-hover.svg`, dish photos and descriptions (hover only shows them when filled in)
+- [ ] Header with nav and phone button on the menu page (as in the design)
+- [ ] Fade-out animation when leaving a category (needs extra state)
 - [ ] Shared order state: the order will be shown on other pages (lift state up or React Context)
-- [ ] Category buttons first, then the items of the chosen category
 - [ ] Tailwind styling
 
 ## Done
@@ -18,6 +19,9 @@
 - [x] `menu.json`: every item has `image` and `allowsExtras` (false for soups and "Voor- en Bijgerechten"); variants use `name` and can have `maxExtras`
 - [x] Extras list at `menuData.extras.items`
 - [x] `OrderLine` has `basePrice`, `extrasPrice`, `quantity`, `extras?`
+- [x] `categories` block in `menu.json` with `name`, `zh` and `matches` (groups the old categories)
+- [x] `Card` type in `types.ts` (one card per dish or per variant)
+- [x] `MenuItem.price` can be `null`: handled in the cards (`price !== null`)
 
 **Order**
 - [x] `order` is state, `totalPrice` is calculated from it (`(basePrice + extrasPrice) * quantity`)
@@ -26,6 +30,11 @@
 - [x] `formatPrice` with `Intl.NumberFormat('nl-NL', EUR)`
 - [x] Extras shown as a list under each order line
 - [x] One-dish discount menu: the combo menu `choices` (21 dishes), where the chosen dish adds no price
+- [x] Adding the same dish twice no longer breaks
+- [x] "+" on an order line opens the popup again for main dishes
+- [x] Deleting a main dish also deletes its extras
+- [x] Same extra adds to the existing line, a different extra makes a new line
+- [x] Price of the extra dish is shown correctly
 
 **Extras popup**
 - [x] `handleAdd` opens the popup through `pendingItem` or adds straight away
@@ -34,6 +43,16 @@
 - [x] Variant A gets 1 free dropdown with only Witte Rijst, Nasi and Bami, without prices
 - [x] Cancel and Submit reset `pendingItem` and `selectedExtras`
 - [x] Code cleaned up into sections with clearer names
+
+**Menu page design**
+- [x] Category grid with bowl icon, Dutch and Chinese name
+- [x] Open category: round header (click = back to categories), cards fade in one after another
+- [x] Cards: number in a black circle on top, name in the middle, price and counter at the bottom
+- [x] Every variant has its own card
+- [x] Hover shows photo and description (only on cards that have one)
+- [x] Counter on the card matches the amount in the order (matches on item id + variant)
+- [x] Colors: cream card, dark red name, green price, black circle and counter, yellow only as shadow
+- [x] Price and counter stuck to the bottom of the card (`margin-top: auto`)
 
 ## Rule for extras
 | `getMaxExtras` | Meaning |
@@ -75,3 +94,11 @@
 - Fixed the error that made dishes appear x2 when choosing the same extra
 - Fixed the error that extra dishes would not get deleted when deleting main dish.
 - Fixed showing the pricing of the extra dish
+
+## 20-21 October 2026
+- Styled the menu page from the design: categories with Chinese names, header, cards, fade-in animations.
+- Categories now come from one `categories` block in `menu.json` (`matches` groups the old categories).
+- Learned that `flatMap` needs one explicit type (`Card[]`) when two branches return different shapes.
+- Cards: variants as their own card, hover info only if there is an image or description (`kaart--info`).
+- Counter matches the order by item id + variant name, because the order line name is "dish - variant".
+- Colors: each color gets one job. Learned `margin-top: auto` pushes an element to the bottom of a flex column.
