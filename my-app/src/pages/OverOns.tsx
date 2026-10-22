@@ -1,6 +1,8 @@
 
 import { useEffect, useRef } from "react";
 import "../css/OverOns.css";
+import overOnsImage from "../images/overOns.png";
+import fotoCollage from "../images/fotoCollage.png"
 
 export default function OverOns() {
   const textRef = useRef(null);
@@ -35,7 +37,7 @@ export default function OverOns() {
         <div className="over-ons-hero-content">
           <img
             className="over-ons-illustratie"
-            src="/images/over-ons-illustratie.png"
+            src= {overOnsImage}
             alt="Illustratie van Ling Long"
           />
 
@@ -67,7 +69,7 @@ export default function OverOns() {
       <section className="over-ons-collage-section">
         <div className="over-ons-collage reveal" ref={collageRef}>
           <img
-            src="/images/over-ons-collage.png"
+            src= {fotoCollage}
             alt="Een kijkje bij Ling Long"
             loading="lazy"
           />

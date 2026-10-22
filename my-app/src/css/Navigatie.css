@@ -1,0 +1,113 @@
+.navigatie {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+}
+
+.navigatie--home {
+  justify-content: center;
+}
+
+.navigatie-links {
+  display: flex;
+  gap: 2.5rem;
+  padding: 2rem 6rem 5rem;
+  background: no-repeat center / 100% 100%;
+  white-space: nowrap;
+}
+
+.navigatie-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--red);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.navigatie-link span:last-child {
+  color: var(--green);
+  font-weight: 500;
+}
+
+.navigatie-link:hover,
+.navigatie-link.active {
+  transform: translateY(-2px);
+}
+
+/* on the home page the links sit on the red background */
+.navigatie--home .navigatie-links {
+  padding: 1.5rem 0;
+}
+
+.navigatie--home .navigatie-link {
+  color: var(--yellow);
+}
+
+/* logo and phone button on the other pages */
+/* logo in a black circle */
+.navigatie-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 5.5rem;
+  height: 5.5rem;
+  margin-top: 0.75rem;
+  border-radius: 50%;
+  background: var(--black);
+  color: var(--yellow);
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.navigatie-logo span:first-child {
+  color: var(--green);
+}
+
+.navigatie-logo:hover {
+  transform: rotate(-4deg) scale(1.05);
+}
+
+/* "bestellingen via de telefoon" + button */
+.navigatie-bellen {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+  margin-top: 1rem;
+}
+
+.navigatie-bellen p {
+  margin: 0;
+  color: var(--yellow);
+  font-size: 0.65rem;
+}
+
+.navigatie-telefoon {
+  padding: 0.4rem 0.9rem;
+  border-radius: 8px;
+  background: var(--green);
+  color: var(--red);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: -3px 3px 0 var(--yellow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.navigatie-telefoon:hover {
+  transform: translate(-3px, 3px);
+  box-shadow: 0 0 0 var(--yellow);
+}

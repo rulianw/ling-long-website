@@ -1,34 +1,40 @@
 .hoofdpagina {
-  min-height: 100vh;
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  min-height: 100svh;
   padding: 4rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background: var(--red);
+  color: var(--white);
+  text-align: left;
+  padding-left: 7rem;
+  padding-top: 10rem;
+
+}
+
+.hoofdpagina-inhoud {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: flex-start;
   gap: 2.5rem;
-  background: var(--red);
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
 }
 
-.hoofdpagina::before {
-  content: '';
+.hoofdpagina-beeld {
   position: absolute;
-  inset: 0;
+  right: 0;
+  bottom: 0;
   z-index: -1;
-  background: url('../assets/illustratie.png') no-repeat right bottom / auto 100%;
+  height: 100%;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  object-position: right bottom;
   animation: image-in 1.2s ease-out both;
-}
-
-@keyframes image-in {
-  from {
-    opacity: 0;
-    transform: translateX(15%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 
 .titel {
@@ -101,4 +107,15 @@ writing-mode: vertical-rl;
 .bestellen button:hover {
   transform: translate(-6px, 6px);
   box-shadow: 0 0 0 var(--yellow);
+}
+
+@keyframes image-in {
+  from {
+    opacity: 0;
+    transform: translateX(15%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

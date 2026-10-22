@@ -5,6 +5,8 @@ import type { MenuItem, Extra, Variant, Card } from '../types'
 import { formatPrice, getOrderTotal } from '../utils/price'
 import { getMaxExtras } from '../utils/extras'
 import { useOrder } from '../hooks/useOrder'
+import kom from '../images/kom.png'
+import komHover from '../images/komHover.png'
 
 type MenuCategory = {
     name: string
@@ -19,11 +21,13 @@ const extras = menuData.extras.items.map((extra) => ({
     quantity: 1,
 }))
 
+
 export default function Menu() {
     const { order, pendingItem, setPendingItem, addToOrder, changeQuantity } = useOrder();
     const [selectedExtras, setSelectedExtras] = useState<Extra[]>([])
     const [selectedChoices, setSelectedChoices] = useState<string[]>([])
     const [activeCategory, setActiveCategory] = useState<MenuCategory | null>(null)
+    const [expandedCard, setExpandedCard] = useState<string | null>(null)
 
     const totalPrice = formatPrice(getOrderTotal(order))
 
@@ -102,8 +106,8 @@ export default function Menu() {
                     onClick={() => setActiveCategory(null)}
                     aria-label="Terug naar alle categorieën"
                 >
-                    <img src="/assets/kom.svg" alt="" className="kop-icoon kop-icoon--normaal" />
-                    <img src="/assets/kom-hover.svg" alt="" className="kop-icoon kop-icoon--hover" />
+                    <img src= {kom} alt="" className="kop-icoon kop-icoon--normaal" />
+                    <img src= {komHover} alt="" className="kop-icoon kop-icoon--hover" />
                     <span className="kop-naam">{activeCategory.name}</span>
                     <span className="kop-zh" lang="zh">{activeCategory.zh}</span>
                 </button>
@@ -118,15 +122,27 @@ export default function Menu() {
                             <span className="kaart-nummer">{card.item.id}</span>
 
                             <div className="kaart-midden">
-                                <h3 className="kaart-naam">{card.title}</h3>
-
-                                {(card.item.image || card.item.description) && (
-                                    <div className="kaart-hover">
-                                        {card.item.image && (
-                                            <img src={card.item.image} alt={card.item.name} />
-                                        )}
-                                        {card.item.description && <p>{card.item.description}</p>}
+                                {expandedCard === card.key ? (
+                                    <div
+                                        className="kaart-beschrijving"
+                                        onClick={() => setExpandedCard(null)}
+                                    >
+                                        <p>{card.item.description}</p>
                                     </div>
+                                ) : (
+                                    <h3
+                                        className="kaart-naam"
+                                        onClick={() => {
+                                            if (card.item.description) {
+                                                setExpandedCard(card.key)
+                                            }
+                                        }}
+                                        style={{
+                                            cursor: card.item.description ? 'pointer' : 'default'
+                                        }}
+                                    >
+                                        {card.title}
+                                    </h3>
                                 )}
                             </div>
 
@@ -152,7 +168,8 @@ export default function Menu() {
                             className="categorie"
                             onClick={() => setActiveCategory(category)}
                         >
-                            <img src="/assets/kom.svg" alt="" className="categorie-icoon" />
+                            <img src={kom} alt="" className="kop-icoon kop-icoon--normaal" />
+                            <img src={komHover} alt="" className="kop-icoon kop-icoon--hover" />
                             <h2>
                                 {category.name}
                                 <span className="categorie-zh" lang="zh">{category.zh}</span>
@@ -233,10 +250,14 @@ export default function Menu() {
             */}
             {pendingItem && (
                 <section>
+                <div className="pop-up-overlay">
+                <div className="pop-up-box">
                     <h2>{pendingItem.item.name}</h2>
 
                     {pendingItem.variant && <p>{pendingItem.variant.name}</p>}
 
+                    <div className = "selection-section">
+                    <p><b> Gerechten </b></p>
                     {/* CHOICES SELECTION */}
                     {Array.from({ length: pendingItem.variant?.choiceAmount ?? 0 }).map((_, i) => (
                         <select
@@ -305,33 +326,41 @@ export default function Menu() {
                         </select>
                     ))}
 
-                    {/* Cancel */}
-                    <button
-                        onClick={() => {
-                            setPendingItem(null)
-                            setSelectedExtras([])
-                            setSelectedChoices([])
-                        }}
-                    >
-                        Cancel
-                    </button>
+                    </div>
 
-                    {/* Submit */}
-                    <button
-                        onClick={() => {
-                            addToOrder(
-                                pendingItem.item,
-                                pendingItem.variant,
-                                selectedExtras.filter((x) => x != null && x.name != ''),
-                                selectedChoices.filter((x) => x != null && x != ''),
-                            )
-                            setPendingItem(null)
-                            setSelectedExtras([])
-                            setSelectedChoices([])
-                        }}
-                    >
-                        Submit
-                    </button>
+                    {/* Cancel */}
+                    <div className = "button-section">
+                        <button 
+                            className = "button"
+                            onClick={() => {
+                                setPendingItem(null)
+                                setSelectedExtras([])
+                                setSelectedChoices([])
+                            }}
+                        >
+                            Verwijder
+                        </button>
+
+                        {/* Submit */}
+                        <button
+                            className = "button"
+                            onClick={() => {
+                                addToOrder(
+                                    pendingItem.item,
+                                    pendingItem.variant,
+                                    selectedExtras.filter((x) => x != null && x.name != ''),
+                                    selectedChoices.filter((x) => x != null && x != ''),
+                                )
+                                setPendingItem(null)
+                                setSelectedExtras([])
+                                setSelectedChoices([])
+                            }}
+                        >
+                            Voeg toe
+                        </button>
+                    </div>
+                </div>
+                </div>
                 </section>
             )}
         </div>

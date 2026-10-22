@@ -1,4 +1,5 @@
-import { Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
+import Navigatie from './components/Navbar'
 import Hoofdpagina from './pages/Hoofdpagina'
 import Menu from './pages/Menu'
 import TijdLocatie from './pages/TijdLocatie'
@@ -7,12 +8,7 @@ import OverOns from './pages/OverOns'
 export default function App() {
   return (
     <>
-      <nav>
-        <Link to="/">Hoofdpagina</Link> |{' '}
-        <Link to="/menu">Menu</Link> |{' '}
-        <Link to="/tijd-locatie">Tijd & Locatie</Link> |{' '}
-        <Link to="/over-ons">Over ons</Link>
-      </nav>
+      <Navigatie />
 
       <Routes>
         <Route path="/" element={<Hoofdpagina />} />

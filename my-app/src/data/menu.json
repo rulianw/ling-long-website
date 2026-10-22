@@ -193,7 +193,7 @@
       { "name": "Grote Chin.Bami", "price": 6.5, "image": "" }
     ]
   },
-  
+
   "categories": [
     { "name": "Soepen", "zh": "汤", "matches": ["Soepen"] },
     { "name": "Bijgerechten", "zh": "配菜", "matches": ["Voor- en Bijgerechten"] },
@@ -209,7 +209,7 @@
     { "name": "Garnalen", "zh": "虾", "matches": ["Garnalen", "Ling Long Garnalen Specialiteiten"] },
     { "name": "Vis", "zh": "鱼", "matches": ["Ling Long Vis Specialiteiten"] },
     { "name": "Indisch", "zh": "印尼菜", "matches": ["Indische gerechten"] },
-    { "name": "Rijsttafel", "zh": "印尼饭桌", "matches": ["Rijsttafels"] },
+    { "name": "Chinees", "zh": "中国菜", "matches": ["Rijsttafels"] },
     { "name": "Voordeel Menu", "zh": "超值菜单", "matches": ["Voordeel Combinatie Menu"] }
   ]
 }
