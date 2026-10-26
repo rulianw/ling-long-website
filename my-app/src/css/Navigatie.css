@@ -77,7 +77,20 @@
 }
 
 .navigatie-logo:hover {
-  transform: rotate(-4deg) scale(1.05);
+  transform: scale(1.05);
+}
+
+/* on the dark page (tijd & locatie) the logo circle is red */
+.navigatie--donker .navigatie-logo {
+  background: var(--red);
+}
+
+.navigatie--donker .navigatie-logo span:first-child {
+  color: var(--yellow);
+}
+
+.navigatie--donker .navigatie-logo span:last-child {
+  color: var(--white);
 }
 
 /* "bestellingen via de telefoon" + button */
@@ -111,3 +124,8 @@
   transform: translate(-3px, 3px);
   box-shadow: 0 0 0 var(--yellow);
 }
+
+.navigatie-logo span:first-child { view-transition-name: titel-zh; }
+.navigatie-logo span:last-child  { view-transition-name: titel-nl; }
+
+

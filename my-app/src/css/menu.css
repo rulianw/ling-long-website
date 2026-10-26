@@ -1,10 +1,9 @@
 .menu {
   width: 100%;
   min-height: 100vh;
-  padding: 4 rem;
+  padding: 5rem 0 4rem;
   background: var(--red);
   color: var(--white);
-  padding-top: 5rem;
 }
 
 .categorieen {
@@ -222,6 +221,24 @@
   line-height: 1.4;
 }
 
+.kaart-hint {
+  display: block;
+  width: fit-content;
+  margin: 0.5rem auto 0;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: var(--red);
+  color: var(--white);
+  font-size: 0.65rem;
+  font-weight: 500;
+  transition: background-color 0.15s ease;
+}
+
+.kaart-naam:hover .kaart-hint,
+.kaart-beschrijving:hover .kaart-hint {
+  background: var(--black);
+}
+
 .kaart-prijs {
   margin: 0;
   color: var(--white);
@@ -263,34 +280,215 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    gap: 1rem;
-    z-index: 1;
-    background-color: color-mix(in srgb, 90%, in var(--black) );
-    border-radius: 2rem;
+    z-index: 10;
+    background-color: color-mix(in srgb, var(--black) 90%, transparent);
 }
 
 .pop-up-box{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 18rem;
+    max-width: 90vw;
+    padding: 2rem;
+    border-radius: 12px;
+    background-color: var(--white);
+    color: var(--red);
+    box-shadow: -6px 6px 0 var(--yellow);
+    text-align: center;
+    animation: fade-up 0.3s ease both;
+}
+
+.pop-up-box h2,
+.pop-up-box p{
+    margin: 0;
 }
 
 .selection-section{
-    display:flex;
-    flex-direction:column;
-    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.selection-section select{
+    padding: 0.6rem 0.75rem;
+    border: 2px solid var(--red);
+    border-radius: 6px;
+    background-color: var(--white);
+    color: var(--black);
+    font-family: inherit;
+    font-size: 0.9rem;
 }
 
 .button-section{
-    display:flex;
+    display: flex;
     flex-direction: row;
-    gap: 2rem;
-    padding-top: 2rem;
-
+    justify-content: center;
+    gap: 1rem;
+    padding-top: 1rem;
 }
 
 .button{
-    display: flex;
-    background-color: var(--white);
-    border-color: var(--black);
-    padding: 1rem;
-    border-radius: 1rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--red);
+    color: var(--white);
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.button:first-child{
+    background-color: var(--black);
+}
+
+.button:hover{
+    transform: translateY(-2px);
+}
+
+/* ---------- order ---------- */
+
+.bestelling {
+  max-width: 34rem;
+  margin: 4rem auto 0;
+  padding: 2rem;
+  border-radius: 12px;
+  background: var(--white);
+  color: var(--red);
+  box-shadow: -6px 6px 0 var(--yellow);
+}
+
+.bestelling-titel {
+  margin: 0 0 1.5rem;
+  text-align: center;
+}
+
+.bestelling-leeg {
+  margin: 0;
+  text-align: center;
+  color: var(--black);
+}
+
+.bestelling-regel {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--red) 25%, transparent);
+}
+
+.bestelling-naam {
+  font-size: 1rem;
+}
+
+.bestelling-lijst {
+  margin: 0.4rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--black);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.bestelling-rechts {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.bestelling-prijs {
+  font-weight: 700;
+}
+
+.bestelling-totaal {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--red);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.bestelling-bellen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.bestelling-allergie {
+  margin: 1.5rem 0 0;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--yellow) 25%, transparent);
+  color: var(--black);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.bestelling-bellen p {
+  max-width: 24rem;
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  padding-bottom: .5rem;
+}
+
+.bestelling-telefoon {
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  background: var(--red);
+  color: var(--white);
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: -3px 3px 0 var(--yellow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.bestelling-telefoon:hover {
+  transform: translate(-3px, 3px);
+  box-shadow: 0 0 0 var(--yellow);
+}
+
+/* ---------- Catering ---------- */
+
+.over-ons-catering {
+  display: flex;
+  justify-content: center;
+  padding: 0 var(--over-ons-padding) 120px;
+  margin-top: 7rem;
+}
+
+.catering-kaart {
+  max-width: 34rem;
+  padding: 2rem;
+  border-radius: 12px;
+  background: var(--green);
+  color: var(--white);
+  box-shadow: -6px 6px 0 var(--yellow);
+  text-align: center;
+}
+
+.catering-kaart h2 {
+  margin: 0 0 1rem;
+}
+
+.catering-kaart p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.catering-kaart .catering-hint {
+  margin-top: 1rem;
+  color: var(--red);
+  font-size: 0.85rem;
 }

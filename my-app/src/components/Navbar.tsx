@@ -11,11 +11,12 @@ const links = [
 export default function Navigatie() {
   const { pathname } = useLocation()
   const isHome = pathname === '/'
+  const isDark = pathname === '/tijd-locatie'
 
   return (
-    <header className={`navigatie ${isHome ? 'navigatie--home' : ''}`}>
+    <header className={`navigatie ${isHome ? 'navigatie--home' : ''} ${isDark ? 'navigatie--donker' : ''}`}>
         {!isHome && (
-            <Link to="/" className="navigatie-logo">
+            <Link to="/" className="navigatie-logo" viewTransition>
             <span lang="zh">玲珑阁</span>
             <span>Ling Long</span>
             </Link>
@@ -26,7 +27,7 @@ export default function Navigatie() {
             style={isHome ? undefined : { backgroundImage: `url(${papier})` }}
         >
             {links.map((link) => (
-            <NavLink key={link.to} to={link.to} className="navigatie-link">
+            <NavLink key={link.to} to={link.to} className="navigatie-link" viewTransition>
                 <span>{link.nl}</span>
                 <span lang="zh">{link.zh}</span>
             </NavLink>

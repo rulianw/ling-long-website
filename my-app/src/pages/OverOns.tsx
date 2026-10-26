@@ -2,12 +2,26 @@
 import { useEffect, useRef } from "react";
 import "../css/OverOns.css";
 import overOnsImage from "../images/overOns.png";
-import fotoCollage from "../images/fotoCollage.png"
+import image1 from "../images/image1.png"
+import image2 from "../images/image2.png"
+import image3 from "../images/image3.png"
+import image4 from "../images/image4.png"
+import image5 from "../images/image5.png"
+import image6 from "../images/image6.png"
+import image7 from "../images/image7.png"
+import image8 from "../images/image8.png"
+import image9 from "../images/image9.png"
+
+
 
 export default function OverOns() {
   const textRef = useRef(null);
   const collageRef = useRef(null);
-
+  const kolommen = [
+    [image1, image2, image3],
+    [image4, image5, image6],
+    [image7, image8, image9],
+  ]
   useEffect(() => {
     const elements = [textRef.current, collageRef.current].filter(Boolean);
 
@@ -66,13 +80,17 @@ export default function OverOns() {
         </div>
       </section>
 
-      <section className="over-ons-collage-section">
-        <div className="over-ons-collage reveal" ref={collageRef}>
-          <img
-            src= {fotoCollage}
-            alt="Een kijkje bij Ling Long"
-            loading="lazy"
-          />
+      <section className="over-ons-galerie">
+        <div className="over-ons-galerie-grid reveal" ref={collageRef}>
+          {kolommen.map((kolom, k) => (
+            <div className="galerie-kolom" key={k}>
+              {kolom.map((src, i) => (
+                <figure className="galerie-tegel" key={i} tabIndex={0}>
+                  <img src={src} alt={`Foto ${k * 3 + i + 1}`} loading="lazy" />
+                </figure>
+              ))}
+            </div>
+          ))}
         </div>
       </section>
     </main>

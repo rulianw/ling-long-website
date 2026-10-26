@@ -1,26 +1,24 @@
-
-/* Main page */
+/* ---------- Main page ---------- */
 
 .over-ons {
   --over-ons-padding: clamp(24px, 6vw, 90px);
 
   width: 100%;
+  max-width: none;
+  padding: 0;
   overflow: clip;
   background: var(--red);
   color: var(--white);
   font-family: var(--heading);
 }
 
-/* First screen */
+/* ---------- Hero ---------- */
 
 .over-ons-hero {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  min-height: 100vh;
   min-height: 100svh;
-
   padding: 50px var(--over-ons-padding);
   text-align: center;
 }
@@ -30,7 +28,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   width: 100%;
   gap: 8px;
 }
@@ -40,14 +37,13 @@
   width: clamp(220px, 35vw, 460px);
   max-width: 100%;
   height: auto;
-  object-fit: contain;
   margin-bottom: 12px;
+  object-fit: contain;
 }
 
 .over-ons-hero h1 {
   margin: 0;
   color: var(--white);
-
   font-size: clamp(48px, 8vw, 108px);
   font-weight: 700;
   line-height: 1.1;
@@ -57,22 +53,19 @@
 .over-ons-chinees {
   margin: 0;
   color: var(--white);
-
   font-size: clamp(25px, 3vw, 42px);
   font-weight: 600;
   line-height: 1.4;
 }
 
-/* Scroll prompt */
+/* ---------- Scroll prompt ---------- */
 
 .over-ons-scroll {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
-
   margin-top: clamp(35px, 8vh, 80px);
-
   color: var(--yellow);
   font-size: 13px;
   letter-spacing: 0.08em;
@@ -94,22 +87,20 @@
   }
 }
 
-/* Introduction section */
+/* ---------- Story ---------- */
 
 .over-ons-verhaal {
   display: flex;
   align-items: center;
   justify-content: center;
-
   min-height: 75vh;
-  padding: 100px var(--over-ons-padding);
+    padding: 100px var(--over-ons-padding) 600px;
 }
 
 .over-ons-tekst {
   width: 100%;
   max-width: 700px;
   margin: 0 auto;
-
   text-align: center;
   font-size: clamp(19px, 2vw, 27px);
   line-height: 1.65;
@@ -123,12 +114,11 @@
   margin-top: 35px;
 }
 
-/* Scroll reveal */
+/* ---------- Scroll reveal ---------- */
 
 .reveal {
   opacity: 0;
   transform: translateY(45px);
-
   transition:
     opacity 900ms ease,
     transform 900ms cubic-bezier(0.2, 0.65, 0.3, 1);
@@ -139,36 +129,34 @@
   transform: translateY(0);
 }
 
-/* Collage section */
+/* ---------- Full-width collage ---------- */
 
 .over-ons-collage-section {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  min-height: 80vh;
-  padding: 70px var(--over-ons-padding) 120px;
+  height: 100svh;
+  overflow: hidden;
 }
 
 .over-ons-collage {
   width: 100%;
-  max-width: 1100px;
+  height: 100%;
 }
 
 .over-ons-collage img {
   display: block;
   width: 100%;
-  height: auto;
-  border-radius: 2px;
+  height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
-/* Mobile */
+/* ---------- Mobile ---------- */
 
 @media (max-width: 650px) {
   .over-ons-hero {
-    min-height: 100svh;
     padding: 35px 22px;
+    .over-ons-galerie-grid {
+      grid-template-columns: repeat(2, 1fr);
+  }
   }
 
   .over-ons-illustratie {
@@ -192,80 +180,84 @@
   .over-ons-tekst p + p {
     margin-top: 28px;
   }
+}
 
-/* Full-width collage */
+/* ---------- Gallery ---------- */
 
-.over-ons {
-  width: 100%;
-  max-width: none;
+.over-ons-galerie {
   padding: 0;
 }
 
-.over-ons-collage-section {
-  width: 100vw;
-  height: 100vh;
+.over-ons-galerie-grid {
+  display: flex;
+  gap: 0;
+  width: 100%;
   height: 100svh;
-  margin: 0;
-  padding: 0;
+}
+
+.galerie-kolom {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+}
+
+.galerie-tegel {
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  overflow: hidden;
-}
-
-.over-ons-collage {
-  width: 100%;
-  height: 100%;
-  max-width: none;
+  flex: 1 1 0;
+  min-height: 0;
   margin: 0;
-  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
 }
 
-.over-ons-collage img {
+.galerie-tegel img {
   display: block;
   width: 100%;
   height: 100%;
-  max-width: none;
   object-fit: cover;
-  object-position: center;
-  border-radius: 0;
-}/* Full-width collage */
-
-.over-ons {
-  width: 100%;
-  max-width: none;
-  padding: 0;
+  transition: transform 0.5s ease;
 }
 
-.over-ons-collage-section {
-  width: 100vw;
-  height: 100vh;
-  height: 100svh;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  overflow: hidden;
+/* left column */
+.galerie-kolom:nth-child(1) .galerie-tegel:nth-child(1) { flex: 195 1 0; }
+.galerie-kolom:nth-child(1) .galerie-tegel:nth-child(2) { flex: 220 1 0; }
+.galerie-kolom:nth-child(1) .galerie-tegel:nth-child(3) { flex: 55 1 0; }
+
+/* middle column */
+.galerie-kolom:nth-child(2) .galerie-tegel:nth-child(1) { flex: 113 1 0; }
+.galerie-kolom:nth-child(2) .galerie-tegel:nth-child(2) { flex: 215 1 0; }
+.galerie-kolom:nth-child(2) .galerie-tegel:nth-child(3) { flex: 142 1 0; }
+
+/* right column */
+.galerie-kolom:nth-child(3) .galerie-tegel:nth-child(1) { flex: 100 1 0; }
+.galerie-kolom:nth-child(3) .galerie-tegel:nth-child(2) { flex: 270 1 0; }
+.galerie-kolom:nth-child(3) .galerie-tegel:nth-child(3) { flex: 100 1 0; }
+
+/* dark layer on top, fades away on hover */
+.galerie-tegel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--black) 60%, transparent);
+  transition: opacity 0.4s ease;
+  pointer-events: none;
 }
 
-.over-ons-collage {
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  margin: 0;
-  padding: 0;
+.galerie-tegel:hover::after,
+.galerie-tegel:focus-visible::after {
+  opacity: 0;
 }
 
-.over-ons-collage img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 0;
+.galerie-tegel:hover img,
+.galerie-tegel:focus-visible img {
+  transform: scale(1.05);
 }
 
+/* phones have no hover, so don't darken there */
+@media (hover: none) {
+  .galerie-tegel::after {
+    opacity: 0;
+  }
 }
-

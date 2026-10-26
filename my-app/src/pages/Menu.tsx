@@ -142,9 +142,12 @@ export default function Menu() {
                                         }}
                                     >
                                         {card.title}
+                                        {card.item.description && (
+                                            <span className="kaart-hint">meer info</span>
+                                        )}
                                     </h3>
                                 )}
-                            </div>
+                                                            </div>
 
                             <div className="kaart-onder">
                                 {card.price !== null && (
@@ -184,63 +187,91 @@ export default function Menu() {
                 (・◦・)   ✧･ﾟ:*      m e n u
                 /づ~ ♡･ﾟ:*:･★‧₊˚         o r d e r
             */}
-            <section>
-                <h2>Uw Bestelling</h2>
+            <section className="bestelling">
+                <h2 className="bestelling-titel">Uw Bestelling</h2>
 
                 {order.length === 0 ? (
-                    <p>Uw bestelling is leeg.</p>
+                    <p className="bestelling-leeg">Uw bestelling is leeg.</p>
                 ) : (
-                    order.map((item) => (
-                        <div key={item.id}>
-                            <div>
-                                {/* Item */}
-                                <strong>{item.name}</strong>
-                                {' x ' + item.quantity} {formatPrice(item.basePrice * item.quantity)}
+                    <div className="bestelling-regels">
+                        {order.map((item) => (
+                            <div className="bestelling-regel" key={item.id}>
+                                <div className="bestelling-info">
+                                    <strong className="bestelling-naam">{item.name}</strong>
 
-                                {/* Choices (combinatie menu) */}
-                                {item.choices && item.choices.length > 0 && (
-                                    <ul>
-                                        {item.choices.map((choice) => (
-                                            <li key={choice}>{choice}</li>
-                                        ))}
-                                    </ul>
-                                )}
+                                    {/* Choices (combinatie menu) */}
+                                    {item.choices && item.choices.length > 0 && (
+                                        <ul className="bestelling-lijst">
+                                            {item.choices.map((choice) => (
+                                                <li key={choice}>{choice}</li>
+                                            ))}
+                                        </ul>
+                                    )}
 
-                                {/* Extras */}
-                                {item.extras && item.extras.length > 0 && (
-                                    <ul>
-                                        {item.extras.map((extra) => (
-                                            <li key={extra.name}>
-                                                {extra.name} x {extra.quantity}
-                                                ({formatPrice(extra.price * extra.quantity)})
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
+                                    {/* Extras */}
+                                    {item.extras && item.extras.length > 0 && (
+                                        <ul className="bestelling-lijst">
+                                            {item.extras.map((extra) => (
+                                                <li key={extra.name}>
+                                                    {extra.name} x {extra.quantity} ({formatPrice(extra.price * extra.quantity)})
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </div>
 
-                                {/* Quantity buttons */}
-                                <button onClick={() => changeQuantity(item.id, 1)}>+1</button>
-                                <button onClick={() => changeQuantity(item.id, -1)}>-1</button>
+                                <div className="bestelling-rechts">
+                                    <span className="bestelling-prijs">
+                                        {formatPrice(
+                                            item.basePrice * item.quantity +
+                                            (item.extras?.reduce(
+                                                (extraTotal, extra) =>
+                                                    extraTotal + extra.price * extra.quantity,
+                                                0
+                                            ) ?? 0)
+                                        )}
+                                    </span>
+                                    <div className="teller">
+                                        <button className="teller-knop" onClick={() => changeQuantity(item.id, -1)}>-</button>
+                                        <span>{item.quantity}</span>
+                                        <button className="teller-knop" onClick={() => changeQuantity(item.id, 1)}>+</button>
+                                    </div>
+                                </div>
                             </div>
-
-                            <span>
-                                {formatPrice(
-                                    item.basePrice * item.quantity +
-                                    (item.extras?.reduce(
-                                        (extraTotal, extra) =>
-                                            extraTotal + extra.price * extra.quantity,
-                                        0
-                                    ) ?? 0)
-                                )}
-                            </span>
-                        </div>
-                    ))
+                        ))}
+                    </div>
                 )}
 
-                <h3>Totaal: {totalPrice}</h3>
+                <div className="bestelling-totaal">
+                    <span>Totaal</span>
+                    <span>{totalPrice}</span>
+                </div>
 
-                <p>bestellingen via de telefoon</p>
-                <button>024 6775634</button>
+                <p className="bestelling-allergie">
+                    Als u allergieën of gevoeligheid voor bepaalde voedingsmiddelen heeft,
+                    meld het onze medewerkers.
+                </p>
+
+                <div className="bestelling-bellen">
+                    <p>
+                        I.v.m. de lange en zorgvuldige bereidingstijd verzoeken wij u
+                        vriendelijk uw bestelling telefonisch door te geven.
+                    </p>
+                    <a href="tel:0246775634" className="bestelling-telefoon">024 6775634</a>
+                </div>
+            </section>
+
+            <section className="over-ons-catering">
+            <div className="catering-kaart">
+                <h2>Catering Service</h2>
+                <p>
+                Wilt u uw gasten of personeel eens verwennen met een heerlijke
+                Chinese maaltijd? Wij bezorgen catering aan huis of bedrijf!
+                </p>
+                <p className="catering-hint">
+                (Vraag meer informatie aan de balie)
+                </p>
+            </div>
             </section>
 
             {/*
