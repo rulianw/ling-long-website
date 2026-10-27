@@ -1,18 +1,16 @@
 # Menu page overview
 
-## Plan (21 October 2026)
+## Plan (27 October 2026)
 1. **Chinese names on the cards** (add a `zh` field per dish in `menu.json`, same idea as the categories)
-2. **Style the order section:** green box, "你的命令" title, girl illustration, total at the bottom right
-3. **Extras popup as an overlay** (now it appears at the bottom of the page)
-4. **Edit function** to change the extras of an order line
+2. **Style the order section:** add the girl illustration and the "你的命令" title (box and total are done)
+3. **Edit function** to change the extras of an order line
+4. **Catering card:** add the fade-in (`reveal` class + ref) on Over Ons
 
 ## To do after today
-- [ ] Add the real assets: `kom.svg`, `kom-hover.svg`, dish photos and descriptions (hover only shows them when filled in)
-- [ ] Header with nav and phone button on the menu page (as in the design)
-- [ ] Fade-out animation when leaving a category (needs extra state)
 - [ ] Shared order state: the order will be shown on other pages (lift state up or React Context)
 - [ ] Tailwind styling
-
+- [ ] Check the pages on small screens (nav, home image, Tijd & Locatie panels)
+- [ ] Subsitute all the visuals with self-made images.
 ## Done
 
 **Data and types**
@@ -43,16 +41,34 @@
 - [x] Variant A gets 1 free dropdown with only Witte Rijst, Nasi and Bami, without prices
 - [x] Cancel and Submit reset `pendingItem` and `selectedExtras`
 - [x] Code cleaned up into sections with clearer names
+- [x] Popup is now an overlay (`pop-up-overlay` + `pop-up-box`) with a semi-transparent dark background (`color-mix`), white box, yellow offset shadow, centered buttons and styled dropdowns
 
 **Menu page design**
 - [x] Category grid with bowl icon, Dutch and Chinese name
 - [x] Open category: round header (click = back to categories), cards fade in one after another
-- [x] Cards: number in a black circle on top, name in the middle, price and counter at the bottom
 - [x] Every variant has its own card
 - [x] Hover shows photo and description (only on cards that have one)
 - [x] Counter on the card matches the amount in the order (matches on item id + variant)
 - [x] Colors: cream card, dark red name, green price, black circle and counter, yellow only as shadow
 - [x] Price and counter stuck to the bottom of the card (`margin-top: auto`)
+- [x] Cards with a description show a red "ⓘ meer info" pill (and "✕ sluiten" when open)
+- [x] Order section restyled as `bestelling` card: white box, yellow shadow, `+`/`−` counter like the cards, one price per line, phone number as a `tel:` link
+- [x] Allergy note (yellow box) and preparation-time sentence next to the phone number added to the order card
+- [x] Black strip under a tall order fixed (bottom margin moved into `.menu` padding)
+
+**Other pages**
+- [x] Over Ons: `@media` block closed, duplicate rules merged, whole CSS cleaned up
+- [x] Over Ons: gallery of 9 images in 3 columns, one full-width rectangle with different heights per picture, darkened with hover reveal (no dark layer on touch screens)
+- [x] Over Ons: catering card between story and gallery
+- [x] Tijd & Locatie: `#fff` replaced by `var(--white)`, red right panel covers the full height, more top padding
+- [x] Nav logo is a red circle on the Tijd & Locatie page (`navigatie--donker`)
+- [x] Home page: image dims/slides off-screen on narrow windows with a gradient so the text stays readable
+
+**Animations**
+- [x] Router changed from `BrowserRouter` to `createBrowserRouter` + `RouterProvider` (`App.tsx` is the layout with `<Outlet />`, routes live in `main.tsx`)
+- [x] Shared-element transition: nav logo letters morph into the home title (and back), without the fade (`::view-transition-old` hidden)
+- [x] Nav morph between home and other pages (`view-transition-name: nav-links`)
+- [x] Bowl (kom) morphs into the round category header with `document.startViewTransition` + `flushSync`, only the clicked kom gets the name
 
 ## Rule for extras
 | `getMaxExtras` | Meaning |
@@ -65,40 +81,15 @@
 
 # Day log
 
-## Week before 5 October
-- State is never changed directly: always give `setOrder` a new array (spread, `map`, `filter`), and call the setter once per action.
-- `totalPrice` is calculated from `order`, not stored. `map` must return every element, `filter` keeps what returns `true`, `reduce` makes one value.
-- Built the order: add, +/−, removal at zero, variants as their own lines, the total.
-- Decided the menu rules: `allowsExtras` on items, `maxExtras` on variants, `getMaxExtras` for the number.
+(... earlier entries unchanged ...)
 
-## 5 October 2026
-- Understood `pending` (the "sticky note" for the dish being decided on) and the flow: `handleAdd` → popup → `addToOrder`.
-- Built the popup with one `<select>` per extra (`Array.from({ length }).map`), with prices.
-- Renamed variant `label` to `name`, fixed the `pending.variant` errors, learned `console.log('x', object)`.
-- Learned `onChange` for a `<select>`, and that `find` can return `undefined`.
-- Fixed the price (`basePrice` + `extrasPrice`), split `OrderLine`, and learned that NaN after a change can be old state (reload with F5).
-- Switched from merging extras into one line to a different `id` per combination.
-
-## 6 October 2026
-- Cancel now also clears the chosen extras (two statements in braces, not `&&`).
-- One position per dropdown: copy the array, change position `i`, set the copy.
-- Empty entries are removed on Submit with `x != null && x.name != ''` (check `x` before `x.name`).
-- Variant A: minimum of 1 dropdown (`Math.max(1, ...)`), free price (`price: 0`), no prices shown, only the first three extras (`slice(0, 3)`).
-- Learned that variables used in the JSX go above `return`, not inside a handler.
-- Cleaned up `Menu.tsx`: sections, clearer names, a controlled `<select>`, one `changeQuantity`.
-
-## 7 October 2026
-- When deleting the extra will get deleted with the main dish
-- When adding the popup will appear again when it's a main dish to choose the extra
-- If it's the same extra dish it will add to the existing one, otherwise a new line will appear
-- Fixed the error that made dishes appear x2 when choosing the same extra
-- Fixed the error that extra dishes would not get deleted when deleting main dish.
-- Fixed showing the pricing of the extra dish
-
-## 20-21 October 2026
-- Styled the menu page from the design: categories with Chinese names, header, cards, fade-in animations.
-- Categories now come from one `categories` block in `menu.json` (`matches` groups the old categories).
-- Learned that `flatMap` needs one explicit type (`Card[]`) when two branches return different shapes.
-- Cards: variants as their own card, hover info only if there is an image or description (`kaart--info`).
-- Counter matches the order by item id + variant name, because the order line name is "dish - variant".
-- Colors: each color gets one job. Learned `margin-top: auto` pushes an element to the bottom of a flex column.
+## 26 October 2026
+- Popup: the overlay covers the screen and the box sizes itself to its content. `opacity` fades everything inside, so transparency goes on the background color only.
+- Learned `color-mix(in srgb, COLOR 90%, transparent)`: a `var()` can't take a comma and an alpha value.
+- Class names in CSS and JSX must match exactly (`.select` vs `selection-section`).
+- Over Ons: an unclosed `@media` block made later rules apply only on mobile. A fixed `height` with `overflow: hidden` crops an image.
+- Collage: flex columns with `flex: N 1 0` per picture give different heights that still add up to one rectangle; `object-fit: cover` fills each tile.
+- Margin collapsing: the bottom margin of the last child can land outside the parent and show the body background.
+- View transitions: React Router's `viewTransition` prop only works with a data router (`createBrowserRouter`), not `<BrowserRouter>`. A `view-transition-name` may exist only once at a time.
+- For state changes (not page changes) start the transition yourself with `document.startViewTransition` and `flushSync`.
+- `min-height: 100%` doesn't resolve in a grid item without a fixed parent height; grid items already stretch.

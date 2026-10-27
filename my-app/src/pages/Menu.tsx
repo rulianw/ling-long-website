@@ -7,6 +7,7 @@ import { getMaxExtras } from '../utils/extras'
 import { useOrder } from '../hooks/useOrder'
 import kom from '../images/kom.png'
 import komHover from '../images/komHover.png'
+import plasticTasje from '../images/plasticTasjeRood.png'
 
 type MenuCategory = {
     name: string
@@ -246,6 +247,11 @@ export default function Menu() {
                     <span>Totaal</span>
                     <span>{totalPrice}</span>
                 </div>
+
+                <p className = "plastic-tasje">
+                    <img src={plasticTasje} alt="plastic tasje" className="plastic-tasje-afbeelding"/>
+                    <span> per tasje €0.05 extra, berekend bij de kassa </span>
+                </p>
 
                 <p className="bestelling-allergie">
                     Als u allergieën of gevoeligheid voor bepaalde voedingsmiddelen heeft,

@@ -15,15 +15,17 @@ import image9 from "../images/image9.png"
 
 
 export default function OverOns() {
-  const textRef = useRef(null);
-  const collageRef = useRef(null);
+  const textRef = useRef<HTMLDivElement>(null);
+  const collageRef = useRef<HTMLDivElement>(null);
   const kolommen = [
     [image1, image2, image3],
     [image4, image5, image6],
     [image7, image8, image9],
   ]
   useEffect(() => {
-    const elements = [textRef.current, collageRef.current].filter(Boolean);
+    const elements = [textRef.current, collageRef.current].filter(
+      (el): el is HTMLDivElement => el !== null
+    );
 
     const observer = new IntersectionObserver(
       (entries) => {
