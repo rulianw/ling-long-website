@@ -2,8 +2,8 @@ import "../css/Menu.css"
 import { useState } from 'react'
 import menuData from '../data/menu.json'
 import type { MenuItem, Extra, Variant, Card } from '../types'
-import { formatPrice, getOrderTotal } from '../utils/price'
-import { getMaxExtras } from '../utils/extras'
+import { formatPrice, getOrderTotal, getLineTotal} from '../utils/price'
+import { getMaxExtras, updateExtra } from '../utils/extras'
 import { useOrder } from '../hooks/useOrder'
 import kom from '../images/kom.png'
 import komHover from '../images/komHover.png'
@@ -224,12 +224,7 @@ export default function Menu() {
                                 <div className="bestelling-rechts">
                                     <span className="bestelling-prijs">
                                         {formatPrice(
-                                            item.basePrice * item.quantity +
-                                            (item.extras?.reduce(
-                                                (extraTotal, extra) =>
-                                                    extraTotal + extra.price * extra.quantity,
-                                                0
-                                            ) ?? 0)
+                                            getLineTotal(item)
                                         )}
                                     </span>
                                     <div className="teller">
@@ -324,33 +319,11 @@ export default function Menu() {
                         <select
                             key={i}
                             value={selectedExtras[i]?.name || ''}
-                            onChange={(e) => {
-                                const chosen = extras.find((extra) => extra.name === e.target.value)
-
-                                if (chosen && extrasAreFree) {
-                                    setSelectedExtras([{ ...chosen, price: 0 }])
-                                }
-
-                                else if (chosen && !(getMaxExtras(pendingItem.item, pendingItem.variant) > 1)) {
-                                    setSelectedExtras([chosen])
-                                }
-
-                                else if (chosen && getMaxExtras(pendingItem.item, pendingItem.variant) > 1) {
-                                    setSelectedExtras((prev) => {
-                                        const next = [...prev];
-                                        next[i] = chosen;
-                                        return next;
-                                    })
-                                }
-
-                                else {
-                                    setSelectedExtras((prev) => {
-                                        const next = [...prev];
-                                        next[i] = { name: '', price: 0, quantity: 0 };
-                                        return next;
-                                    })
-                                }
-                            }}
+                    onChange={(e) =>
+                        setSelectedExtras(
+                            updateExtra(extras, selectedExtras, i, e.target.value, extrasAreFree)
+                        )
+                    }
                         >
                             <option value="">Geen Keuze</option>
 
