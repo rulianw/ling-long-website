@@ -1,4 +1,4 @@
-    import type { MenuItem, Variant, Extra, Pending } from '../types'
+    import type { MenuItem, Variant, Extra } from '../types'
     
     /* Returns:
         -1 = extras are not allowed

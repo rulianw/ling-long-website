@@ -1,13 +1,15 @@
 import "../css/Menu.css"
 import { useState } from 'react'
 import menuData from '../data/menu.json'
+import OrderSummary from '../components/OrderSummary'
+import PopUp from '../components/popUp'
+
 import type { MenuItem, Extra, Variant, Card } from '../types'
-import { formatPrice, getOrderTotal, getLineTotal} from '../utils/price'
-import { getMaxExtras, updateExtra } from '../utils/extras'
+import { formatPrice, getOrderTotal} from '../utils/price'
+import { getMaxExtras } from '../utils/extras'
 import { useOrder } from '../hooks/useOrder'
 import kom from '../images/kom.png'
 import komHover from '../images/komHover.png'
-import plasticTasje from '../images/plasticTasjeRood.png'
 
 type MenuCategory = {
     name: string
@@ -188,191 +190,15 @@ export default function Menu() {
                 (・◦・)   ✧･ﾟ:*      m e n u
                 /づ~ ♡･ﾟ:*:･★‧₊˚         o r d e r
             */}
-            <section className="bestelling">
-                <h2 className="bestelling-titel">Uw Bestelling</h2>
 
-                {order.length === 0 ? (
-                    <p className="bestelling-leeg">Uw bestelling is leeg.</p>
-                ) : (
-                    <div className="bestelling-regels">
-                        {order.map((item) => (
-                            <div className="bestelling-regel" key={item.id}>
-                                <div className="bestelling-info">
-                                    <strong className="bestelling-naam">{item.name}</strong>
-
-                                    {/* Choices (combinatie menu) */}
-                                    {item.choices && item.choices.length > 0 && (
-                                        <ul className="bestelling-lijst">
-                                            {item.choices.map((choice) => (
-                                                <li key={choice}>{choice}</li>
-                                            ))}
-                                        </ul>
-                                    )}
-
-                                    {/* Extras */}
-                                    {item.extras && item.extras.length > 0 && (
-                                        <ul className="bestelling-lijst">
-                                            {item.extras.map((extra) => (
-                                                <li key={extra.name}>
-                                                    {extra.name} x {extra.quantity} ({formatPrice(extra.price * extra.quantity)})
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    )}
-                                </div>
-
-                                <div className="bestelling-rechts">
-                                    <span className="bestelling-prijs">
-                                        {formatPrice(
-                                            getLineTotal(item)
-                                        )}
-                                    </span>
-                                    <div className="teller">
-                                        <button className="teller-knop" onClick={() => changeQuantity(item.id, -1)}>-</button>
-                                        <span>{item.quantity}</span>
-                                        <button className="teller-knop" onClick={() => changeQuantity(item.id, 1)}>+</button>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
-
-                <div className="bestelling-totaal">
-                    <span>Totaal</span>
-                    <span>{totalPrice}</span>
-                </div>
-
-                <p className = "plastic-tasje">
-                    <img src={plasticTasje} alt="plastic tasje" className="plastic-tasje-afbeelding"/>
-                    <span> per tasje €0.05 extra, berekend bij de kassa </span>
-                </p>
-
-                <p className="bestelling-allergie">
-                    Als u allergieën of gevoeligheid voor bepaalde voedingsmiddelen heeft,
-                    meld het onze medewerkers.
-                </p>
-
-                <div className="bestelling-bellen">
-                    <p>
-                        I.v.m. de lange en zorgvuldige bereidingstijd verzoeken wij u
-                        vriendelijk uw bestelling telefonisch door te geven.
-                    </p>
-                    <a href="tel:0246775634" className="bestelling-telefoon">024 6775634</a>
-                </div>
-            </section>
-
-            <section className="over-ons-catering">
-            <div className="catering-kaart">
-                <h2>Catering Service</h2>
-                <p>
-                Wilt u uw gasten of personeel eens verwennen met een heerlijke
-                Chinese maaltijd? Wij bezorgen catering aan huis of bedrijf!
-                </p>
-                <p className="catering-hint">
-                (Vraag meer informatie aan de balie)
-                </p>
-            </div>
-            </section>
-
+            <OrderSummary order={order} totalPrice={totalPrice}/>
+ 
             {/*
                  ∧＿∧
                 (・◦・)   ✧･ﾟ:*      p e n d i n g
                 /づ~ ♡･ﾟ:*:･★‧₊˚       i t e m s
             */}
-            {pendingItem && (
-                <section>
-                <div className="pop-up-overlay">
-                <div className="pop-up-box">
-                    <h2>{pendingItem.item.name}</h2>
-
-                    {pendingItem.variant && <p>{pendingItem.variant.name}</p>}
-
-                    <div className = "selection-section">
-                    <p><b> Gerechten </b></p>
-                    {/* CHOICES SELECTION */}
-                    {Array.from({ length: pendingItem.variant?.choiceAmount ?? 0 }).map((_, i) => (
-                        <select
-                            key={i}
-                            value={selectedChoices[i] || ''}
-                            onChange={(e) => {
-                                setSelectedChoices((prev) => {
-                                    const next = [...prev];
-                                    next[i] = e.target.value;
-                                    return next;
-                                })
-                            }}
-                        >
-                            <option value="">Geen Keuze</option>
-
-                            {pendingItem.item.choices?.map((choice) => (
-                                <option key={choice} value={choice}>
-                                    {choice}
-                                </option>
-                            ))}
-                        </select>
-                    ))}
-
-                    {/* EXTRAS SELECTION */}
-                    <p><b> Bijgerechten </b></p>
-                    {Array.from({ length: Math.max(1, getMaxExtras(pendingItem.item, pendingItem.variant)) }).map((_, i) => (
-                        <select
-                            key={i}
-                            value={selectedExtras[i]?.name || ''}
-                    onChange={(e) =>
-                        setSelectedExtras(
-                            updateExtra(extras, selectedExtras, i, e.target.value, extrasAreFree)
-                        )
-                    }
-                        >
-                            <option value="">Geen Keuze</option>
-
-                            {visibleExtras.map((extra) => (
-                                <option key={extra.name} value={extra.name}>
-                                    {extra.name}
-                                    {!extrasAreFree && formatPrice(extra.price)}
-                                </option>
-                            ))}
-                        </select>
-                    ))}
-
-                    </div>
-
-                    {/* Cancel */}
-                    <div className = "button-section">
-                        <button 
-                            className = "button"
-                            onClick={() => {
-                                setPendingItem(null)
-                                setSelectedExtras([])
-                                setSelectedChoices([])
-                            }}
-                        >
-                            Verwijder
-                        </button>
-
-                        {/* Submit */}
-                        <button
-                            className = "button"
-                            onClick={() => {
-                                addToOrder(
-                                    pendingItem.item,
-                                    pendingItem.variant,
-                                    selectedExtras.filter((x) => x != null && x.name != ''),
-                                    selectedChoices.filter((x) => x != null && x != ''),
-                                )
-                                setPendingItem(null)
-                                setSelectedExtras([])
-                                setSelectedChoices([])
-                            }}
-                        >
-                            Voeg toe
-                        </button>
-                    </div>
-                </div>
-                </div>
-                </section>
-            )}
+            <PopUp selectedExtras={selectedExtras} setSelectedExtras={setSelectedExtras} selectedChoices={selectedChoices} setSelectedChoices={setSelectedChoices} pendingItem={pendingItem} setPendingItem={setPendingItem} addToOrder={addToOrder}/>
         </div>
     )
 }
