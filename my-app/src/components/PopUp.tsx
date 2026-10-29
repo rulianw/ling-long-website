@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { Extra } from '../types'
 import menuData from '../data/menu.json'
 import { formatPrice } from '../utils/price'
@@ -7,10 +8,6 @@ import { useOrder } from '../hooks/useOrder'
 type OrderApi = ReturnType<typeof useOrder>
 
 type PopUpProps = {
-    selectedExtras: Extra[]
-    setSelectedExtras: React.Dispatch<React.SetStateAction<Extra[]>>
-    selectedChoices: string[]
-    setSelectedChoices: React.Dispatch<React.SetStateAction<string[]>>
     pendingItem: OrderApi['pendingItem']
     setPendingItem: OrderApi['setPendingItem']
     addToOrder: OrderApi['addToOrder']
@@ -21,15 +18,14 @@ const extras = menuData.extras.items.map((extra) => ({
     quantity: 1,
 }))
 
-export default function popUp({
-    selectedExtras,
-    setSelectedExtras,
-    selectedChoices,
-    setSelectedChoices,
+export default function PopUp({
     pendingItem,
     setPendingItem,
     addToOrder,
 }: PopUpProps) {
+    const [selectedExtras, setSelectedExtras] = useState<Extra[]>([])
+    const [selectedChoices, setSelectedChoices] = useState<string[]>([])
+
     if (!pendingItem) return null
 
     const choiceAmount = pendingItem.variant?.choiceAmount ?? 0

@@ -1,12 +1,15 @@
 # Menu page overview
 
-## Plan (27 October 2026)
-1. **Split `Menu.tsx` into three components:** category/card list, order summary, popup (no new features)
-2. **`useOrder`:** keep "change quantity" and "choose extras again" as two separate things
-3. **Chinese names on the cards** (add a `zh` field per dish in `menu.json`, same idea as the categories)
-4. **Style the order section:** add the girl illustration and the "你的命令" title (box and total are done)
-5. **Edit function** to change the extras of an order line
-6. **Catering card:** add the fade-in (`reveal` class + ref) on Over Ons
+## Plan (29 October 2026)
+1. **Kom morph back in `MenuItems`:** add `openCategory` and `closeCategory` again (`startViewTransition` + `flushSync`), and the `komCategory` state
+2. **Card as its own component:** pull the `<article className="kaart">` out of `MenuItems` (props for data, `onAdd`/`onRemove`/`onToggle` for actions)
+3. **List logic into a hook:** `activeCategory`, `expandedCard`, `cards`, `openCategory`/`closeCategory`. Do not call `useOrder()` inside it; pass the order in
+4. **`useOrder`:** keep "change quantity" and "choose extras again" as two separate things
+5. **Check `OrderSummary`:** it still contains the catering section, which belongs on Over Ons
+6. **Chinese names on the cards** (add a `zh` field per dish in `menu.json`, same idea as the categories)
+7. **Style the order section:** add the girl illustration and the "你的命令" title (box and total are done)
+8. **Edit function** to change the extras of an order line
+9. **Catering card:** add the fade-in (`reveal` class + ref) on Over Ons
 
 ## To do after today
 - [ ] Shared order state: the order will be shown on other pages (lift state up or React Context)
@@ -43,9 +46,17 @@
 - [x] One `<select>` per allowed extra, each with its own position in `selectedExtras`
 - [x] "Geen Keuze" clears its position; empty entries are filtered out on Submit
 - [x] Variant A gets 1 free dropdown with only Witte Rijst, Nasi and Bami, without prices
-- [x] Cancel and Submit reset `pendingItem` and `selectedExtras`
-- [x] The `onChange` branches moved into one helper, `updateExtraAt` in `utils/extras.ts` (returns a new array, no `setState` inside)
+- [x] Cancel and Submit reset `pendingItem` and `selectedExtras` through one `close()` function
+- [x] The `onChange` branches moved into one helper, `updateExtra` in `utils/extras.ts` (returns a new array, no `setState` inside)
+- [x] "Gerechten" title only shows when the dish has choices (`choiceAmount > 0`)
 - [x] Popup is an overlay (`pop-up-overlay` + `pop-up-box`) with a semi-transparent dark background (`color-mix`), white box, yellow offset shadow, centered buttons and styled dropdowns
+
+**Menu.tsx split into components**
+- [x] `Menu.tsx` only calls `useOrder()` and renders `MenuItems`, `OrderSummary` and `PopUp`
+- [x] `OrderSummary` gets `order` and `totalPrice` as props
+- [x] `PopUp` owns `selectedExtras` and `selectedChoices`, and gets `pendingItem`, `setPendingItem` and `addToOrder` as props (types reused with `ReturnType<typeof useOrder>`)
+- [x] `MenuItems` owns `activeCategory`, `expandedCard`, the cards, `handleAdd`, `countInOrder` and `removeOne`, and reads `items` and `categories` from the json itself
+- [x] The nested `.menu` wrapper in `MenuItems` is gone
 
 **Menu page design**
 - [x] Category grid with bowl icon, Dutch and Chinese name
@@ -55,7 +66,7 @@
 - [x] Counter on the card matches the amount in the order (matches on item id + variant)
 - [x] Colors: cream card, dark red name, green price, black circle and counter, yellow only as shadow
 - [x] Price and counter stuck to the bottom of the card (`margin-top: auto`)
-- [x] Cards with a description show a red "ⓘ meer info" pill (and "✕ sluiten" when open)
+- [x] Cards with a description show a red "meer info" pill
 - [x] Order section restyled as `bestelling` card: white box, yellow shadow, `+`/`−` counter like the cards, one price per line, phone number as a `tel:` link
 - [x] Allergy note (yellow box) and preparation-time sentence next to the phone number added to the order card
 - [x] Plastic bag note (bag with "per tasje" text) on the right side of the order card
@@ -69,14 +80,13 @@
 - [x] Tijd & Locatie: `#fff` replaced by `var(--white)`, red right panel covers the full height, more top padding
 - [x] Tijd & Locatie: today's opening hours row is highlighted (`openingstijden-rij--vandaag`)
 - [x] Nav logo is a red circle on the Tijd & Locatie page (`navigatie--donker`)
-- [x] Home page: image dims/slides off-screen on narrow windows with a gradient so the text stays readable
+- [x] Home page: image dims/slides off-screen on narrow windows with a gradient so the text stays readable (`Hoofdpagina.css` restored to the working version)
 
 **Animations**
 - [x] Router changed from `BrowserRouter` to `createBrowserRouter` + `RouterProvider` (`App.tsx` is the layout with `<Outlet />`, routes live in `main.tsx`)
 - [x] Shared-element transition: nav logo letters morph into the home title (and back), without the fade (`::view-transition-old` hidden)
 - [x] Nav morph between home and other pages (`view-transition-name: nav-links`)
-- [x] Bowl (kom) morphs into the round category header with `document.startViewTransition` + `flushSync`, only the clicked kom gets the name
-
+- [x] Bowl (kom) morphs into the round category header with `document.startViewTransition` + `flushSync`, only the clicked kom gets the name (needs to be put back in `MenuItems`, see plan)
 
 ## Rule for extras
 | `getMaxExtras` | Meaning |
@@ -86,8 +96,6 @@
 | `1` or more | That many paid extras |
 
 ---
-
-# Day log
 
 # Day log
 
@@ -149,3 +157,17 @@
 - A helper that returns a new array must not use `(prev) => ...` (that only works inside a state setter) and must not change the old array: `const next = [...selectedExtras]`, never `= selectedExtras`.
 - Every branch of a function must `return` something, and a ternary is `a ? b : c` (not `??`).
 - With one dropdown `i` is always 0, so "return `[chosen]`" and "copy and replace position `i`" are the same: one branch less.
+
+## 29 October 2026
+- Split `Menu.tsx` into `MenuItems`, `OrderSummary` and `PopUp`.
+- A component name must start with a capital, or React treats it as an HTML tag (`<orderSummary />` fails).
+- A component receives one props object: destructure it in the parameter list (`{ order, totalPrice }: Props`) and describe it with one type.
+- Every call to a hook with `useState` makes its own copy of the state. A component that calls `useOrder()` itself does not share the order with `Menu.tsx`, so pass `order`, `pendingItem` and the functions down as props.
+- State lives in the lowest component that all its users share: only the popup uses `selectedExtras`, so it lives in `PopUp`.
+- Hooks must run before an early `return` (`if (!pendingItem) return null`), or React throws "rendered more hooks than during the previous render".
+- `ReturnType<typeof useOrder>` reuses the exact types from the hook, so a prop type can't drift from the real function.
+- `formatPrice` returns a string, so a `totalPrice` prop made from it must be typed `string`, not `number`.
+- A function used as a prop is typed as a function (`OrderApi['addToOrder']`), not as the data type it returns (`OrderLine`).
+- Renaming a file only by capital letters can leave the old file behind (`popUp.tsx` vs `PopUp.tsx`): rename through a temporary name and restart the dev server.
+- Don't rewrite a whole working file to fix something small. Go back to the last working version and change one thing at a time.
+- A conditional render with a number (`count && ...`) shows a literal `0`: compare it explicitly (`count > 0 && ...`).

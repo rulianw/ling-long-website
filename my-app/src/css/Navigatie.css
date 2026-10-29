@@ -45,11 +45,18 @@
 
 /* on the home page the links sit on the red background */
 .navigatie--home .navigatie-links {
-  padding: 1.5rem 0;
+  gap: 4.5rem;
+  padding: 4rem 0 0 17rem;
 }
 
 .navigatie--home .navigatie-link {
   color: var(--yellow);
+  font-size: clamp(1rem, 1.4vw, 1.7rem);
+  font-weight: 900;
+}
+
+.navigatie--home .navigatie-link span:last-child {
+  font-weight: 900;
 }
 
 /* logo and phone button on the other pages */

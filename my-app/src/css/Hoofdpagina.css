@@ -1,18 +1,15 @@
 .hoofdpagina {
   position: relative;
   isolation: isolate;
-  width: 100%;
-  min-height: 100svh;
-  padding: 4rem;
-  overflow: hidden;
   display: flex;
   align-items: center;
+  width: 100%;
+  min-height: 100svh;
+  padding: 10rem 4rem 4rem 7rem; /* top right bottom left */
+  overflow: hidden;
   background: var(--red);
   color: var(--white);
   text-align: left;
-  padding-left: 7rem;
-  padding-top: 10rem;
-
 }
 
 .hoofdpagina-inhoud {
@@ -37,17 +34,18 @@
   animation: image-in 1.2s ease-out both;
 }
 
+/* ---------- title ---------- */
+
 .titel {
   display: flex;
   align-items: center;
   gap: 1.5rem;
   margin: 0;
   width: fit-content;
-  transition: transform 0.3s ease;
 }
 
 .titel-zh {
-writing-mode: vertical-rl;
+  writing-mode: vertical-rl;
   color: var(--green);
   font-size: 3.5rem;
   font-weight: 600;
@@ -61,7 +59,6 @@ writing-mode: vertical-rl;
   font-size: 6rem;
   font-weight: 600;
   line-height: 1;
-  letter-spacing: 0;
   transition: letter-spacing 0.3s ease;
 }
 
@@ -72,6 +69,9 @@ writing-mode: vertical-rl;
 .titel:hover .titel-nl {
   letter-spacing: -0.08em;
 }
+
+/* ---------- text and phone ---------- */
+
 .omschrijving {
   max-width: 14rem;
   margin: 0;
@@ -109,6 +109,8 @@ writing-mode: vertical-rl;
   box-shadow: 0 0 0 var(--yellow);
 }
 
+/* ---------- animation ---------- */
+
 @keyframes image-in {
   from {
     opacity: 0;
@@ -120,7 +122,35 @@ writing-mode: vertical-rl;
   }
 }
 
+/* ---------- logo transition (shared with the nav) ---------- */
+
+.titel-zh { view-transition-name: titel-zh; }
+.titel-nl { view-transition-name: titel-nl; }
+
+::view-transition-group(titel-zh),
+::view-transition-group(titel-nl) {
+  animation-duration: 0.6s;
+  animation-timing-function: cubic-bezier(0.2, 0.65, 0.3, 1);
+}
+
+/* no crossfade: the letters only move and scale */
+::view-transition-old(titel-zh),
+::view-transition-old(titel-nl) {
+  display: none;
+}
+
+::view-transition-new(titel-zh),
+::view-transition-new(titel-nl) {
+  animation: none;
+}
+
+/* ---------- smaller windows ---------- */
+
 @media (max-width: 70rem) {
+  .hoofdpagina-beeld {
+    right: -20%;
+  }
+
   .hoofdpagina::after {
     content: "";
     position: absolute;
@@ -135,21 +165,26 @@ writing-mode: vertical-rl;
   }
 }
 
-.titel-zh { view-transition-name: titel-zh; }
-.titel-nl { view-transition-name: titel-nl; }
+/* ---------- phones ---------- */
 
-::view-transition-group(titel-zh),
-::view-transition-group(titel-nl) {
-  animation-duration: 0.6s;
-  animation-timing-function: cubic-bezier(0.2, 0.65, 0.3, 1);
-}
+@media (max-width: 40rem) {
+  .hoofdpagina {
+    padding: 8rem 1.5rem 3rem;
+  }
 
-::view-transition-old(titel-zh),
-::view-transition-old(titel-nl) {
-  display: none;
-}
+  .hoofdpagina-beeld {
+    right: -45%;
+  }
 
-::view-transition-new(titel-zh),
-::view-transition-new(titel-nl) {
-  animation: none;
+  .titel-zh {
+    font-size: 2.5rem;
+  }
+
+  .titel-nl {
+    font-size: 4rem;
+  }
+
+  .bestellen button {
+    font-size: 1.5rem;
+  }
 }
