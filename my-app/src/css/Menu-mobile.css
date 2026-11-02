@@ -1,0 +1,115 @@
+/* overrides for the components from Menu.css, only inside .menu-mobile */
+
+.menu-mobile {
+  width: 100%;
+  min-height: 100svh;
+  padding: 6.5rem 0 0;
+  background: var(--red);
+  color: var(--white);
+}
+
+/* OrderSummary wraps itself in .menu, which is meant for the whole page */
+.menu-mobile .menu {
+  min-height: 0;
+  padding: 0;
+}
+
+/* ---------- categories ---------- */
+
+.menu-mobile .categorieen {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem 0.75rem;
+  padding: 1.5rem 1rem;
+}
+
+.menu-mobile .categorie .kop-icoon {
+  width: 4rem;
+  height: 4rem;
+}
+
+.menu-mobile .categorie h2 {
+  font-size: 0.75rem;
+}
+
+/* phones keep :hover after a tap, so always show the normal bowl */
+.menu-mobile .kop-icoon--hover {
+  display: none;
+}
+
+.menu-mobile .categorie:hover .kop-icoon--normaal,
+.menu-mobile .categorie-kop:hover .kop-icoon--normaal {
+  opacity: 1;
+}
+
+/* ---------- open category ---------- */
+
+.menu-mobile .categorie-kop {
+  width: 7.5rem;
+  height: 7.5rem;
+  margin: 1rem auto 2rem;
+}
+
+.menu-mobile .categorie-kop .kop-icoon {
+  width: 3.25rem;
+  height: 3.25rem;
+}
+
+.menu-mobile .kaarten {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem 1rem;
+  max-width: none;
+  padding: 0 1.25rem 0 1.5rem; /* room for the shadow on the left */
+}
+
+.menu-mobile .kaart {
+  min-height: 12rem;
+  box-shadow: -4px 4px 0 var(--yellow);
+}
+
+.menu-mobile .kaart-naam {
+  font-size: 0.85rem;
+}
+
+/* bigger tap targets for + and - */
+.menu-mobile .teller {
+  gap: 0.25rem;
+  padding: 0.15rem 0.25rem;
+}
+
+.menu-mobile .teller-knop {
+  min-width: 2rem;
+  min-height: 2rem;
+  font-size: 1.2rem;
+}
+
+/* ---------- popup ---------- */
+
+.menu-mobile .pop-up-box {
+  width: calc(100% - 2rem);
+  min-width: 0;
+  max-height: 90svh;
+  padding: 1.5rem 1.25rem;
+  overflow-y: auto;
+}
+
+/* ---------- order ---------- */
+
+.menu-mobile .bestelling {
+  margin: 3rem 1rem 0 1.25rem;
+  padding: 1.5rem 1.25rem;
+}
+
+.menu-mobile .bestelling-telefoon {
+  font-size: 1.25rem;
+}
+
+/* ---------- catering ---------- */
+
+.menu-mobile .over-ons-catering {
+  margin-top: 3rem;
+  padding: 0 1rem 4rem 1.25rem;
+}
+
+.menu-mobile .catering-kaart {
+  padding: 1.5rem 1.25rem;
+}

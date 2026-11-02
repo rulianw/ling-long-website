@@ -1,0 +1,142 @@
+.tijd-locatie-mobile {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  background: var(--background);
+  color: var(--white);
+}
+
+/* the red location part fills the rest of the screen */
+.locatie-mobile {
+  flex-grow: 1;
+}
+
+.tijd-mobile,
+.locatie-mobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 3.5rem 1.25rem;
+}
+
+.tijd-mobile {
+  padding-top: 7rem;
+  background: var(--background);
+}
+
+.locatie-mobile {
+  background: var(--red);
+}
+
+/* Chinese heading above each section */
+.tijd-locatie-mobile-zh {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  margin-right: -0.3em; /* letter-spacing adds space after the last letter */
+}
+
+/* ---------- opening hours ---------- */
+
+.tijd-mobile-box {
+  position: relative;
+  width: 100%;
+  max-width: 26rem;
+  margin-top: 1rem;
+  padding: 2.75rem 1rem 1.25rem;
+  border: 2px solid var(--yellow);
+  border-radius: 10px;
+  background: var(--black);
+}
+
+.tijd-mobile-box h3 {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0.7rem 1.25rem;
+  border-radius: 10px;
+  background: var(--green);
+  color: var(--yellow);
+  font-size: 1.15rem;
+  white-space: nowrap;
+}
+
+.tijd-mobile-rij {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.2rem 0.75rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.tijd-mobile-rij + .tijd-mobile-rij {
+  margin-top: 0.3rem;
+}
+
+.tijd-mobile-rij span:last-child {
+  white-space: nowrap;
+}
+
+.tijd-mobile-rij--vandaag {
+  background: var(--yellow);
+  color: var(--black);
+  font-weight: 700;
+}
+
+.tijd-mobile-feestdag {
+  width: 100%;
+  max-width: 26rem;
+  margin: 0;
+  padding: 1rem;
+  border-radius: 10px;
+  background: var(--red);
+  color: var(--yellow);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* ---------- location ---------- */
+
+.locatie-mobile-kaart {
+  width: 100%;
+  max-width: 30rem;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--black);
+}
+
+.locatie-mobile-kaart iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.locatie-mobile-adres {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  background: var(--black);
+  color: var(--white);
+  font-size: 0.95rem;
+  text-decoration: none;
+  box-shadow: -3px 3px 0 var(--yellow);
+}
+
+.locatie-mobile-icoon {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}

@@ -1,16 +1,7 @@
 
 import "../css/TijdLocatie.css";
 import locatie from "../images/locatie.png"
-
-const openingHours = [
-  ["Maandag", "gesloten", 1],
-  ["Dinsdag", "15:00 tot 21:00", 2],
-  ["Woensdag", "15:00 tot 21:00", 3],
-  ["Donderdag", "15:00 tot 21:00", 4],
-  ["Vrijdag", "15:00 tot 21:00", 5],
-  ["Zaterdag", "13:00 tot 21:00", 6],
-  ["Zondag", "13:00 tot 21:00", 0],
-];
+import { openingHours } from "../data/openingstijden";
 
 export default function TijdLocatie() {
   const today = new Date().getDay();

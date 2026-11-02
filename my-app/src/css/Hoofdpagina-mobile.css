@@ -1,0 +1,89 @@
+.hoofdpagina-mobile {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  min-height: 100svh;
+  padding: 3.5rem 1.5rem;
+  overflow: hidden;
+  background: var(--red);
+  color: var(--white);
+  text-align: center;
+}
+
+/* the drawing sits faintly behind everything */
+.hoofdpagina-mobile-beeld {
+  position: absolute;
+  right: -30%;
+  bottom: 0;
+  z-index: -1;
+  width: 150%;
+  max-width: none;
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+/* ---------- title ---------- */
+
+.hoofdpagina-mobile-titel {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0;
+}
+
+.hoofdpagina-mobile-zh {
+  writing-mode: vertical-rl;
+  color: var(--green);
+  font-size: 2.6rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.hoofdpagina-mobile-nl {
+  width: min-content; /* forces "Ling" / "Long" onto two lines */
+  color: var(--yellow);
+  font-size: 4.25rem;
+  font-weight: 600;
+  line-height: 1;
+  text-align: left;
+}
+
+.hoofdpagina-mobile-zh { view-transition-name: titel-zh; }
+.hoofdpagina-mobile-nl { view-transition-name: titel-nl; }
+
+/* ---------- text and phone ---------- */
+
+.hoofdpagina-mobile-omschrijving {
+  max-width: 17rem;
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.hoofdpagina-mobile-bestellen p {
+  margin: 0 0 0.75rem;
+  color: var(--yellow);
+  font-size: 0.85rem;
+}
+
+.hoofdpagina-mobile-bestellen a {
+  display: inline-block;
+  padding: 0.7rem 1.5rem;
+  border-radius: 12px;
+  background: var(--green);
+  color: var(--red);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: -5px 5px 0 var(--yellow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hoofdpagina-mobile-bestellen a:active {
+  transform: translate(-5px, 5px);
+  box-shadow: 0 0 0 var(--yellow);
+}

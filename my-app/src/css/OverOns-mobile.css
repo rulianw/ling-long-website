@@ -1,0 +1,103 @@
+.over-ons-mobile {
+  width: 100%;
+  overflow: clip;
+  background: var(--red);
+  color: var(--white);
+}
+
+/* ---------- Hero ---------- */
+
+.over-ons-mobile-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  min-height: 100svh;
+  padding: 7rem 1.5rem 3rem;
+  text-align: center;
+}
+
+.over-ons-mobile-illustratie {
+  display: block;
+  width: min(75vw, 20rem);
+  height: auto;
+  margin-bottom: 0.75rem;
+}
+
+.over-ons-mobile-hero h1 {
+  margin: 0;
+  font-size: clamp(3rem, 14vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+
+.over-ons-mobile-chinees {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* ---------- Story ---------- */
+
+.over-ons-mobile-verhaal {
+  padding: 3rem 1.75rem 6rem;
+}
+
+.over-ons-mobile-tekst {
+  max-width: 32rem;
+  margin: 0 auto;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.over-ons-mobile-tekst p {
+  margin: 0;
+}
+
+.over-ons-mobile-tekst p + p {
+  margin-top: 1.75rem;
+}
+
+/* ---------- Gallery ---------- */
+
+.over-ons-mobile-galerie {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.over-ons-mobile-foto {
+  margin: 0;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.over-ons-mobile-foto:first-child {
+  grid-column: 1 / -1;
+  aspect-ratio: 4 / 3;
+}
+
+.over-ons-mobile-foto img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- Scroll reveal ---------- */
+
+.over-ons-mobile-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 900ms ease,
+    transform 900ms cubic-bezier(0.2, 0.65, 0.3, 1);
+}
+
+.over-ons-mobile-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
