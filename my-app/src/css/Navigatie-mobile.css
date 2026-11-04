@@ -46,10 +46,10 @@
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.navigatie-mobile-telefoon:active {
+/* .navigatie-mobile-telefoon:active {
   transform: translate(-3px, 3px);
   box-shadow: 0 0 0 var(--yellow);
-}
+} */
 
 /* hamburger button, turns into a cross when open */
 .navigatie-mobile-knop {

@@ -39,6 +39,7 @@ export type Card = {
 }
 
 export type MenuCategory = {
+    id: number
     name: string
     zh: string
     matches: string[]

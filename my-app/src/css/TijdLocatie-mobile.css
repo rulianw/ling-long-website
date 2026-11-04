@@ -23,6 +23,7 @@
 .tijd-mobile {
   padding-top: 7rem;
   background: var(--background);
+  padding-bottom: 7rem;
 }
 
 .locatie-mobile {

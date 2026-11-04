@@ -38,6 +38,103 @@
   opacity: 1;
 }
 
+.categorie-koppen {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  max-width: 34rem;
+  margin: 4rem auto 3rem;
+  padding: 0 1rem;
+}
+
+/* spacing now lives on the row, not on the big bowl */
+.categorie-koppen .categorie-kop,
+.menu-mobile .categorie-koppen .categorie-kop {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0;
+}
+
+.categorie-kop-links,
+.categorie-kop-rechts {
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--white);
+  font-family: inherit;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.categorie-kop-links  { grid-column: 1; justify-self: start; }
+.categorie-kop-rechts { grid-column: 3; justify-self: end; }
+
+.categorie-kop-links:hover,
+.categorie-kop-rechts:hover,
+.categorie-kop-links:focus-visible,
+.categorie-kop-rechts:focus-visible {
+  opacity: 1;
+}
+
+.categorie-kop-links:hover  { transform: translateX(-3px); }
+.categorie-kop-rechts:hover { transform: translateX(3px); }
+
+.categorie-kop-links .kop-icoon,
+.categorie-kop-rechts .kop-icoon {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.categorie-kop-links .kop-naam,
+.categorie-kop-rechts .kop-naam {
+  max-width: 5.5rem;
+  font-size: 0.7rem;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.categorie-kop-links .kop-zh,
+.categorie-kop-rechts .kop-zh {
+  font-size: 0.65rem;
+}
+
+.slide-volgende .categorie-koppen,
+.slide-volgende .kaarten {
+  animation: slide-from-right 0.35s cubic-bezier(0.2, 0.65, 0.3, 1) both;
+}
+
+.slide-vorige .categorie-koppen,
+.slide-vorige .kaarten {
+  animation: slide-from-left 0.35s cubic-bezier(0.2, 0.65, 0.3, 1) both;
+}
+
+@keyframes slide-from-right {
+  from { opacity: 0; transform: translateX(2.5rem); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-from-left {
+  from { opacity: 0; transform: translateX(-2.5rem); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide-volgende .categorie-koppen,
+  .slide-volgende .kaarten,
+  .slide-vorige .categorie-koppen,
+  .slide-vorige .kaarten {
+    animation: none;
+  }
+}
+
 .categorie .kop-icoon--hover {
   position: absolute;
   top: 0;

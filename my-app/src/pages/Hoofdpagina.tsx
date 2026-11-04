@@ -18,7 +18,9 @@ export default function Hoofdpagina() {
 
         <div className="bestellen">
           <p>bestellingen via de telefoon</p>
-          <button>024 6775634</button>
+            <a href="tel:0246775634" className="bestellen-button">
+              024 6775634
+            </a>
         </div>
       </div>
     </main>

@@ -1,21 +1,22 @@
 # Menu page overview
 
-## Plan (29 October 2026)
-1. **Kom morph back in `MenuItems`:** add `openCategory` and `closeCategory` again (`startViewTransition` + `flushSync`), and the `komCategory` state
-2. **Card as its own component:** pull the `<article className="kaart">` out of `MenuItems` (props for data, `onAdd`/`onRemove`/`onToggle` for actions)
-3. **List logic into a hook:** `activeCategory`, `expandedCard`, `cards`, `openCategory`/`closeCategory`. Do not call `useOrder()` inside it; pass the order in
-4. **`useOrder`:** keep "change quantity" and "choose extras again" as two separate things
-5. **Check `OrderSummary`:** it still contains the catering section, which belongs on Over Ons
-6. **Chinese names on the cards** (add a `zh` field per dish in `menu.json`, same idea as the categories)
-7. **Style the order section:** add the girl illustration and the "你的命令" title (box and total are done)
-8. **Edit function** to change the extras of an order line
-9. **Catering card:** add the fade-in (`reveal` class + ref) on Over Ons
+## Plan (3 November 2026)
+1. **Swipe between categories:** touch events on the open category (swipe left = next, right = previous), using the direction state that is already there
+2. **Reset the slide direction:** call `setSlideRichting(null)` when opening a category from the grid or going back with the middle button, so those don't slide
+3. **Kom morph back in `MenuItems`:** add `openCategory` and `closeCategory` again (`startViewTransition` + `flushSync`) and the `komCategory` state, and make it work together with the slide
+4. **Card as its own component:** pull the `<article className="kaart">` out of `MenuItems` (props for data, `onAdd`/`onRemove`/`onToggle` for actions)
+5. **List logic into a hook:** `activeCategory`, `expandedCard`, `cards`, previous/next, open/close. Do not call `useOrder()` inside it; pass the order in
+6. **`useOrder`:** keep "change quantity" and "choose extras again" as two separate things
+7. **Check `OrderSummary`:** it still contains the catering section, which belongs on Over Ons
+8. **Chinese names on the cards** (add a `zh` field per dish in `menu.json`, same idea as the categories)
+9. **Style the order section:** add the girl illustration and the "你的命令" title (box and total are done)
+10. **Edit function** to change the extras of an order line
+11. **Catering card:** add the fade-in (`reveal` class + ref) on Over Ons
 
 ## To do after today
 - [ ] Shared order state: the order will be shown on other pages (lift state up or React Context)
-- [ ] Tailwind styling
-- [ ] Check the pages on small screens (nav, home image, Tijd & Locatie panels)
 - [ ] Substitute all the visuals with self-made images
+- [ ] Test the mobile menu on a real phone (tap sizes, long dish names, popup with two dropdowns)
 
 ## Done
 
@@ -23,7 +24,7 @@
 - [x] `menu.json`: every item has `image` and `allowsExtras` (false for soups and "Voor- en Bijgerechten"); variants use `name` and can have `maxExtras`
 - [x] Extras list at `menuData.extras.items`
 - [x] `OrderLine` has `basePrice`, `extrasPrice`, `quantity`, `extras?`
-- [x] `categories` block in `menu.json` with `name`, `zh` and `matches` (groups the old categories)
+- [x] `categories` block in `menu.json` with `id`, `name`, `zh` and `matches` (groups the old categories); `MenuCategory` type has the `id`
 - [x] `Card` type in `types.ts` (one card per dish or per variant)
 - [x] `MenuItem.price` can be `null`: handled in the cards (`price !== null`)
 
@@ -72,6 +73,17 @@
 - [x] Plastic bag note (bag with "per tasje" text) on the right side of the order card
 - [x] Black strip under a tall order fixed (bottom margin moved into `.menu` padding)
 
+**Category switcher**
+- [x] `previousCategory` and `nextCategory` are plain `const` values worked out from `activeCategory` (not state), `null` on the first and last category and when nothing is open
+- [x] Header row `categorie-koppen`: previous, active (round header) and next; a neighbour only renders when it exists
+- [x] Slide animation with direction (`slideRichting`, `goToNeighbour`, classes `slide-vorige` / `slide-volgende`), switched off with `prefers-reduced-motion`
+
+**Mobile menu**
+- [x] `MenuMobile.tsx` renders the same three components inside `.menu-mobile`; `Menu-mobile.css` restyles them
+- [x] Counter has separate round `+` and `−` buttons with the number in between (44px tap targets; the number gets a dark color on the white order card)
+- [x] Categories as wide tiles with a press effect, one card per row (number and name on top, price and counter below), taller dropdowns with 16px text, full-width popup buttons and phone button, safe-area padding at the bottom
+- [x] Hover image hidden on touch screens, because phones keep `:hover` after a tap
+
 **Other pages**
 - [x] Over Ons: `@media` block closed, duplicate rules merged, whole CSS cleaned up
 - [x] Over Ons: gallery of 9 images in 3 columns, one full-width rectangle with different heights per picture, darkened with hover reveal (no dark layer on touch screens)
@@ -81,6 +93,7 @@
 - [x] Tijd & Locatie: today's opening hours row is highlighted (`openingstijden-rij--vandaag`)
 - [x] Nav logo is a red circle on the Tijd & Locatie page (`navigatie--donker`)
 - [x] Home page: image dims/slides off-screen on narrow windows with a gradient so the text stays readable (`Hoofdpagina.css` restored to the working version)
+- [x] Favicon (rice bowl) in `index.html`, with the image in `public`
 
 **Animations**
 - [x] Router changed from `BrowserRouter` to `createBrowserRouter` + `RouterProvider` (`App.tsx` is the layout with `<Outlet />`, routes live in `main.tsx`)
@@ -171,3 +184,14 @@
 - Renaming a file only by capital letters can leave the old file behind (`popUp.tsx` vs `PopUp.tsx`): rename through a temporary name and restart the dev server.
 - Don't rewrite a whole working file to fix something small. Go back to the last working version and change one thing at a time.
 - A conditional render with a number (`count && ...`) shows a literal `0`: compare it explicitly (`count > 0 && ...`).
+
+## 3 November 2026
+- Favicon: the `href` is a URL on the site, not a file path on the computer. Files in `public` are served from the root (`/rice-bowl.png`); test by opening that URL. Favicons are cached, so hard refresh.
+- Separate `+`/`−` buttons: the dark background comes from the base `.teller` rule, so commenting out the mobile override doesn't remove it; set `background: transparent` on the wrapper. Center a button's content with flex or grid (`place-items: center`), and put `gap` on the wrapper, not on the button.
+- Values that can be worked out from other state are plain `const` variables above `return`, not `useState` (`previousCategory`, `nextCategory`, like `cards`).
+- A `const` can't be assigned again. A ternary produces a value, so it goes on the right of one `=`: `const x = condition ? a : b`.
+- `activeCategory && ...` in a condition also tells TypeScript the value isn't `null` in the branch after it. Use `categories.length` instead of a hard-coded 16.
+- Render a neighbour button only when it exists, or an empty button sends `null` and jumps back to the grid.
+- `key={activeCategory.name}` rebuilds the wrapper on each category change, so a CSS animation runs again. A direction class (`slide-vorige` / `slide-volgende`) picks which way it slides.
+- A `view-transition-name` may exist only once on the page, so the neighbour bowls must not use the class that carries `kom`.
+- Touch screens: tap targets of about 44px, 16px text in dropdowns (stops iOS zoom), and `:hover` sticks after a tap, so don't hide information behind it.

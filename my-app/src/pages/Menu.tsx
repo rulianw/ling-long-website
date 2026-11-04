@@ -3,10 +3,19 @@ import MenuItems from '../components/MenuItems'
 import OrderSummary from '../components/OrderSummary'
 import PopUp from '../components/PopUp'
 import { formatPrice, getOrderTotal} from '../utils/price'
-import { useOrder } from '../hooks/useOrder'
+import { OrderContext } from "../context/OrderContext"
+import { useContext } from 'react' 
 
 export default function Menu() {
-    const { order, pendingItem, setPendingItem, addToOrder, changeQuantity } = useOrder();
+    const orderApi = useContext(OrderContext??null)
+    if (!orderApi) return null;
+    const { 
+        order,
+        pendingItem,
+        setPendingItem,
+        addToOrder,
+        changeQuantity 
+    } = orderApi
     const totalPrice = formatPrice(getOrderTotal(order))
 
     return (

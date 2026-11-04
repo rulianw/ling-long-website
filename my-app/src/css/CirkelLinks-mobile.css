@@ -41,10 +41,6 @@
   box-shadow: 0 0 0 var(--yellow);
 }
 
-.cirkel-mobile.active {
-  box-shadow: inset 0 0 0 2px var(--yellow), -5px 5px 0 var(--yellow);
-}
-
 .cirkel-mobile-zh {
   display: flex;
   flex-direction: column;

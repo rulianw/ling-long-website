@@ -207,21 +207,21 @@
   },
 
   "categories": [
-    { "name": "Soepen", "zh": "汤", "matches": ["Soepen"] },
-    { "name": "Bijgerechten", "zh": "配菜", "matches": ["Voor- en Bijgerechten"] },
-    { "name": "Nasi/Bami", "zh": "米饭/面条", "matches": ["Nasi/Bami"] },
-    { "name": "Mihoen/Chinese Bami", "zh": "米粉/中国面条", "matches": ["Mihoen/Chinese Bami"] },
-    { "name": "Foe Yong Hai", "zh": "芙蓉蛋", "matches": ["Foe Yong Hai (ei)"] },
-    { "name": "Tjap Tjoi", "zh": "什菜", "matches": ["Tjap Tjoi (groenten)"] },
-    { "name": "Vegetarisch", "zh": "素菜", "matches": ["Vegetarisch"] },
-    { "name": "Kip", "zh": "鸡", "matches": ["Kip", "Ling Long Kip specialiteiten"] },
-    { "name": "Varken", "zh": "猪肉", "matches": ["Varkensvlees", "Ling Long Varkensvlees specialiteiten"] },
-    { "name": "Ossenhaas", "zh": "牛里脊肉", "matches": ["Ossenhaas", "Ling Long Ossenhaas Specialiteiten"] },
-    { "name": "Eend", "zh": "鸭肉", "matches": ["Eend"] },
-    { "name": "Garnalen", "zh": "虾", "matches": ["Garnalen", "Ling Long Garnalen Specialiteiten"] },
-    { "name": "Vis", "zh": "鱼", "matches": ["Ling Long Vis Specialiteiten"] },
-    { "name": "Indisch", "zh": "印尼菜", "matches": ["Indische gerechten"] },
-    { "name": "Menu's", "zh": "中国菜", "matches": ["Rijsttafels"] },
-    { "name": "Voordeel Menu", "zh": "超值菜单", "matches": ["Voordeel Combinatie Menu"] }
+    { "id": 1, "name": "Soepen", "zh": "汤", "matches": ["Soepen"] },
+    { "id": 2, "name": "Bijgerechten", "zh": "配菜", "matches": ["Voor- en Bijgerechten"] },
+    { "id": 3, "name": "Nasi/Bami", "zh": "米饭/面条", "matches": ["Nasi/Bami"] },
+    { "id": 4, "name": "Mihoen/Chinese Bami", "zh": "米粉/中国面条", "matches": ["Mihoen/Chinese Bami"] },
+    { "id": 5, "name": "Foe Yong Hai", "zh": "芙蓉蛋", "matches": ["Foe Yong Hai (ei)"] },
+    { "id": 6, "name": "Tjap Tjoi", "zh": "什菜", "matches": ["Tjap Tjoi (groenten)"] },
+    { "id": 7, "name": "Vegetarisch", "zh": "素菜", "matches": ["Vegetarisch"] },
+    { "id": 8, "name": "Kip", "zh": "鸡", "matches": ["Kip", "Ling Long Kip specialiteiten"] },
+    { "id": 9, "name": "Varken", "zh": "猪肉", "matches": ["Varkensvlees", "Ling Long Varkensvlees specialiteiten"] },
+    { "id": 10, "name": "Ossenhaas", "zh": "牛里脊肉", "matches": ["Ossenhaas", "Ling Long Ossenhaas Specialiteiten"] },
+    { "id": 11, "name": "Eend", "zh": "鸭肉", "matches": ["Eend"] },
+    { "id": 12, "name": "Garnalen", "zh": "虾", "matches": ["Garnalen", "Ling Long Garnalen Specialiteiten"] },
+    { "id": 13, "name": "Vis", "zh": "鱼", "matches": ["Ling Long Vis Specialiteiten"] },
+    { "id": 14, "name": "Indisch", "zh": "印尼菜", "matches": ["Indische gerechten"] },
+    { "id": 15, "name": "Menu's", "zh": "中国菜", "matches": ["Rijsttafels"] },
+    { "id": 16,"name": "Voordeel Menu", "zh": "超值菜单", "matches": ["Voordeel Combinatie Menu"] }
   ]
 }

@@ -22,7 +22,6 @@ const router = createBrowserRouter([
       { path: '/tijd-locatie', element: <Responsive desktop={<TijdLocatie />} mobile={<TijdLocatieMobile />} /> },
       { path: '/over-ons', element: <Responsive desktop={<OverOns />} mobile={<OverOnsMobile />} /> },
 
-      // always the mobile version, to check it in a desktop browser
       { path: '/hoofdpagina-mobile', element: <HoofdpaginaMobile /> },
       { path: '/menu-mobile', element: <MenuMobile /> },
       { path: '/tijd-locatie-mobile', element: <TijdLocatieMobile /> },

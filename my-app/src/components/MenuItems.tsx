@@ -27,6 +27,13 @@ export default function MenuItems({
 
     const [activeCategory, setActiveCategory] = useState<MenuCategory | null>(null)
     const [expandedCard, setExpandedCard] = useState<string | null>(null)
+    
+    const [slideRichting, setSlideRichting] = useState<'vorige' | 'volgende' | null>(null)
+
+    function goToNeighbour(category: MenuCategory, richting: 'vorige' | 'volgende') {
+        setSlideRichting(richting)
+        setActiveCategory(category)
+    }
 
     //items of the chosen category
     const shownItems = activeCategory
@@ -51,6 +58,14 @@ export default function MenuItems({
                 title: item.name,
             }]
     )
+
+    const previousCategory = activeCategory && activeCategory.id > 1
+    ? categories.find((category) => category.id === activeCategory.id - 1)
+    : null
+
+    const nextCategory = activeCategory && activeCategory.id < categories.length
+        ? categories.find((category) => category.id === activeCategory.id + 1)
+        : null
 
     //Checks extras before adding to order
     function handleAdd(item: MenuItem, variant?: Variant) {
@@ -78,7 +93,24 @@ export default function MenuItems({
     return(
         <div>
             {activeCategory ? (
-                <div className="categorie-weergave" key={activeCategory.name}>
+                <div
+                    className={`categorie-weergave ${slideRichting ? `slide-${slideRichting}` : ''}`}
+                    key={activeCategory.name}
+                >
+
+                    <div className ="categorie-koppen">
+                    {previousCategory && (
+                        <button
+                            className="categorie-kop-links"
+                            onClick={() => goToNeighbour(previousCategory, 'vorige')}
+                            aria-label={`Vorige categorie: ${previousCategory.name}`}
+                        >
+                            <img src={kom} alt="" className="kop-icoon kop-icoon--normaal" />
+                            <span className="kop-naam">{previousCategory.name}</span>
+                            <span className="kop-zh" lang="zh">{previousCategory.zh}</span>
+                        </button>
+                    )}
+
                     <button
                         className="categorie-kop"
                         onClick={() => setActiveCategory(null)}
@@ -89,6 +121,19 @@ export default function MenuItems({
                         <span className="kop-naam">{activeCategory.name}</span>
                         <span className="kop-zh" lang="zh">{activeCategory.zh}</span>
                     </button>
+
+                    {nextCategory && (
+                        <button
+                            className="categorie-kop-rechts"
+                            onClick={() => goToNeighbour(nextCategory, 'volgende')}
+                            aria-label={`Volgende categorie: ${nextCategory.name}`}
+                        >
+                            <img src={kom} alt="" className="kop-icoon kop-icoon--normaal" />
+                            <span className="kop-naam">{nextCategory.name}</span>
+                            <span className="kop-zh" lang="zh">{nextCategory.zh}</span>
+                        </button>
+                    )}
+                    </div>
 
                     <div className="kaarten">
                         {cards.map((card, index) => (

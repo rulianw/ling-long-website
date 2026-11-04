@@ -1,9 +1,7 @@
-/* overrides for the components from Menu.css, only inside .menu-mobile */
-
 .menu-mobile {
   width: 100%;
   min-height: 100svh;
-  padding: 6.5rem 0 0;
+  padding: 6.5rem 0 calc(2rem + env(safe-area-inset-bottom, 0px));
   background: var(--red);
   color: var(--white);
 }
@@ -14,12 +12,26 @@
   padding: 0;
 }
 
-/* ---------- categories ---------- */
+/* ---------- categories: wide tiles ---------- */
 
 .menu-mobile .categorieen {
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem 0.75rem;
-  padding: 1.5rem 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding: 1rem 1.25rem 2rem;
+}
+
+.menu-mobile .categorie {
+  justify-content: center;
+  min-height: 8.5rem;
+  padding: 1.25rem 0.5rem;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--black) 35%, transparent);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.menu-mobile .categorie:active {
+  transform: scale(0.97);
+  background: color-mix(in srgb, var(--black) 55%, transparent);
 }
 
 .menu-mobile .categorie .kop-icoon {
@@ -28,7 +40,7 @@
 }
 
 .menu-mobile .categorie h2 {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
 }
 
 /* phones keep :hover after a tap, so always show the normal bowl */
@@ -41,12 +53,11 @@
   opacity: 1;
 }
 
-/* ---------- open category ---------- */
+/* ---------- open category: header ---------- */
 
 .menu-mobile .categorie-kop {
   width: 7.5rem;
   height: 7.5rem;
-  margin: 1rem auto 2rem;
 }
 
 .menu-mobile .categorie-kop .kop-icoon {
@@ -54,32 +65,111 @@
   height: 3.25rem;
 }
 
-.menu-mobile .kaarten {
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem 1rem;
-  max-width: none;
-  padding: 0 1.25rem 0 1.5rem; /* room for the shadow on the left */
+/* previous / next: bigger tap area */
+.menu-mobile .categorie-kop-links,
+.menu-mobile .categorie-kop-rechts {
+  min-height: 4.5rem;
+  padding: 0.5rem 0.25rem;
 }
 
+/* ---------- open category: cards ---------- */
+
+.menu-mobile .kaarten {
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  max-width: none;
+  padding: 0 1.25rem 2rem 1.5rem; /* extra room on the left for the shadow */
+}
+
+/* top row: number + name, bottom row: price + counter */
 .menu-mobile .kaart {
-  min-height: 12rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 1rem 1rem;
+  min-height: 0;
+  padding: 1.25rem;
+  text-align: left;
   box-shadow: -4px 4px 0 var(--yellow);
 }
 
-.menu-mobile .kaart-naam {
-  font-size: 0.85rem;
+.menu-mobile .kaart-midden {
+  justify-content: flex-start;
+  width: auto;
+  min-width: 0;
 }
 
-/* bigger tap targets for + and - */
+.menu-mobile .kaart-naam {
+  font-size: 1.05rem;
+  line-height: 1.4;
+}
+
+.menu-mobile .kaart-beschrijving {
+  justify-content: flex-start;
+}
+
+.menu-mobile .kaart-beschrijving p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.menu-mobile .kaart-hint {
+  margin: 0.5rem 0 0;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.75rem;
+}
+
+.menu-mobile .kaart-onder {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 0;
+  padding-top: 1rem;
+  border-top: 1px solid color-mix(in srgb, var(--red) 25%, transparent);
+}
+
+.menu-mobile .kaart-prijs {
+  font-size: 1.2rem;
+}
+
+/* ---------- counter: separate round buttons ---------- */
+
 .menu-mobile .teller {
-  gap: 0.25rem;
-  padding: 0.15rem 0.25rem;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0;
+  background: transparent;
+}
+
+.menu-mobile .teller > span {
+  min-width: 1.75rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
 }
 
 .menu-mobile .teller-knop {
-  min-width: 2rem;
-  min-height: 2rem;
-  font-size: 1.2rem;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border-radius: 15%;
+  background: var(--black);
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.menu-mobile .teller-knop:active {
+  transform: scale(0.92);
+}
+
+/* the number sits on a white card in the order section */
+.menu-mobile .bestelling .teller > span {
+  color: var(--black);
 }
 
 /* ---------- popup ---------- */
@@ -92,22 +182,42 @@
   overflow-y: auto;
 }
 
+/* 16px stops iOS from zooming in when a dropdown is tapped */
+.menu-mobile .selection-section select {
+  min-height: 3rem;
+  font-size: 1rem;
+}
+
+.menu-mobile .button-section {
+  gap: 0.75rem;
+}
+
+.menu-mobile .button-section .button {
+  flex: 1;
+  min-height: 3rem;
+  font-size: 1rem;
+}
+
 /* ---------- order ---------- */
 
 .menu-mobile .bestelling {
-  margin: 3rem 1rem 0 1.25rem;
+  margin: 2.5rem 1.25rem 0 1.5rem;
   padding: 1.5rem 1.25rem;
 }
 
 .menu-mobile .bestelling-telefoon {
+  display: block;
+  width: 100%;
+  padding: 0.9rem 1rem;
   font-size: 1.25rem;
+  text-align: center;
 }
 
 /* ---------- catering ---------- */
 
 .menu-mobile .over-ons-catering {
-  margin-top: 3rem;
-  padding: 0 1rem 4rem 1.25rem;
+  margin-top: 2.5rem;
+  padding: 0 1.25rem 3rem 1.5rem;
 }
 
 .menu-mobile .catering-kaart {
