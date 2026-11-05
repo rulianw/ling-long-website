@@ -1,0 +1,338 @@
+/* ---------- drawer ---------- */
+
+.order-popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  width: min(24rem, 100vw);
+  background: var(--white);
+  color: var(--black);
+  font-family: 'Courier New', ui-monospace, monospace;
+  border-left: 2px solid var(--black);
+  transform: translateX(100%);
+  visibility: hidden;
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.65, 0.3, 1),
+    visibility 0s 0.4s;
+}
+
+.order-popup--open {
+  transform: translateX(0);
+  visibility: visible;
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.65, 0.3, 1),
+    visibility 0s;
+}
+
+/* tab hangs out on the left and moves along with the drawer */
+.order-popup-tab {
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  visibility: visible;
+  padding: 1.25rem 0.7rem;
+  border: 2px solid var(--black);
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  background: var(--black);
+  color: var(--white);
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: background-color 0.2s ease;
+}
+
+.order-popup-tab:hover,
+.order-popup-tab:focus-visible {
+  background: var(--red);
+  border-color: var(--red);
+}
+
+.order-popup-inhoud {
+  height: 100%;
+  padding: 2rem 1.5rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* ---------- receipt: overrides for OrderSummary ---------- */
+
+/* delete + confirmation in receipt style */
+.order-popup .bestelling-verwijder,
+.order-popup .bestelling-annuleer {
+  border-radius: 4px;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.order-popup .bestelling-bevestig {
+  border-radius: 0;
+  border-style: dashed;
+  background: none;
+}
+
+.order-popup .menu {
+  min-height: 0;
+  padding: 0;
+  background: none;
+}
+
+.order-popup .bestelling {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--black);
+  box-shadow: none;
+}
+
+.order-popup .bestelling-titel {
+  margin: 0 0 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px dashed var(--black);
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.order-popup .bestelling-leeg {
+  color: var(--black);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.order-popup .bestelling-regel {
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px dashed color-mix(in srgb, var(--black) 40%, transparent);
+}
+
+.order-popup .bestelling-naam {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.order-popup .bestelling-lijst {
+  margin: 0.3rem 0 0;
+  padding-left: 0;
+  color: color-mix(in srgb, var(--black) 70%, transparent);
+  font-size: 0.75rem;
+  list-style: none;
+}
+
+.order-popup .bestelling-lijst li::before {
+  content: '+ ';
+}
+
+.order-popup .bestelling-prijs {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* counter: outlined, no fill */
+.order-popup .teller {
+  gap: 0.4rem;
+  padding: 0;
+  background: transparent;
+  color: var(--black);
+  font-size: 0.85rem;
+}
+
+.order-popup .teller > span {
+  color: var(--black);
+}
+
+/* .teller .teller-knop is stronger than the rule in Menu-mobile.css */
+.order-popup .teller .teller-knop {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: 1.5px solid var(--black);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--black);
+  font-size: 1rem;
+  line-height: 1;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.order-popup .teller .teller-knop:active {
+  background: var(--black);
+  color: var(--white);
+}
+
+/* hover only on devices with a mouse (phones keep :hover after a tap) */
+@media (hover: hover) {
+  .order-popup .teller .teller-knop:hover {
+    background: var(--black);
+    color: var(--white);
+  }
+}
+
+/* total: the one red accent */
+.order-popup .bestelling-totaal {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 2px dashed var(--black);
+  border-bottom: none;
+  color: var(--red);
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.order-popup .plastic-tasje {
+  align-items: flex-end;
+  color: var(--black);
+  font-size: 0.7rem;
+}
+
+.order-popup .plastic-tasje-afbeelding {
+  width: 2rem;
+}
+
+.order-popup .bestelling-allergie {
+  margin-top: 1.25rem;
+  padding: 0.75rem;
+  border: 1px dashed var(--black);
+  border-radius: 0;
+  background: none;
+  color: var(--black);
+  font-size: 0.7rem;
+  text-align: left;
+}
+
+.order-popup .bestelling-bellen {
+  align-items: stretch;
+  margin-top: 1.25rem;
+  text-align: center;
+}
+
+.order-popup .bestelling-bellen p {
+  max-width: none;
+  font-size: 0.7rem;
+}
+
+.order-popup .bestelling-telefoon {
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--black);
+  border-radius: 0;
+  background: var(--black);
+  color: var(--white);
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  box-shadow: none;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.order-popup .bestelling-telefoon:hover {
+  background: var(--red);
+  border-color: var(--red);
+  transform: none;
+  box-shadow: none;
+}
+
+/* the catering card doesn't belong on the receipt */
+.order-popup .over-ons-catering {
+  display: none;
+}
+
+/* ---------- phones: bottom sheet ---------- */
+
+@media (max-width: 40rem) {
+  .order-popup {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 85svh;
+    border-left: none;
+    border-top: 2px solid var(--black);
+    border-radius: 12px 12px 0 0;
+    transform: translateY(100%);
+  }
+
+  .order-popup--open {
+    transform: translateY(0);
+  }
+
+  /* the tab hangs above the sheet: it sits at the bottom of the screen when closed */
+  .order-popup-tab {
+    top: auto;
+    right: 1rem;
+    bottom: 100%;
+    min-height: 2.75rem;
+    padding: 0.6rem 1.25rem;
+    border: 2px solid var(--red);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    background: var(--white);
+    color: var(--red);
+    writing-mode: horizontal-tb;
+    transform: none;
+  }
+
+  .order-popup-tab:hover,
+  .order-popup-tab:focus-visible {
+    background: var(--red);
+    border-color: var(--red);
+    color: var(--white);
+  }
+
+  .order-popup-inhoud {
+    padding: 1.5rem 1.25rem calc(2rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* bigger tap targets */
+  .order-popup .teller {
+    gap: 0.6rem;
+    font-size: 1rem;
+  }
+
+  .order-popup .teller .teller-knop {
+    width: 2.75rem;
+    height: 2.75rem;
+    font-size: 1.25rem;
+  }
+
+  .order-popup .bestelling-naam,
+  .order-popup .bestelling-prijs {
+    font-size: 1rem;
+  }
+
+  .order-popup .bestelling-lijst {
+    font-size: 0.8rem;
+  }
+
+  .order-popup .bestelling-telefoon {
+    min-height: 3rem;
+  }
+
+  .order-popup .bestelling-telefoon {
+    padding: 0.9rem 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .order-popup,
+  .order-popup--open {
+    transition: none;
+  }
+}

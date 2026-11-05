@@ -43,7 +43,9 @@
   white-space: nowrap;
   text-decoration: none;
   box-shadow: -3px 3px 0 var(--yellow);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 /* .navigatie-mobile-telefoon:active {
@@ -74,18 +76,20 @@
   height: 2px;
   border-radius: 2px;
   background: var(--yellow);
-  transition: transform 0.25s ease, opacity 0.2s ease;
+  transition:
+    transform 0.25s ease,
+    opacity 0.2s ease;
 }
 
-.navigatie-mobile-knop[aria-expanded="true"] span:nth-child(1) {
+.navigatie-mobile-knop[aria-expanded='true'] span:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
 }
 
-.navigatie-mobile-knop[aria-expanded="true"] span:nth-child(2) {
+.navigatie-mobile-knop[aria-expanded='true'] span:nth-child(2) {
   opacity: 0;
 }
 
-.navigatie-mobile-knop[aria-expanded="true"] span:nth-child(3) {
+.navigatie-mobile-knop[aria-expanded='true'] span:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
 }
 
@@ -102,8 +106,12 @@
 }
 
 @keyframes paneel-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* on the dark page (tijd & locatie) the circles are red */
@@ -120,5 +128,9 @@
   color: var(--white);
 }
 
-.navigatie-mobile-logo span:first-child { view-transition-name: titel-zh; }
-.navigatie-mobile-logo span:last-child  { view-transition-name: titel-nl; }
+.navigatie-mobile-logo span:first-child {
+  view-transition-name: titel-zh;
+}
+.navigatie-mobile-logo span:last-child {
+  view-transition-name: titel-nl;
+}

@@ -94,7 +94,7 @@
   align-items: center;
   justify-content: center;
   min-height: 75vh;
-    padding: 100px var(--over-ons-padding) 600px;
+  padding: 100px var(--over-ons-padding) 600px;
 }
 
 .over-ons-tekst {
@@ -156,7 +156,7 @@
     padding: 35px 22px;
     .over-ons-galerie-grid {
       grid-template-columns: repeat(2, 1fr);
-  }
+    }
   }
 
   .over-ons-illustratie {
@@ -221,23 +221,41 @@
 }
 
 /* left column */
-.galerie-kolom:nth-child(1) .galerie-tegel:nth-child(1) { flex: 195 1 0; }
-.galerie-kolom:nth-child(1) .galerie-tegel:nth-child(2) { flex: 220 1 0; }
-.galerie-kolom:nth-child(1) .galerie-tegel:nth-child(3) { flex: 55 1 0; }
+.galerie-kolom:nth-child(1) .galerie-tegel:nth-child(1) {
+  flex: 195 1 0;
+}
+.galerie-kolom:nth-child(1) .galerie-tegel:nth-child(2) {
+  flex: 220 1 0;
+}
+.galerie-kolom:nth-child(1) .galerie-tegel:nth-child(3) {
+  flex: 55 1 0;
+}
 
 /* middle column */
-.galerie-kolom:nth-child(2) .galerie-tegel:nth-child(1) { flex: 113 1 0; }
-.galerie-kolom:nth-child(2) .galerie-tegel:nth-child(2) { flex: 215 1 0; }
-.galerie-kolom:nth-child(2) .galerie-tegel:nth-child(3) { flex: 142 1 0; }
+.galerie-kolom:nth-child(2) .galerie-tegel:nth-child(1) {
+  flex: 113 1 0;
+}
+.galerie-kolom:nth-child(2) .galerie-tegel:nth-child(2) {
+  flex: 215 1 0;
+}
+.galerie-kolom:nth-child(2) .galerie-tegel:nth-child(3) {
+  flex: 142 1 0;
+}
 
 /* right column */
-.galerie-kolom:nth-child(3) .galerie-tegel:nth-child(1) { flex: 100 1 0; }
-.galerie-kolom:nth-child(3) .galerie-tegel:nth-child(2) { flex: 270 1 0; }
-.galerie-kolom:nth-child(3) .galerie-tegel:nth-child(3) { flex: 100 1 0; }
+.galerie-kolom:nth-child(3) .galerie-tegel:nth-child(1) {
+  flex: 100 1 0;
+}
+.galerie-kolom:nth-child(3) .galerie-tegel:nth-child(2) {
+  flex: 270 1 0;
+}
+.galerie-kolom:nth-child(3) .galerie-tegel:nth-child(3) {
+  flex: 100 1 0;
+}
 
 /* dark layer on top, fades away on hover */
 .galerie-tegel::after {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   background: color-mix(in srgb, var(--black) 60%, transparent);

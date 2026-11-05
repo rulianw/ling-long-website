@@ -52,8 +52,12 @@
   text-align: left;
 }
 
-.hoofdpagina-mobile-zh { view-transition-name: titel-zh; }
-.hoofdpagina-mobile-nl { view-transition-name: titel-nl; }
+.hoofdpagina-mobile-zh {
+  view-transition-name: titel-zh;
+}
+.hoofdpagina-mobile-nl {
+  view-transition-name: titel-nl;
+}
 
 /* ---------- text and phone ---------- */
 
@@ -80,7 +84,9 @@
   font-weight: 700;
   text-decoration: none;
   box-shadow: -5px 5px 0 var(--yellow);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .hoofdpagina-mobile-bestellen a:active {

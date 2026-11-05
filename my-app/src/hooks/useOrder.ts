@@ -1,142 +1,137 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import type { MenuItem, OrderLine, Variant, Extra, Pending } from '../types'
-import { getMaxExtras } from '../utils/extras.ts'
-export function useOrder( ) {
-    const [order, setOrder] = useState<OrderLine[]>([])
-    const [pendingItem, setPendingItem] = useState<Pending | null>(null)
+import { getMaxExtras } from '../utils/extras'
 
-    function addToOrder(newItem: MenuItem, variant?: Variant, extras?: Extra[], choices?: string[]) {
-        const name = variant
-            ? `${newItem.name} - ${variant.name}`
-            : newItem.name
-
-        const basePrice = variant?.price ?? newItem.price ?? 0
-
-        //ID based on the dish + variant + extras + choices
-        const selectedExtras = (extras ?? []).map((extra) => ({
-            ...extra,
-            quantity: 1,
-        }))
-
-        const extrasKey = selectedExtras
-            .map((extra) => extra.name)
-            .sort()
-            .join('+')
-
-        const choicesKey = (choices??[])
-            .sort()
-            .join('+')
-
-        const id = [
-            newItem.id,
-            variant?.name,
-            extrasKey,
-            choicesKey,
-        ]
-            .filter(Boolean)
-            .join('-')
-
-        setOrder((prevOrder) => {
-            const existingItem = prevOrder.find(
-                (item) => item.id === id
-            )
-
-            if (existingItem) {
-                return prevOrder.map((item) =>
-                    item.id === id
-                        ? {
-                            ...item,
-                            quantity: item.quantity + 1,
-                            extras: item.extras?.map((extra) => ({
-                                ...extra,
-                                quantity: extra.quantity + 1,
-                            })),
-                        }
-                        : item
-                )
-            }
-
-            return [
-                ...prevOrder,
-                {
-                    id,
-                    item: newItem,
-                    name,
-                    basePrice,
-                    quantity: 1,
-                    variant: variant?.name,
-                    extras: selectedExtras,
-                    choices
-                },
-            ]
-        })
+export function useOrder() {
+  const [order, setOrder] = useState<OrderLine[]>(() => {
+    const storedOrder = localStorage.getItem('order')
+    try {
+      return storedOrder ? JSON.parse(storedOrder) : []
+    } catch (error) {
+      console.error('Error parsing stored order:', error)
+      return []
     }
+  })
 
-    // Increases or decreases selected item
-    function changeQuantity(itemId: number | string, delta: number) {
-        const orderItem = order.find(
-            (item) => item.id === itemId
+  useEffect(() => {
+    localStorage.setItem('order', JSON.stringify(order))
+  }, [order])
+
+  const [pendingItem, setPendingItem] = useState<Pending | null>(null)
+
+  function deleteOrder() {
+    setOrder([])
+    localStorage.removeItem('order')
+  }
+
+  function addToOrder(newItem: MenuItem, variant?: Variant, extras?: Extra[], choices?: string[]) {
+    const name = variant ? `${newItem.name} - ${variant.name}` : newItem.name
+
+    const basePrice = variant?.price ?? newItem.price ?? 0
+
+    // ID based on the dish + variant + extras + choices
+    const selectedExtras = (extras ?? []).map((extra) => ({
+      ...extra,
+      quantity: 1,
+    }))
+
+    const extrasKey = selectedExtras
+      .map((extra) => extra.name)
+      .sort()
+      .join('+')
+
+    const choicesKey = (choices ?? []).sort().join('+')
+
+    const id = [newItem.id, variant?.name, extrasKey, choicesKey].filter(Boolean).join('-')
+
+    setOrder((prevOrder) => {
+      const existingItem = prevOrder.find((item) => item.id === id)
+
+      if (existingItem) {
+        return prevOrder.map((item) =>
+          item.id === id
+            ? {
+                ...item,
+                quantity: item.quantity + 1,
+                extras: item.extras?.map((extra) => ({
+                  ...extra,
+                  quantity: extra.quantity + 1,
+                })),
+              }
+            : item,
         )
-        if (!orderItem) return
+      }
 
-        if (delta === 1) {
-            const menuItem = orderItem.item
+      return [
+        ...prevOrder,
+        {
+          id,
+          item: newItem,
+          name,
+          basePrice,
+          quantity: 1,
+          variant: variant?.name,
+          extras: selectedExtras,
+          choices,
+        },
+      ]
+    })
+  }
 
-            const variant = orderItem.variant
-                ? menuItem.variants?.find(
-                    (v) => v.name === orderItem.variant
-                )
-                : undefined
-            
-            //if the item has extras, open extras selection
-            if (getMaxExtras(menuItem, variant) !== -1) {
-                // setSelectedExtras([])
+  // Increases or decreases selected item
+  function changeQuantity(itemId: number | string, delta: number) {
+    const orderItem = order.find((item) => item.id === itemId)
+    if (!orderItem) return
 
-                setPendingItem({
-                    item: menuItem,
-                    variant: variant,
-                })
-                return
-            }
-        }
+    if (delta === 1) {
+      const menuItem = orderItem.item
 
-        setOrder((prevOrder) => {
-            return prevOrder
-                .map((item) => {
-                    if (item.id !== itemId) {
-                        return item
-                    }
+      const variant = orderItem.variant
+        ? menuItem.variants?.find((v) => v.name === orderItem.variant)
+        : undefined
 
-                    const newQuantity =
-                        item.quantity + delta
-
-
-                    const newExtras = item.extras
-                        ?.map((extra) => ({
-                            ...extra,
-                            quantity:
-                                extra.quantity + delta,
-                        }))
-                        .filter(
-                            (extra) => extra.quantity > 0
-                        )
-
-
-                    return {
-                        ...item,
-                        quantity: newQuantity,
-                        extras: newExtras,
-                    }
-                })
-                .filter((item) => item.quantity > 0)
+      // if the item has extras, open extras selection
+      if (getMaxExtras(menuItem, variant) !== -1) {
+        setPendingItem({
+          item: menuItem,
+          variant: variant,
         })
+        return
+      }
     }
 
-    return {
-        order,
-        pendingItem,
-        setPendingItem,
-        addToOrder,
-        changeQuantity,
-    }
+    setOrder((prevOrder) => {
+      return prevOrder
+        .map((item) => {
+          if (item.id !== itemId) {
+            return item
+          }
+
+          const newQuantity = item.quantity + delta
+
+          const newExtras = item.extras
+            ?.map((extra) => ({
+              ...extra,
+              quantity: extra.quantity + delta,
+            }))
+            .filter((extra) => extra.quantity > 0)
+
+          return {
+            ...item,
+            quantity: newQuantity,
+            extras: newExtras,
+          }
+        })
+        .filter((item) => item.quantity > 0)
+    })
+  }
+
+  return {
+    order,
+    pendingItem,
+    setPendingItem,
+    addToOrder,
+    changeQuantity,
+    deleteOrder,
+  }
 }

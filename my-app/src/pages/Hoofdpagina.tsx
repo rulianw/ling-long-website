@@ -1,5 +1,5 @@
-import "../css/Hoofdpagina.css"
-import hoofdpagina from "../images/hoofdpagina.png"
+import '../css/Hoofdpagina.css'
+import hoofdpagina from '../images/hoofdpagina.png'
 
 export default function Hoofdpagina() {
   return (
@@ -8,19 +8,19 @@ export default function Hoofdpagina() {
 
       <div className="hoofdpagina-inhoud">
         <h1 className="titel">
-          <span className="titel-zh" lang="zh">玲珑阁</span>
+          <span className="titel-zh" lang="zh">
+            玲珑阁
+          </span>
           <span className="titel-nl">Ling Long</span>
         </h1>
 
-        <p className="omschrijving">
-          Een klein Chinees afhaal restaurant gelegen in Beuningen.
-        </p>
+        <p className="omschrijving">Een klein Chinees afhaal restaurant gelegen in Beuningen.</p>
 
         <div className="bestellen">
           <p>bestellingen via de telefoon</p>
-            <a href="tel:0246775634" className="bestellen-button">
-              024 6775634
-            </a>
+          <a href="tel:0246775634" className="bestellen-button">
+            024 6775634
+          </a>
         </div>
       </div>
     </main>

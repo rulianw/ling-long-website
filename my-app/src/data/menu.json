@@ -29,7 +29,7 @@
     { "id": 22, "name": "Diverse sauzen", "price": 3.2, "category": "Voor- en Bijgerechten", "description": "", "image": "", "allowsExtras": false },
     { "id": 23, "name": "Atjar", "price": 3.2, "category": "Voor- en Bijgerechten", "description": "", "image": "", "allowsExtras": false },
     { "id": 28, "name": "Goreng", "price": null, "category": "Nasi/Bami", "description": "met ei & ham", "image": "", "allowsExtras": false, "variants": [ { "name": "Nasi", "price": 6.8 }, { "name": "Bami", "price": 6.8 } ] },
-    { "id": 29, "name": "Nasi Kerrie", "price": 8.2, "category": "Nasi/Bami", "description": "met sambal, kipfilet en kerrie", "image": "", "allowsExtras": true },
+    { "id": 29, "name": "Nasi Kerrie", "price": 8.2, "category": "Nasi/Bami", "description": "met sambal, kipfilet en kerrie", "image": "", "allowsExtras": false },
     { "id": 30, "name": "Speciaal", "price": null, "category": "Nasi/Bami", "description": "met kip en saté", "image": "", "allowsExtras": false, "variants": [ { "name": "Nasi", "price": 10.7 }, { "name": "Bami", "price": 10.7 } ] },
     { "id": 31, "name": "Ling Long Speciaal", "price": null, "category": "Nasi/Bami", "description": "tjap tjoi, babi pangang, daging roedjak en saté", "image": "", "allowsExtras": false, "variants": [ { "name": "Nasi", "price": 16.4 }, { "name": "Bami", "price": 16.4 } ] },
     { "id": 32, "name": "Royal", "price": null, "category": "Nasi/Bami", "description": "foe yong hai, babi pangang, koe loe yuk en saté", "image": "", "allowsExtras": false, "variants": [ { "name": "Nasi", "price": 15.4 }, { "name": "Bami", "price": 15.4 } ] },

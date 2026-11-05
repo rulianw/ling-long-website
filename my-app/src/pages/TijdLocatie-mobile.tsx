@@ -1,21 +1,25 @@
-import "../css/TijdLocatie-mobile.css";
-import locatie from "../images/locatie.png"
-import { openingHours } from "../data/openingstijden";
+import '../css/TijdLocatie-mobile.css'
+import OrderPopup from '../components/OrderPopup'
+import locatie from '../images/locatie.png'
+import { openingHours } from '../data/openingstijden'
 
 export default function TijdLocatieMobile() {
-  const today = new Date().getDay();
+  const today = new Date().getDay()
 
   return (
     <main className="tijd-locatie-mobile">
+      <OrderPopup />
       <section className="tijd-mobile">
-        <h2 className="tijd-locatie-mobile-zh" lang="zh">营业时间</h2>
+        <h2 className="tijd-locatie-mobile-zh" lang="zh">
+          营业时间
+        </h2>
 
         <div className="tijd-mobile-box">
           <h3>openingstijden</h3>
 
           {openingHours.map(([name, hours, dayNumber]) => (
             <div
-              className={`tijd-mobile-rij ${dayNumber === today ? "tijd-mobile-rij--vandaag" : ""}`}
+              className={`tijd-mobile-rij ${dayNumber === today ? 'tijd-mobile-rij--vandaag' : ''}`}
               key={name}
             >
               <span>{name}</span>
@@ -32,7 +36,9 @@ export default function TijdLocatieMobile() {
       </section>
 
       <section className="locatie-mobile">
-        <h2 className="tijd-locatie-mobile-zh" lang="zh">地点</h2>
+        <h2 className="tijd-locatie-mobile-zh" lang="zh">
+          地点
+        </h2>
 
         <div className="locatie-mobile-kaart">
           <iframe
@@ -56,5 +62,5 @@ export default function TijdLocatieMobile() {
         </a>
       </section>
     </main>
-  );
+  )
 }

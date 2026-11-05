@@ -10,9 +10,9 @@ export default function App() {
   const isMobile = useIsMobile() || isMobilePreview(pathname)
 
   return (
-      <OrderProvider>
-        {isMobile ? <NavigatieMobile /> : <Navigatie />}
-        <Outlet />
-      </OrderProvider>
+    <OrderProvider>
+      {isMobile ? <NavigatieMobile /> : <Navigatie />}
+      <Outlet />
+    </OrderProvider>
   )
 }

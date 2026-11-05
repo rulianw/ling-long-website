@@ -1,13 +1,14 @@
-
-import "../css/TijdLocatie.css";
-import locatie from "../images/locatie.png"
-import { openingHours } from "../data/openingstijden";
+import '../css/TijdLocatie.css'
+import OrderPopup from '../components/OrderPopup'
+import locatie from '../images/locatie.png'
+import { openingHours } from '../data/openingstijden'
 
 export default function TijdLocatie() {
-  const today = new Date().getDay();
+  const today = new Date().getDay()
 
   return (
     <section className="tijd-locatie">
+      <OrderPopup />
       <div className="openingstijden">
         <div className="openingstijden-content">
           <div className="openingstijden-box">
@@ -16,7 +17,7 @@ export default function TijdLocatie() {
             <div className="openingstijden-rijen">
               {openingHours.map(([name, hours, dayNumber]) => (
                 <div
-                  className={`openingstijden-rij ${dayNumber === today ? "openingstijden-rij--vandaag" : ""}`}
+                  className={`openingstijden-rij ${dayNumber === today ? 'openingstijden-rij--vandaag' : ''}`}
                   key={name}
                 >
                   <span>{name}</span>
@@ -52,11 +53,7 @@ export default function TijdLocatie() {
 
           <p className="locatie-adres">
             <span aria-hidden="true">
-              <img
-                src={locatie}
-                alt="locatie"
-                className="locatie-icoon"
-              />
+              <img src={locatie} alt="locatie" className="locatie-icoon" />
             </span>
             Koolzaadveld 67, 6641 SV, Beuningen
           </p>
@@ -67,5 +64,5 @@ export default function TijdLocatie() {
         </h2>
       </div>
     </section>
-  );
+  )
 }

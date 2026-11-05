@@ -124,7 +124,9 @@
   font-weight: 700;
   text-decoration: none;
   box-shadow: -3px 3px 0 var(--yellow);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .navigatie-telefoon:hover {
@@ -132,7 +134,9 @@
   box-shadow: 0 0 0 var(--yellow);
 }
 
-.navigatie-logo span:first-child { view-transition-name: titel-zh; }
-.navigatie-logo span:last-child  { view-transition-name: titel-nl; }
-
-
+.navigatie-logo span:first-child {
+  view-transition-name: titel-zh;
+}
+.navigatie-logo span:last-child {
+  view-transition-name: titel-nl;
+}

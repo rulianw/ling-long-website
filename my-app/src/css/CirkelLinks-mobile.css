@@ -29,12 +29,18 @@
   text-align: center;
   text-decoration: none;
   box-shadow: -5px 5px 0 var(--yellow);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
   animation: cirkel-in 0.5s cubic-bezier(0.2, 0.65, 0.3, 1) both;
 }
 
-.cirkel-mobile:nth-child(2) { animation-delay: 80ms; }
-.cirkel-mobile:nth-child(3) { animation-delay: 160ms; }
+.cirkel-mobile:nth-child(2) {
+  animation-delay: 80ms;
+}
+.cirkel-mobile:nth-child(3) {
+  animation-delay: 160ms;
+}
 
 .cirkel-mobile:active {
   transform: translate(-5px, 5px);

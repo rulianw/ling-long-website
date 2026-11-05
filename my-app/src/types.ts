@@ -3,9 +3,9 @@ export type Variant = { name: string; price: number; maxExtras?: number; choiceA
 export type Extra = { name: string; price: number; quantity: number }
 
 export type MenuItem = {
-  id: number | string       
+  id: number | string
   name: string
-  price: number | null      
+  price: number | null
   category: string
   description: string
   image: string
@@ -25,22 +25,22 @@ export type OrderLine = {
   choices?: string[]
 }
 
-export type Pending = { 
+export type Pending = {
   item: MenuItem
-  variant?: Variant 
+  variant?: Variant
 }
 
 export type Card = {
-    key: string
-    item: MenuItem
-    variant?: Variant
-    price: number | null
-    title: string
+  key: string
+  item: MenuItem
+  variant?: Variant
+  price: number | null
+  title: string
 }
 
 export type MenuCategory = {
-    id: number
-    name: string
-    zh: string
-    matches: string[]
+  id: number
+  name: string
+  zh: string
+  matches: string[]
 }

@@ -17,10 +17,19 @@ const router = createBrowserRouter([
   {
     element: <App />,
     children: [
-      { path: '/', element: <Responsive desktop={<Hoofdpagina />} mobile={<HoofdpaginaMobile />} /> },
+      {
+        path: '/',
+        element: <Responsive desktop={<Hoofdpagina />} mobile={<HoofdpaginaMobile />} />,
+      },
       { path: '/menu', element: <Responsive desktop={<Menu />} mobile={<MenuMobile />} /> },
-      { path: '/tijd-locatie', element: <Responsive desktop={<TijdLocatie />} mobile={<TijdLocatieMobile />} /> },
-      { path: '/over-ons', element: <Responsive desktop={<OverOns />} mobile={<OverOnsMobile />} /> },
+      {
+        path: '/tijd-locatie',
+        element: <Responsive desktop={<TijdLocatie />} mobile={<TijdLocatieMobile />} />,
+      },
+      {
+        path: '/over-ons',
+        element: <Responsive desktop={<OverOns />} mobile={<OverOnsMobile />} />,
+      },
 
       { path: '/hoofdpagina-mobile', element: <HoofdpaginaMobile /> },
       { path: '/menu-mobile', element: <MenuMobile /> },

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import "../css/Navigatie-mobile.css"
+import '../css/Navigatie-mobile.css'
 import CirkelLinksMobile from './CirkelLinks-mobile'
 import { basePath, isMobilePreview, mobilePath } from '../utils/mobile'
 

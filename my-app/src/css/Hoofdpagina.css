@@ -103,7 +103,9 @@
   text-decoration: none;
   box-shadow: -6px 6px 0 var(--yellow);
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .bestellen-button:hover {
@@ -126,8 +128,12 @@
 
 /* ---------- logo transition (shared with the nav) ---------- */
 
-.titel-zh { view-transition-name: titel-zh; }
-.titel-nl { view-transition-name: titel-nl; }
+.titel-zh {
+  view-transition-name: titel-zh;
+}
+.titel-nl {
+  view-transition-name: titel-nl;
+}
 
 ::view-transition-group(titel-zh),
 ::view-transition-group(titel-nl) {
@@ -154,7 +160,7 @@
   }
 
   .hoofdpagina::after {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     z-index: 0;
