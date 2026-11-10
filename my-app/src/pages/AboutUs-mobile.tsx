@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
-import '../css/OverOns-mobile.css'
+import '../css/AboutUs-mobile.css'
 import OrderPopup from '../components/OrderPopup'
-import overOnsImage from '../images/overOns.png'
+import aboutUsImage from '../images/aboutUs.png'
 import image1 from '../images/image1.png'
 import image2 from '../images/image2.png'
 import image3 from '../images/image3.png'
@@ -12,9 +12,9 @@ import image7 from '../images/image7.png'
 import image8 from '../images/image8.png'
 import image9 from '../images/image9.png'
 
-const fotos = [image1, image2, image3, image4, image5, image6, image7, image8, image9]
+const photos = [image1, image2, image3, image4, image5, image6, image7, image8, image9]
 
-export default function OverOnsMobile() {
+export default function AboutUsMobile() {
   const textRef = useRef<HTMLDivElement>(null)
   const collageRef = useRef<HTMLDivElement>(null)
 
@@ -43,23 +43,23 @@ export default function OverOnsMobile() {
   }, [])
 
   return (
-    <main className="over-ons-mobile">
+    <main className="about-us-mobile">
       <OrderPopup />
-      <section className="over-ons-mobile-hero">
+      <section className="about-us-mobile-hero">
         <img
-          className="over-ons-mobile-illustratie"
-          src={overOnsImage}
+          className="about-us-mobile-illustration"
+          src={aboutUsImage}
           alt="Illustratie van Ling Long"
         />
 
         <h1>over ons</h1>
-        <p className="over-ons-mobile-chinees" lang="zh">
+        <p className="about-us-mobile-chinese" lang="zh">
           我们
         </p>
       </section>
 
-      <section className="over-ons-mobile-verhaal">
-        <div className="over-ons-mobile-tekst over-ons-mobile-reveal" ref={textRef}>
+      <section className="about-us-mobile-story">
+        <div className="about-us-mobile-text about-us-mobile-reveal" ref={textRef}>
           <p>
             Líng Lóng staat voor verfijnd en delicaat, maar ook voor levendigheid en karakter. Klein
             van formaat, groot in gastvrijheid: wij geloven dat een afhaalmaaltijd net zo warm en
@@ -74,9 +74,9 @@ export default function OverOnsMobile() {
       </section>
 
       {/* first photo full width, the rest in two columns */}
-      <div className="over-ons-mobile-galerie over-ons-mobile-reveal" ref={collageRef}>
-        {fotos.map((src, i) => (
-          <figure className="over-ons-mobile-foto" key={i}>
+      <div className="about-us-mobile-gallery about-us-mobile-reveal" ref={collageRef}>
+        {photos.map((src, i) => (
+          <figure className="about-us-mobile-photo" key={i}>
             <img src={src} alt={`Foto ${i + 1}`} loading="lazy" />
           </figure>
         ))}

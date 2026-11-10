@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
-import '../css/OverOns.css'
+import '../css/AboutUs.css'
 import OrderPopup from '../components/OrderPopup'
-import overOnsImage from '../images/overOns.png'
+import aboutUsImage from '../images/aboutUs.png'
 import image1 from '../images/image1.png'
 import image2 from '../images/image2.png'
 import image3 from '../images/image3.png'
@@ -12,10 +12,10 @@ import image7 from '../images/image7.png'
 import image8 from '../images/image8.png'
 import image9 from '../images/image9.png'
 
-export default function OverOns() {
+export default function AboutUs() {
   const textRef = useRef<HTMLDivElement>(null)
   const collageRef = useRef<HTMLDivElement>(null)
-  const kolommen = [
+  const columns = [
     [image1, image2, image3],
     [image4, image5, image6],
     [image7, image8, image9],
@@ -45,25 +45,25 @@ export default function OverOns() {
   }, [])
 
   return (
-    <main className="over-ons">
+    <main className="about-us">
       <OrderPopup />
-      <section className="over-ons-hero">
-        <div className="over-ons-hero-content">
+      <section className="about-us-hero">
+        <div className="about-us-hero-content">
           <img
-            className="over-ons-illustratie"
-            src={overOnsImage}
+            className="about-us-illustration"
+            src={aboutUsImage}
             alt="Illustratie van Ling Long"
           />
 
           <h1>over ons</h1>
-          <p className="over-ons-chinees" lang="zh">
+          <p className="about-us-chinese" lang="zh">
             我们
           </p>
         </div>
       </section>
 
-      <section className="over-ons-verhaal">
-        <div className="over-ons-tekst reveal" ref={textRef}>
+      <section className="about-us-story">
+        <div className="about-us-text reveal" ref={textRef}>
           <p>
             Líng Lóng staat voor verfijnd en delicaat, maar ook voor levendigheid en karakter. Klein
             van formaat, groot in gastvrijheid: wij geloven dat een afhaalmaaltijd net zo warm en
@@ -77,13 +77,13 @@ export default function OverOns() {
         </div>
       </section>
 
-      <section className="over-ons-galerie">
-        <div className="over-ons-galerie-grid reveal" ref={collageRef}>
-          {kolommen.map((kolom, k) => (
-            <div className="galerie-kolom" key={k}>
-              {kolom.map((src, i) => (
-                <figure className="galerie-tegel" key={i} tabIndex={0}>
-                  <img src={src} alt={`Foto ${k * 3 + i + 1}`} loading="lazy" />
+      <section className="about-us-gallery">
+        <div className="about-us-gallery-grid reveal" ref={collageRef}>
+          {columns.map((column, c) => (
+            <div className="gallery-column" key={c}>
+              {column.map((src, i) => (
+                <figure className="gallery-tile" key={i} tabIndex={0}>
+                  <img src={src} alt={`Foto ${c * 3 + i + 1}`} loading="lazy" />
                 </figure>
               ))}
             </div>

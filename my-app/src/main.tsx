@@ -4,14 +4,14 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import App from './App.tsx'
 import Responsive from './components/Responsive'
-import Hoofdpagina from './pages/Hoofdpagina'
+import Home from './pages/Home'
 import Menu from './pages/Menu'
-import TijdLocatie from './pages/TijdLocatie'
-import OverOns from './pages/OverOns'
-import HoofdpaginaMobile from './pages/Hoofdpagina-mobile'
+import TimeLocation from './pages/TimeLocation'
+import AboutUs from './pages/AboutUs'
+import HomeMobile from './pages/Home-mobile'
 import MenuMobile from './pages/Menu-mobile'
-import TijdLocatieMobile from './pages/TijdLocatie-mobile'
-import OverOnsMobile from './pages/OverOns-mobile'
+import TimeLocationMobile from './pages/TimeLocation-mobile'
+import AboutUsMobile from './pages/AboutUs-mobile'
 
 const router = createBrowserRouter([
   {
@@ -19,22 +19,22 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Responsive desktop={<Hoofdpagina />} mobile={<HoofdpaginaMobile />} />,
+        element: <Responsive desktop={<Home />} mobile={<HomeMobile />} />,
       },
       { path: '/menu', element: <Responsive desktop={<Menu />} mobile={<MenuMobile />} /> },
       {
         path: '/tijd-locatie',
-        element: <Responsive desktop={<TijdLocatie />} mobile={<TijdLocatieMobile />} />,
+        element: <Responsive desktop={<TimeLocation />} mobile={<TimeLocationMobile />} />,
       },
       {
         path: '/over-ons',
-        element: <Responsive desktop={<OverOns />} mobile={<OverOnsMobile />} />,
+        element: <Responsive desktop={<AboutUs />} mobile={<AboutUsMobile />} />,
       },
 
-      { path: '/hoofdpagina-mobile', element: <HoofdpaginaMobile /> },
+      { path: '/hoofdpagina-mobile', element: <HomeMobile /> },
       { path: '/menu-mobile', element: <MenuMobile /> },
-      { path: '/tijd-locatie-mobile', element: <TijdLocatieMobile /> },
-      { path: '/over-ons-mobile', element: <OverOnsMobile /> },
+      { path: '/tijd-locatie-mobile', element: <TimeLocationMobile /> },
+      { path: '/over-ons-mobile', element: <AboutUsMobile /> },
     ],
   },
 ])

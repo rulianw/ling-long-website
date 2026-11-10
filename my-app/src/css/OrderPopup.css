@@ -55,7 +55,7 @@
   border-color: var(--red);
 }
 
-.order-popup-inhoud {
+.order-popup-content {
   height: 100%;
   padding: 2rem 1.5rem;
   overflow-y: auto;
@@ -65,15 +65,15 @@
 /* ---------- receipt: overrides for OrderSummary ---------- */
 
 /* delete + confirmation in receipt style */
-.order-popup .bestelling-verwijder,
-.order-popup .bestelling-annuleer {
+.order-popup .order-summary-delete,
+.order-popup .order-summary-cancel {
   border-radius: 4px;
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-.order-popup .bestelling-bevestig {
+.order-popup .order-summary-confirm {
   border-radius: 0;
   border-style: dashed;
   background: none;
@@ -85,7 +85,7 @@
   background: none;
 }
 
-.order-popup .bestelling {
+.order-popup .order-summary {
   max-width: none;
   margin: 0;
   padding: 0;
@@ -95,7 +95,7 @@
   box-shadow: none;
 }
 
-.order-popup .bestelling-titel {
+.order-popup .order-summary-title {
   margin: 0 0 1.25rem;
   padding-bottom: 1rem;
   border-bottom: 2px dashed var(--black);
@@ -105,24 +105,24 @@
   text-transform: uppercase;
 }
 
-.order-popup .bestelling-leeg {
+.order-popup .order-summary-empty {
   color: var(--black);
   font-size: 0.85rem;
   text-align: center;
 }
 
-.order-popup .bestelling-regel {
+.order-popup .order-summary-line {
   gap: 0.75rem;
   padding: 0.75rem 0;
   border-bottom: 1px dashed color-mix(in srgb, var(--black) 40%, transparent);
 }
 
-.order-popup .bestelling-naam {
+.order-popup .order-summary-name {
   font-size: 0.9rem;
   font-weight: 700;
 }
 
-.order-popup .bestelling-lijst {
+.order-popup .order-summary-list {
   margin: 0.3rem 0 0;
   padding-left: 0;
   color: color-mix(in srgb, var(--black) 70%, transparent);
@@ -130,17 +130,17 @@
   list-style: none;
 }
 
-.order-popup .bestelling-lijst li::before {
+.order-popup .order-summary-list li::before {
   content: '+ ';
 }
 
-.order-popup .bestelling-prijs {
+.order-popup .order-summary-price {
   font-size: 0.9rem;
   font-weight: 700;
 }
 
 /* counter: outlined, no fill */
-.order-popup .teller {
+.order-popup .counter {
   gap: 0.4rem;
   padding: 0;
   background: transparent;
@@ -148,12 +148,12 @@
   font-size: 0.85rem;
 }
 
-.order-popup .teller > span {
+.order-popup .counter > span {
   color: var(--black);
 }
 
-/* .teller .teller-knop is stronger than the rule in Menu-mobile.css */
-.order-popup .teller .teller-knop {
+/* .counter .counter-button is stronger than the rule in Menu-mobile.css */
+.order-popup .counter .counter-button {
   display: grid;
   place-items: center;
   width: 1.75rem;
@@ -170,21 +170,21 @@
     color 0.15s ease;
 }
 
-.order-popup .teller .teller-knop:active {
+.order-popup .counter .counter-button:active {
   background: var(--black);
   color: var(--white);
 }
 
 /* hover only on devices with a mouse (phones keep :hover after a tap) */
 @media (hover: hover) {
-  .order-popup .teller .teller-knop:hover {
+  .order-popup .counter .counter-button:hover {
     background: var(--black);
     color: var(--white);
   }
 }
 
 /* total: the one red accent */
-.order-popup .bestelling-totaal {
+.order-popup .order-summary-total {
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 2px dashed var(--black);
@@ -195,17 +195,17 @@
   text-transform: uppercase;
 }
 
-.order-popup .plastic-tasje {
+.order-popup .plastic-bag {
   align-items: flex-end;
   color: var(--black);
   font-size: 0.7rem;
 }
 
-.order-popup .plastic-tasje-afbeelding {
+.order-popup .plastic-bag-image {
   width: 2rem;
 }
 
-.order-popup .bestelling-allergie {
+.order-popup .order-summary-allergy {
   margin-top: 1.25rem;
   padding: 0.75rem;
   border: 1px dashed var(--black);
@@ -216,18 +216,18 @@
   text-align: left;
 }
 
-.order-popup .bestelling-bellen {
+.order-popup .order-summary-call {
   align-items: stretch;
   margin-top: 1.25rem;
   text-align: center;
 }
 
-.order-popup .bestelling-bellen p {
+.order-popup .order-summary-call p {
   max-width: none;
   font-size: 0.7rem;
 }
 
-.order-popup .bestelling-telefoon {
+.order-popup .order-summary-phone {
   padding: 0.75rem 1rem;
   border: 2px solid var(--black);
   border-radius: 0;
@@ -241,7 +241,7 @@
     border-color 0.15s ease;
 }
 
-.order-popup .bestelling-telefoon:hover {
+.order-popup .order-summary-phone:hover {
   background: var(--red);
   border-color: var(--red);
   transform: none;
@@ -249,7 +249,7 @@
 }
 
 /* the catering card doesn't belong on the receipt */
-.order-popup .over-ons-catering {
+.order-popup .about-us-catering {
   display: none;
 }
 
@@ -296,36 +296,36 @@
     color: var(--white);
   }
 
-  .order-popup-inhoud {
+  .order-popup-content {
     padding: 1.5rem 1.25rem calc(2rem + env(safe-area-inset-bottom, 0px));
   }
 
   /* bigger tap targets */
-  .order-popup .teller {
+  .order-popup .counter {
     gap: 0.6rem;
     font-size: 1rem;
   }
 
-  .order-popup .teller .teller-knop {
+  .order-popup .counter .counter-button {
     width: 2.75rem;
     height: 2.75rem;
     font-size: 1.25rem;
   }
 
-  .order-popup .bestelling-naam,
-  .order-popup .bestelling-prijs {
+  .order-popup .order-summary-name,
+  .order-popup .order-summary-price {
     font-size: 1rem;
   }
 
-  .order-popup .bestelling-lijst {
+  .order-popup .order-summary-list {
     font-size: 0.8rem;
   }
 
-  .order-popup .bestelling-telefoon {
+  .order-popup .order-summary-phone {
     min-height: 3rem;
   }
 
-  .order-popup .bestelling-telefoon {
+  .order-popup .order-summary-phone {
     padding: 0.9rem 1rem;
   }
 }

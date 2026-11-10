@@ -14,13 +14,13 @@
 
 /* ---------- categories: wide tiles ---------- */
 
-.menu-mobile .categorieen {
+.menu-mobile .categories {
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
   padding: 1rem 1.25rem 2rem;
 }
 
-.menu-mobile .categorie {
+.menu-mobile .category {
   justify-content: center;
   min-height: 8.5rem;
   padding: 1.25rem 0.5rem;
@@ -31,52 +31,52 @@
     background-color 0.15s ease;
 }
 
-.menu-mobile .categorie:active {
+.menu-mobile .category:active {
   transform: scale(0.97);
   background: color-mix(in srgb, var(--black) 55%, transparent);
 }
 
-.menu-mobile .categorie .kop-icoon {
+.menu-mobile .category .header-icon {
   width: 4rem;
   height: 4rem;
 }
 
-.menu-mobile .categorie h2 {
+.menu-mobile .category h2 {
   font-size: 0.85rem;
 }
 
 /* phones keep :hover after a tap, so always show the normal bowl */
-.menu-mobile .kop-icoon--hover {
+.menu-mobile .header-icon--hover {
   display: none;
 }
 
-.menu-mobile .categorie:hover .kop-icoon--normaal,
-.menu-mobile .categorie-kop:hover .kop-icoon--normaal {
+.menu-mobile .category:hover .header-icon--normal,
+.menu-mobile .category-header:hover .header-icon--normal {
   opacity: 1;
 }
 
 /* ---------- open category: header ---------- */
 
-.menu-mobile .categorie-kop {
+.menu-mobile .category-header {
   width: 7.5rem;
   height: 7.5rem;
 }
 
-.menu-mobile .categorie-kop .kop-icoon {
+.menu-mobile .category-header .header-icon {
   width: 3.25rem;
   height: 3.25rem;
 }
 
 /* previous / next: bigger tap area */
-.menu-mobile .categorie-kop-links,
-.menu-mobile .categorie-kop-rechts {
+.menu-mobile .category-header-left,
+.menu-mobile .category-header-right {
   min-height: 4.5rem;
   padding: 0.5rem 0.25rem;
 }
 
 /* ---------- open category: cards ---------- */
 
-.menu-mobile .kaarten {
+.menu-mobile .cards {
   grid-template-columns: 1fr;
   gap: 1.75rem;
   max-width: none;
@@ -84,7 +84,7 @@
 }
 
 /* top row: number + name, bottom row: price + counter */
-.menu-mobile .kaart {
+.menu-mobile .card {
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
@@ -95,33 +95,33 @@
   box-shadow: -4px 4px 0 var(--yellow);
 }
 
-.menu-mobile .kaart-midden {
+.menu-mobile .card-middle {
   justify-content: flex-start;
   width: auto;
   min-width: 0;
 }
 
-.menu-mobile .kaart-naam {
+.menu-mobile .card-name {
   font-size: 1.05rem;
   line-height: 1.4;
 }
 
-.menu-mobile .kaart-beschrijving {
+.menu-mobile .card-description {
   justify-content: flex-start;
 }
 
-.menu-mobile .kaart-beschrijving p {
+.menu-mobile .card-description p {
   font-size: 0.9rem;
   line-height: 1.5;
 }
 
-.menu-mobile .kaart-hint {
+.menu-mobile .card-hint {
   margin: 0.5rem 0 0;
   padding: 0.3rem 0.8rem;
   font-size: 0.75rem;
 }
 
-.menu-mobile .kaart-onder {
+.menu-mobile .card-bottom {
   grid-column: 1 / -1;
   flex-direction: row;
   justify-content: space-between;
@@ -133,27 +133,27 @@
   border-top: 1px solid color-mix(in srgb, var(--red) 25%, transparent);
 }
 
-.menu-mobile .kaart-prijs {
+.menu-mobile .card-price {
   font-size: 1.2rem;
 }
 
 /* ---------- counter: separate round buttons ---------- */
 
-.menu-mobile .teller {
+.menu-mobile .counter {
   align-items: center;
   gap: 0.75rem;
   padding: 0;
   background: transparent;
 }
 
-.menu-mobile .teller > span {
+.menu-mobile .counter > span {
   min-width: 1.75rem;
   font-size: 1.1rem;
   font-weight: 700;
   text-align: center;
 }
 
-.menu-mobile .teller-knop {
+.menu-mobile .counter-button {
   display: grid;
   place-items: center;
   width: 2.75rem;
@@ -165,12 +165,12 @@
   line-height: 1;
 }
 
-.menu-mobile .teller-knop:active {
+.menu-mobile .counter-button:active {
   transform: scale(0.92);
 }
 
 /* the number sits on a white card in the order section */
-.menu-mobile .bestelling .teller > span {
+.menu-mobile .order-summary .counter > span {
   color: var(--black);
 }
 
@@ -202,12 +202,12 @@
 
 /* ---------- order ---------- */
 
-.menu-mobile .bestelling {
+.menu-mobile .order-summary {
   margin: 2.5rem 1.25rem 0 1.5rem;
   padding: 1.5rem 1.25rem;
 }
 
-.menu-mobile .bestelling-telefoon {
+.menu-mobile .order-summary-phone {
   display: block;
   width: 100%;
   padding: 0.9rem 1rem;
@@ -217,11 +217,11 @@
 
 /* ---------- catering ---------- */
 
-.menu-mobile .over-ons-catering {
+.menu-mobile .about-us-catering {
   margin-top: 2.5rem;
   padding: 0 1.25rem 3rem 1.5rem;
 }
 
-.menu-mobile .catering-kaart {
+.menu-mobile .catering-card {
   padding: 1.5rem 1.25rem;
 }

@@ -2,9 +2,9 @@
 
 ## Plan (3 November 2026)
 1. **Swipe between categories:** touch events on the open category (swipe left = next, right = previous), using the direction state that is already there
-2. **Reset the slide direction:** call `setSlideRichting(null)` when opening a category from the grid or going back with the middle button, so those don't slide
-3. **Kom morph back in `MenuItems`:** add `openCategory` and `closeCategory` again (`startViewTransition` + `flushSync`) and the `komCategory` state, and make it work together with the slide
-4. **Card as its own component:** pull the `<article className="kaart">` out of `MenuItems` (props for data, `onAdd`/`onRemove`/`onToggle` for actions)
+2. **Reset the slide direction:** call `setSlideDirection(null)` when opening a category from the grid or going back with the middle button, so those don't slide
+3. **Bowl morph back in `MenuItems`:** add `openCategory` and `closeCategory` again (`startViewTransition` + `flushSync`) and the `bowlCategory` state, and make it work together with the slide
+4. **Card as its own component:** pull the `<article className="card">` out of `MenuItems` (props for data, `onAdd`/`onRemove`/`onToggle` for actions)
 5. **List logic into a hook:** `activeCategory`, `expandedCard`, `cards`, previous/next, open/close. Do not call `useOrder()` inside it; pass the order in
 6. **`useOrder`:** keep "change quantity" and "choose extras again" as two separate things
 7. **Check `OrderSummary`:** it still contains the catering section, which belongs on Over Ons
@@ -14,8 +14,8 @@
 11. **Catering card:** add the fade-in (`reveal` class + ref) on Over Ons
 
 ## To do after today
-- [ ] Shared order state: the order will be shown on other pages (lift state up or React Context)
-- [ ] Substitute all the visuals with self-made images
+- [x] Shared order state: the order will be shown on other pages (lift state up or React Context)
+- [x] Substitute all the visuals with self-made images
 - [ ] Test the mobile menu on a real phone (tap sizes, long dish names, popup with two dropdowns)
 
 ## Done
@@ -68,18 +68,18 @@
 - [x] Colors: cream card, dark red name, green price, black circle and counter, yellow only as shadow
 - [x] Price and counter stuck to the bottom of the card (`margin-top: auto`)
 - [x] Cards with a description show a red "meer info" pill
-- [x] Order section restyled as `bestelling` card: white box, yellow shadow, `+`/`−` counter like the cards, one price per line, phone number as a `tel:` link
+- [x] Order section restyled as `order-summary` card: white box, yellow shadow, `+`/`−` counter like the cards, one price per line, phone number as a `tel:` link
 - [x] Allergy note (yellow box) and preparation-time sentence next to the phone number added to the order card
 - [x] Plastic bag note (bag with "per tasje" text) on the right side of the order card
 - [x] Black strip under a tall order fixed (bottom margin moved into `.menu` padding)
 
 **Category switcher**
 - [x] `previousCategory` and `nextCategory` are plain `const` values worked out from `activeCategory` (not state), `null` on the first and last category and when nothing is open
-- [x] Header row `categorie-koppen`: previous, active (round header) and next; a neighbour only renders when it exists
-- [x] Slide animation with direction (`slideRichting`, `goToNeighbour`, classes `slide-vorige` / `slide-volgende`), switched off with `prefers-reduced-motion`
+- [x] Header row `category-headers`: previous, active (round header) and next; a neighbour only renders when it exists
+- [x] Slide animation with direction (`slideDirection`, `goToNeighbour`, classes `slide-previous` / `slide-next`), switched off with `prefers-reduced-motion`
 
 **Mobile menu**
-- [x] `MenuMobile.tsx` renders the same three components inside `.menu-mobile`; `Menu-mobile.css` restyles them
+- [x] `Menu-mobile.tsx` renders the same three components inside `.menu-mobile`; `Menu-mobile.css` restyles them
 - [x] Counter has separate round `+` and `−` buttons with the number in between (44px tap targets; the number gets a dark color on the white order card)
 - [x] Categories as wide tiles with a press effect, one card per row (number and name on top, price and counter below), taller dropdowns with 16px text, full-width popup buttons and phone button, safe-area padding at the bottom
 - [x] Hover image hidden on touch screens, because phones keep `:hover` after a tap
@@ -90,16 +90,16 @@
 - [x] Over Ons: catering card between story and gallery
 - [x] Over Ons: refs typed with `useRef<HTMLDivElement>(null)` and a type guard, so the `observe` error is gone
 - [x] Tijd & Locatie: `#fff` replaced by `var(--white)`, red right panel covers the full height, more top padding
-- [x] Tijd & Locatie: today's opening hours row is highlighted (`openingstijden-rij--vandaag`)
-- [x] Nav logo is a red circle on the Tijd & Locatie page (`navigatie--donker`)
-- [x] Home page: image dims/slides off-screen on narrow windows with a gradient so the text stays readable (`Hoofdpagina.css` restored to the working version)
+- [x] Tijd & Locatie: today's opening hours row is highlighted (`opening-hours-row--today`)
+- [x] Nav logo is a red circle on the Tijd & Locatie page (`navbar--dark`)
+- [x] Home page: image dims/slides off-screen on narrow windows with a gradient so the text stays readable (`Home.css` restored to the working version)
 - [x] Favicon (rice bowl) in `index.html`, with the image in `public`
 
 **Animations**
 - [x] Router changed from `BrowserRouter` to `createBrowserRouter` + `RouterProvider` (`App.tsx` is the layout with `<Outlet />`, routes live in `main.tsx`)
 - [x] Shared-element transition: nav logo letters morph into the home title (and back), without the fade (`::view-transition-old` hidden)
 - [x] Nav morph between home and other pages (`view-transition-name: nav-links`)
-- [x] Bowl (kom) morphs into the round category header with `document.startViewTransition` + `flushSync`, only the clicked kom gets the name (needs to be put back in `MenuItems`, see plan)
+- [x] Bowl morphs into the round category header with `document.startViewTransition` + `flushSync`, only the clicked bowl gets the name (needs to be put back in `MenuItems`, see plan)
 
 ## Rule for extras
 | `getMaxExtras` | Meaning |
@@ -146,7 +146,7 @@
 - Styled the menu page from the design: categories with Chinese names, header, cards, fade-in animations.
 - Categories now come from one `categories` block in `menu.json` (`matches` groups the old categories).
 - Learned that `flatMap` needs one explicit type (`Card[]`) when two branches return different shapes.
-- Cards: variants as their own card, hover info only if there is an image or description (`kaart--info`).
+- Cards: variants as their own card, hover info only if there is an image or description (`card--info`).
 - Counter matches the order by item id + variant name, because the order line name is "dish - variant".
 - Colors: each color gets one job. Learned `margin-top: auto` pushes an element to the bottom of a flex column.
 
@@ -187,11 +187,11 @@
 
 ## 3 November 2026
 - Favicon: the `href` is a URL on the site, not a file path on the computer. Files in `public` are served from the root (`/rice-bowl.png`); test by opening that URL. Favicons are cached, so hard refresh.
-- Separate `+`/`−` buttons: the dark background comes from the base `.teller` rule, so commenting out the mobile override doesn't remove it; set `background: transparent` on the wrapper. Center a button's content with flex or grid (`place-items: center`), and put `gap` on the wrapper, not on the button.
+- Separate `+`/`−` buttons: the dark background comes from the base `.counter` rule, so commenting out the mobile override doesn't remove it; set `background: transparent` on the wrapper. Center a button's content with flex or grid (`place-items: center`), and put `gap` on the wrapper, not on the button.
 - Values that can be worked out from other state are plain `const` variables above `return`, not `useState` (`previousCategory`, `nextCategory`, like `cards`).
 - A `const` can't be assigned again. A ternary produces a value, so it goes on the right of one `=`: `const x = condition ? a : b`.
 - `activeCategory && ...` in a condition also tells TypeScript the value isn't `null` in the branch after it. Use `categories.length` instead of a hard-coded 16.
 - Render a neighbour button only when it exists, or an empty button sends `null` and jumps back to the grid.
-- `key={activeCategory.name}` rebuilds the wrapper on each category change, so a CSS animation runs again. A direction class (`slide-vorige` / `slide-volgende`) picks which way it slides.
-- A `view-transition-name` may exist only once on the page, so the neighbour bowls must not use the class that carries `kom`.
+- `key={activeCategory.name}` rebuilds the wrapper on each category change, so a CSS animation runs again. A direction class (`slide-previous` / `slide-next`) picks which way it slides.
+- A `view-transition-name` may exist only once on the page, so the neighbour bowls must not use the class that carries `bowl`.
 - Touch screens: tap targets of about 44px, 16px text in dropdowns (stops iOS zoom), and `:hover` sticks after a tap, so don't hide information behind it.

@@ -1,25 +1,25 @@
-import '../css/TijdLocatie-mobile.css'
+import '../css/TimeLocation-mobile.css'
 import OrderPopup from '../components/OrderPopup'
-import locatie from '../images/locatie.png'
-import { openingHours } from '../data/openingstijden'
+import locationIcon from '../images/location.png'
+import { openingHours } from '../data/openingHours'
 
-export default function TijdLocatieMobile() {
+export default function TimeLocationMobile() {
   const today = new Date().getDay()
 
   return (
-    <main className="tijd-locatie-mobile">
+    <main className="time-location-mobile">
       <OrderPopup />
-      <section className="tijd-mobile">
-        <h2 className="tijd-locatie-mobile-zh" lang="zh">
+      <section className="time-mobile">
+        <h2 className="time-location-mobile-zh" lang="zh">
           营业时间
         </h2>
 
-        <div className="tijd-mobile-box">
+        <div className="time-mobile-box">
           <h3>openingstijden</h3>
 
           {openingHours.map(([name, hours, dayNumber]) => (
             <div
-              className={`tijd-mobile-rij ${dayNumber === today ? 'tijd-mobile-rij--vandaag' : ''}`}
+              className={`time-mobile-row ${dayNumber === today ? 'time-mobile-row--today' : ''}`}
               key={name}
             >
               <span>{name}</span>
@@ -28,19 +28,19 @@ export default function TijdLocatieMobile() {
           ))}
         </div>
 
-        <p className="tijd-mobile-feestdag">
+        <p className="time-mobile-holiday">
           ieder feestdag open van
           <br />
           13.00 tot 21.00
         </p>
       </section>
 
-      <section className="locatie-mobile">
-        <h2 className="tijd-locatie-mobile-zh" lang="zh">
+      <section className="location-mobile">
+        <h2 className="time-location-mobile-zh" lang="zh">
           地点
         </h2>
 
-        <div className="locatie-mobile-kaart">
+        <div className="location-mobile-map">
           <iframe
             title="Ling Long locatie in Beuningen"
             src="https://maps.google.com/maps?q=Koolzaadveld%2067%2C%206641%20SV%20Beuningen&output=embed"
@@ -52,12 +52,12 @@ export default function TijdLocatieMobile() {
 
         {/* opens the maps app on a phone */}
         <a
-          className="locatie-mobile-adres"
+          className="location-mobile-address"
           href="https://maps.google.com/?q=Koolzaadveld%2067%2C%206641%20SV%20Beuningen"
           target="_blank"
           rel="noreferrer"
         >
-          <img src={locatie} alt="" className="locatie-mobile-icoon" />
+          <img src={locationIcon} alt="" className="location-mobile-icon" />
           Koolzaadveld 67, 6641 SV, Beuningen
         </a>
       </section>

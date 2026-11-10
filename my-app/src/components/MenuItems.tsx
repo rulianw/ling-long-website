@@ -3,8 +3,8 @@ import type { MenuItem, Variant, Card, OrderLine, MenuCategory } from '../types'
 import { formatPrice } from '../utils/price'
 import { getMaxExtras } from '../utils/extras'
 import type { OrderApi } from '../context/OrderContext'
-import kom from '../images/kom.png'
-import komHover from '../images/komHover.png'
+import bowl from '../images/bowl.png'
+import bowlHover from '../images/bowlHover.png'
 import menuData from '../data/menu.json'
 
 type MenuItemsProps = {
@@ -26,10 +26,10 @@ export default function MenuItems({
   const [activeCategory, setActiveCategory] = useState<MenuCategory | null>(null)
   const [expandedCard, setExpandedCard] = useState<string | null>(null)
 
-  const [slideRichting, setSlideRichting] = useState<'vorige' | 'volgende' | null>(null)
+  const [slideDirection, setSlideDirection] = useState<'previous' | 'next' | null>(null)
 
-  function goToNeighbour(category: MenuCategory, richting: 'vorige' | 'volgende') {
-    setSlideRichting(richting)
+  function goToNeighbour(category: MenuCategory, direction: 'previous' | 'next') {
+    setSlideDirection(direction)
     setActiveCategory(category)
   }
 
@@ -94,69 +94,69 @@ export default function MenuItems({
     <div>
       {activeCategory ? (
         <div
-          className={`categorie-weergave ${slideRichting ? `slide-${slideRichting}` : ''}`}
+          className={`category-view ${slideDirection ? `slide-${slideDirection}` : ''}`}
           key={activeCategory.name}
         >
-          <div className="categorie-koppen">
+          <div className="category-headers">
             {previousCategory && (
               <button
-                className="categorie-kop-links"
-                onClick={() => goToNeighbour(previousCategory, 'vorige')}
+                className="category-header-left"
+                onClick={() => goToNeighbour(previousCategory, 'previous')}
                 aria-label={`Vorige categorie: ${previousCategory.name}`}
               >
-                <img src={kom} alt="" className="kop-icoon kop-icoon--normaal" />
-                <span className="kop-naam">{previousCategory.name}</span>
-                <span className="kop-zh" lang="zh">
+                <img src={bowl} alt="" className="header-icon header-icon--normal" />
+                <span className="header-name">{previousCategory.name}</span>
+                <span className="header-zh" lang="zh">
                   {previousCategory.zh}
                 </span>
               </button>
             )}
 
             <button
-              className="categorie-kop"
+              className="category-header"
               onClick={() => setActiveCategory(null)}
               aria-label="Terug naar alle categorieën"
             >
-              <img src={kom} alt="" className="kop-icoon kop-icoon--normaal" />
-              <img src={komHover} alt="" className="kop-icoon kop-icoon--hover" />
-              <span className="kop-naam">{activeCategory.name}</span>
-              <span className="kop-zh" lang="zh">
+              <img src={bowl} alt="" className="header-icon header-icon--normal" />
+              <img src={bowlHover} alt="" className="header-icon header-icon--hover" />
+              <span className="header-name">{activeCategory.name}</span>
+              <span className="header-zh" lang="zh">
                 {activeCategory.zh}
               </span>
             </button>
 
             {nextCategory && (
               <button
-                className="categorie-kop-rechts"
-                onClick={() => goToNeighbour(nextCategory, 'volgende')}
+                className="category-header-right"
+                onClick={() => goToNeighbour(nextCategory, 'next')}
                 aria-label={`Volgende categorie: ${nextCategory.name}`}
               >
-                <img src={kom} alt="" className="kop-icoon kop-icoon--normaal" />
-                <span className="kop-naam">{nextCategory.name}</span>
-                <span className="kop-zh" lang="zh">
+                <img src={bowl} alt="" className="header-icon header-icon--normal" />
+                <span className="header-name">{nextCategory.name}</span>
+                <span className="header-zh" lang="zh">
                   {nextCategory.zh}
                 </span>
               </button>
             )}
           </div>
 
-          <div className="kaarten">
+          <div className="cards">
             {cards.map((card, index) => (
               <article
                 key={card.key}
-                className={`kaart ${card.item.image || card.item.description ? 'kaart--info' : ''}`}
+                className={`card ${card.item.image || card.item.description ? 'card--info' : ''}`}
                 style={{ animationDelay: `${index * 60}ms` }}
               >
-                <span className="kaart-nummer">{card.item.id}</span>
+                <span className="card-number">{card.item.id}</span>
 
-                <div className="kaart-midden">
+                <div className="card-middle">
                   {expandedCard === card.key ? (
-                    <div className="kaart-beschrijving" onClick={() => setExpandedCard(null)}>
+                    <div className="card-description" onClick={() => setExpandedCard(null)}>
                       <p>{card.item.description}</p>
                     </div>
                   ) : (
                     <h3
-                      className="kaart-naam"
+                      className="card-name"
                       onClick={() => {
                         if (card.item.description) {
                           setExpandedCard(card.key)
@@ -167,27 +167,27 @@ export default function MenuItems({
                       }}
                     >
                       {card.title}
-                      {card.item.description && <span className="kaart-hint">meer info</span>}
+                      {card.item.description && <span className="card-hint">meer info</span>}
                     </h3>
                   )}
                 </div>
 
-                <div className="kaart-onder">
+                <div className="card-bottom">
                   {card.price !== null && (
-                    <p className="kaart-prijs">
+                    <p className="card-price">
                       <b>{formatPrice(card.price)}</b>
                     </p>
                   )}
-                  <div className="teller">
+                  <div className="counter">
                     <button
-                      className="teller-knop"
+                      className="counter-button"
                       onClick={() => removeOne(card.item, card.variant)}
                     >
                       -
                     </button>
                     <span>{countInOrder(card.item, card.variant)}</span>
                     <button
-                      className="teller-knop"
+                      className="counter-button"
                       onClick={() => handleAdd(card.item, card.variant)}
                     >
                       +
@@ -199,18 +199,18 @@ export default function MenuItems({
           </div>
         </div>
       ) : (
-        <div className="categorieen">
+        <div className="categories">
           {categories.map((category) => (
             <button
               key={category.name}
-              className="categorie"
+              className="category"
               onClick={() => setActiveCategory(category)}
             >
-              <img src={kom} alt="" className="kop-icoon kop-icoon--normaal" />
-              <img src={komHover} alt="" className="kop-icoon kop-icoon--hover" />
+              <img src={bowl} alt="" className="header-icon header-icon--normal" />
+              <img src={bowlHover} alt="" className="header-icon header-icon--hover" />
               <h2>
                 {category.name}
-                <span className="categorie-zh" lang="zh">
+                <span className="category-zh" lang="zh">
                   {category.zh}
                 </span>
               </h2>

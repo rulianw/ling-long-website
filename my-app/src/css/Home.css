@@ -1,4 +1,4 @@
-.hoofdpagina {
+.home {
   position: relative;
   isolation: isolate;
   display: flex;
@@ -12,7 +12,7 @@
   text-align: left;
 }
 
-.hoofdpagina-inhoud {
+.home-content {
   position: relative;
   z-index: 1;
   display: flex;
@@ -21,7 +21,7 @@
   gap: 2.5rem;
 }
 
-.hoofdpagina-beeld {
+.home-image {
   position: absolute;
   right: 0;
   bottom: 0;
@@ -36,7 +36,7 @@
 
 /* ---------- title ---------- */
 
-.titel {
+.title {
   display: flex;
   align-items: center;
   gap: 1.5rem;
@@ -44,7 +44,7 @@
   width: fit-content;
 }
 
-.titel-zh {
+.title-zh {
   writing-mode: vertical-rl;
   color: var(--green);
   font-size: 3.5rem;
@@ -53,7 +53,7 @@
   transition: letter-spacing 0.3s ease;
 }
 
-.titel-nl {
+.title-nl {
   width: min-content; /* forces "Ling" / "Long" onto two lines */
   color: var(--yellow);
   font-size: 6rem;
@@ -62,35 +62,35 @@
   transition: letter-spacing 0.3s ease;
 }
 
-.titel:hover .titel-zh {
+.title:hover .title-zh {
   letter-spacing: -0.2em;
 }
 
-.titel:hover .titel-nl {
+.title:hover .title-nl {
   letter-spacing: -0.08em;
 }
 
 /* ---------- text and phone ---------- */
 
-.omschrijving {
+.description {
   max-width: 14rem;
   margin: 0;
   font-size: 1.25rem;
   line-height: 1.4;
 }
 
-.bestellen {
+.ordering {
   width: fit-content;
 }
 
-.bestellen p {
+.ordering p {
   margin: 0 0 0.75rem;
   color: var(--yellow);
   font-size: 0.9rem;
   text-align: right;
 }
 
-.bestellen-button {
+.ordering-button {
   display: inline-block;
   padding: 0.75rem 1.75rem;
   border: none;
@@ -108,7 +108,7 @@
     box-shadow 0.15s ease;
 }
 
-.bestellen-button:hover {
+.ordering-button:hover {
   transform: translate(-6px, 6px);
   box-shadow: 0 0 0 var(--yellow);
 }
@@ -128,38 +128,38 @@
 
 /* ---------- logo transition (shared with the nav) ---------- */
 
-.titel-zh {
-  view-transition-name: titel-zh;
+.title-zh {
+  view-transition-name: title-zh;
 }
-.titel-nl {
-  view-transition-name: titel-nl;
+.title-nl {
+  view-transition-name: title-nl;
 }
 
-::view-transition-group(titel-zh),
-::view-transition-group(titel-nl) {
+::view-transition-group(title-zh),
+::view-transition-group(title-nl) {
   animation-duration: 0.6s;
   animation-timing-function: cubic-bezier(0.2, 0.65, 0.3, 1);
 }
 
 /* no crossfade: the letters only move and scale */
-::view-transition-old(titel-zh),
-::view-transition-old(titel-nl) {
+::view-transition-old(title-zh),
+::view-transition-old(title-nl) {
   display: none;
 }
 
-::view-transition-new(titel-zh),
-::view-transition-new(titel-nl) {
+::view-transition-new(title-zh),
+::view-transition-new(title-nl) {
   animation: none;
 }
 
 /* ---------- smaller windows ---------- */
 
 @media (max-width: 70rem) {
-  .hoofdpagina-beeld {
+  .home-image {
     right: -20%;
   }
 
-  .hoofdpagina::after {
+  .home::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -176,23 +176,23 @@
 /* ---------- phones ---------- */
 
 @media (max-width: 40rem) {
-  .hoofdpagina {
+  .home {
     padding: 8rem 1.5rem 3rem;
   }
 
-  .hoofdpagina-beeld {
+  .home-image {
     right: -45%;
   }
 
-  .titel-zh {
+  .title-zh {
     font-size: 2.5rem;
   }
 
-  .titel-nl {
+  .title-nl {
     font-size: 4rem;
   }
 
-  .bestellen-button {
+  .ordering-button {
     font-size: 1.5rem;
   }
 }

@@ -1,5 +1,5 @@
 import { NavLink, useLocation } from 'react-router-dom'
-import '../css/CirkelLinks-mobile.css'
+import '../css/CircleLinks-mobile.css'
 import { isMobilePreview, mobilePath } from '../utils/mobile'
 
 // every word gets its own line inside the circle
@@ -9,29 +9,29 @@ const links = [
   { to: '/tijd-locatie', nl: ['tijd', 'locatie'], zh: ['时间', '地点'] },
 ]
 
-type CirkelLinksProps = {
+type CircleLinksProps = {
   onClick?: () => void
 }
 
-export default function CirkelLinksMobile({ onClick }: CirkelLinksProps) {
+export default function CircleLinksMobile({ onClick }: CircleLinksProps) {
   const preview = isMobilePreview(useLocation().pathname)
 
   return (
-    <nav className="cirkels-mobile">
+    <nav className="circles-mobile">
       {links.map((link) => (
         <NavLink
           key={link.to}
           to={mobilePath(link.to, preview)}
-          className="cirkel-mobile"
+          className="circle-mobile"
           onClick={onClick}
           viewTransition
         >
-          {link.nl.map((woord) => (
-            <span key={woord}>{woord}</span>
+          {link.nl.map((word) => (
+            <span key={word}>{word}</span>
           ))}
-          <span className="cirkel-mobile-zh" lang="zh">
-            {link.zh.map((woord) => (
-              <span key={woord}>{woord}</span>
+          <span className="circle-mobile-zh" lang="zh">
+            {link.zh.map((word) => (
+              <span key={word}>{word}</span>
             ))}
           </span>
         </NavLink>

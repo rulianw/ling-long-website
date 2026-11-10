@@ -1,4 +1,4 @@
-.navigatie-mobile {
+.navbar-mobile {
   position: absolute;
   top: 0;
   left: 0;
@@ -11,7 +11,7 @@
 }
 
 /* logo in a black circle */
-.navigatie-mobile-logo {
+.navbar-mobile-logo {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,11 +28,11 @@
   text-decoration: none;
 }
 
-.navigatie-mobile-logo span:first-child {
+.navbar-mobile-logo span:first-child {
   color: var(--green);
 }
 
-.navigatie-mobile-telefoon {
+.navbar-mobile-phone {
   margin-left: auto;
   padding: 0.45rem 0.8rem;
   border-radius: 8px;
@@ -48,13 +48,13 @@
     box-shadow 0.15s ease;
 }
 
-/* .navigatie-mobile-telefoon:active {
+/* .navbar-mobile-phone:active {
   transform: translate(-3px, 3px);
   box-shadow: 0 0 0 var(--yellow);
 } */
 
 /* hamburger button, turns into a cross when open */
-.navigatie-mobile-knop {
+.navbar-mobile-button {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -70,7 +70,7 @@
   cursor: pointer;
 }
 
-.navigatie-mobile-knop span {
+.navbar-mobile-button span {
   display: block;
   width: 1.1rem;
   height: 2px;
@@ -81,20 +81,20 @@
     opacity 0.2s ease;
 }
 
-.navigatie-mobile-knop[aria-expanded='true'] span:nth-child(1) {
+.navbar-mobile-button[aria-expanded='true'] span:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
 }
 
-.navigatie-mobile-knop[aria-expanded='true'] span:nth-child(2) {
+.navbar-mobile-button[aria-expanded='true'] span:nth-child(2) {
   opacity: 0;
 }
 
-.navigatie-mobile-knop[aria-expanded='true'] span:nth-child(3) {
+.navbar-mobile-button[aria-expanded='true'] span:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
 }
 
 /* full screen panel with the links, sits behind the logo and buttons */
-.navigatie-mobile-paneel {
+.navbar-mobile-panel {
   position: fixed;
   inset: 0;
   z-index: -1;
@@ -102,10 +102,10 @@
   align-items: center;
   justify-content: center;
   background: var(--red);
-  animation: paneel-in 0.25s ease both;
+  animation: panel-in 0.25s ease both;
 }
 
-@keyframes paneel-in {
+@keyframes panel-in {
   from {
     opacity: 0;
   }
@@ -114,23 +114,23 @@
   }
 }
 
-/* on the dark page (tijd & locatie) the circles are red */
-.navigatie-mobile--donker .navigatie-mobile-logo,
-.navigatie-mobile--donker .navigatie-mobile-knop {
+/* on the dark page (tijd & location) the circles are red */
+.navbar-mobile--dark .navbar-mobile-logo,
+.navbar-mobile--dark .navbar-mobile-button {
   background: var(--red);
 }
 
-.navigatie-mobile--donker .navigatie-mobile-logo span:first-child {
+.navbar-mobile--dark .navbar-mobile-logo span:first-child {
   color: var(--yellow);
 }
 
-.navigatie-mobile--donker .navigatie-mobile-logo span:last-child {
+.navbar-mobile--dark .navbar-mobile-logo span:last-child {
   color: var(--white);
 }
 
-.navigatie-mobile-logo span:first-child {
-  view-transition-name: titel-zh;
+.navbar-mobile-logo span:first-child {
+  view-transition-name: title-zh;
 }
-.navigatie-mobile-logo span:last-child {
-  view-transition-name: titel-nl;
+.navbar-mobile-logo span:last-child {
+  view-transition-name: title-nl;
 }

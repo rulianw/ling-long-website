@@ -1,4 +1,4 @@
-.navigatie {
+.navbar {
   position: absolute;
   top: 0;
   left: 0;
@@ -10,11 +10,11 @@
   padding: 0 1.5rem;
 }
 
-.navigatie--home {
+.navbar--home {
   justify-content: center;
 }
 
-.navigatie-links {
+.navbar-links {
   display: flex;
   gap: 2.5rem;
   padding: 2rem 6rem 5rem;
@@ -22,7 +22,7 @@
   white-space: nowrap;
 }
 
-.navigatie-link {
+.navbar-link {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,35 +33,35 @@
   transition: transform 0.2s ease;
 }
 
-.navigatie-link span:last-child {
+.navbar-link span:last-child {
   color: var(--green);
   font-weight: 500;
 }
 
-.navigatie-link:hover,
-.navigatie-link.active {
+.navbar-link:hover,
+.navbar-link.active {
   transform: translateY(-2px);
 }
 
 /* on the home page the links sit on the red background */
-.navigatie--home .navigatie-links {
+.navbar--home .navbar-links {
   gap: 4.5rem;
   padding: 4rem 0 0 17rem;
 }
 
-.navigatie--home .navigatie-link {
+.navbar--home .navbar-link {
   color: var(--yellow);
   font-size: clamp(1rem, 1.4vw, 1.7rem);
   font-weight: 900;
 }
 
-.navigatie--home .navigatie-link span:last-child {
+.navbar--home .navbar-link span:last-child {
   font-weight: 900;
 }
 
 /* logo and phone button on the other pages */
 /* logo in a black circle */
-.navigatie-logo {
+.navbar-logo {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -79,29 +79,29 @@
   transition: transform 0.2s ease;
 }
 
-.navigatie-logo span:first-child {
+.navbar-logo span:first-child {
   color: var(--green);
 }
 
-.navigatie-logo:hover {
+.navbar-logo:hover {
   transform: scale(1.05);
 }
 
-/* on the dark page (tijd & locatie) the logo circle is red */
-.navigatie--donker .navigatie-logo {
+/* on the dark page (tijd & location) the logo circle is red */
+.navbar--dark .navbar-logo {
   background: var(--red);
 }
 
-.navigatie--donker .navigatie-logo span:first-child {
+.navbar--dark .navbar-logo span:first-child {
   color: var(--yellow);
 }
 
-.navigatie--donker .navigatie-logo span:last-child {
+.navbar--dark .navbar-logo span:last-child {
   color: var(--white);
 }
 
 /* "bestellingen via de telefoon" + button */
-.navigatie-bellen {
+.navbar-call {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -109,13 +109,13 @@
   margin-top: 1rem;
 }
 
-.navigatie-bellen p {
+.navbar-call p {
   margin: 0;
   color: var(--yellow);
   font-size: 0.65rem;
 }
 
-.navigatie-telefoon {
+.navbar-phone {
   padding: 0.4rem 0.9rem;
   border-radius: 8px;
   background: var(--green);
@@ -129,14 +129,14 @@
     box-shadow 0.15s ease;
 }
 
-.navigatie-telefoon:hover {
+.navbar-phone:hover {
   transform: translate(-3px, 3px);
   box-shadow: 0 0 0 var(--yellow);
 }
 
-.navigatie-logo span:first-child {
-  view-transition-name: titel-zh;
+.navbar-logo span:first-child {
+  view-transition-name: title-zh;
 }
-.navigatie-logo span:last-child {
-  view-transition-name: titel-nl;
+.navbar-logo span:last-child {
+  view-transition-name: title-nl;
 }

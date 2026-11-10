@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import '../css/OrderPopUp.css'
+import '../css/OrderPopup.css'
 import OrderSummary from './OrderSummary'
 import { OrderContext } from '../context/OrderContext'
 import { formatPrice, getOrderTotal } from '../utils/price'
@@ -23,7 +23,7 @@ export default function OrderPopup() {
       <div className="order-popup-open">
         {orderPopupIsActive && (
           <div>
-            <div className="order-popup-inhoud">
+            <div className="order-popup-content">
               <OrderSummary order={order} totalPrice={totalPrice} />
             </div>
           </div>

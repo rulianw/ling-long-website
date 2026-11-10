@@ -1,6 +1,6 @@
 /* Full-screen page layout */
 
-.tijd-locatie {
+.time-location {
   display: grid;
   grid-template-columns: 1fr 1fr;
 
@@ -16,7 +16,7 @@
 
 /* Left panel */
 
-.openingstijden {
+.opening-hours {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,13 +30,13 @@
   background: var(--background);
 }
 
-.openingstijden-content {
+.opening-hours-content {
   flex: 1;
   min-width: 0;
   max-width: 520px;
 }
 
-.openingstijden-box {
+.opening-hours-box {
   position: relative;
   padding: 52px 28px 26px;
   border: 2px solid var(--yellow);
@@ -44,7 +44,7 @@
   background: var(--black);
 }
 
-.openingstijden-box h2 {
+.opening-hours-box h2 {
   position: absolute;
   top: 0;
   left: 50%;
@@ -58,13 +58,13 @@
   white-space: nowrap;
 }
 
-.openingstijden-rijen {
+.opening-hours-rows {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-.openingstijden-rij {
+.opening-hours-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 16px;
@@ -74,18 +74,18 @@
   line-height: 1.45;
 }
 
-.openingstijden-rij--vandaag {
+.opening-hours-row--today {
   background: var(--yellow);
   color: var(--black);
   font-weight: 700;
 }
 
-.openingstijden-rij span:last-child {
+.opening-hours-row span:last-child {
   text-align: right;
   white-space: nowrap;
 }
 
-.openingstijden-notificatie {
+.opening-hours-notice {
   margin-top: 24px;
   padding: 16px;
   border-radius: 10px;
@@ -99,8 +99,8 @@
 
 /* Chinese vertical heading */
 
-.openingstijden-titel,
-.locatie-titel {
+.opening-hours-title,
+.location-title {
   flex-shrink: 0;
   margin: 0;
   color: var(--white);
@@ -112,7 +112,7 @@
 
 /* Right panel */
 
-.locatie {
+.location {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -125,34 +125,34 @@
   background: var(--red);
 }
 
-.locatie-content {
+.location-content {
   flex: 1;
   min-width: 0;
   max-width: 600px;
 }
 
-.locatie-kaart {
+.location-map {
   width: 100%;
   aspect-ratio: 4 / 3;
   overflow: hidden;
   background: var(--black);
 }
 
-.locatie-kaart iframe {
+.location-map iframe {
   display: block;
   width: 100%;
   height: 100%;
   border: 0;
 }
 
-.locatie-adres {
+.location-address {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 16px;
 }
 
-.locatie-icoon {
+.location-icon {
   width: 18px;
   height: 18px;
   object-fit: contain;
@@ -176,24 +176,24 @@ body {
 /* Medium screens */
 
 @media (max-width: 900px) {
-  .openingstijden,
-  .locatie {
+  .opening-hours,
+  .location {
     gap: 18px;
     padding: 36px 20px;
   }
 
-  .openingstijden-box {
+  .opening-hours-box {
     padding-right: 16px;
     padding-left: 16px;
   }
 
-  .openingstijden-rij {
+  .opening-hours-row {
     gap: 8px;
     font-size: 14px;
   }
 
-  .openingstijden-titel,
-  .locatie-titel {
+  .opening-hours-title,
+  .location-title {
     font-size: 30px;
   }
 }
@@ -201,31 +201,31 @@ body {
 /* Mobile: stack panels vertically */
 
 @media (max-width: 650px) {
-  .tijd-locatie {
+  .time-location {
     grid-template-columns: 1fr;
   }
 
-  .openingstijden,
-  .locatie {
+  .opening-hours,
+  .location {
     min-height: auto;
     padding: 64px 20px;
     gap: 20px;
   }
 
-  .openingstijden-content {
+  .opening-hours-content {
     max-width: 440px;
   }
 
-  .locatie-content {
+  .location-content {
     max-width: 520px;
   }
 
-  .openingstijden-rij {
+  .opening-hours-row {
     font-size: clamp(14px, 3.5vw, 17px);
   }
 
-  .openingstijden-titel,
-  .locatie-titel {
+  .opening-hours-title,
+  .location-title {
     font-size: 32px;
   }
 }

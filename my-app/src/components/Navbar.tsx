@@ -1,6 +1,6 @@
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import '../css/Navigatie.css'
-import papier from '../images/navigatie.png'
+import '../css/Navbar.css'
+import paper from '../images/navbar.png'
 
 const links = [
   { to: '/menu', nl: 'menu', zh: '菜单' },
@@ -8,28 +8,26 @@ const links = [
   { to: '/over-ons', nl: 'over ons', zh: '我们' },
 ]
 
-export default function Navigatie() {
+export default function Navbar() {
   const { pathname } = useLocation()
   const isHome = pathname === '/'
   const isDark = pathname === '/tijd-locatie'
 
   return (
-    <header
-      className={`navigatie ${isHome ? 'navigatie--home' : ''} ${isDark ? 'navigatie--donker' : ''}`}
-    >
+    <header className={`navbar ${isHome ? 'navbar--home' : ''} ${isDark ? 'navbar--dark' : ''}`}>
       {!isHome && (
-        <Link to="/" className="navigatie-logo" viewTransition>
+        <Link to="/" className="navbar-logo" viewTransition>
           <span lang="zh">玲珑阁</span>
           <span>Ling Long</span>
         </Link>
       )}
 
       <nav
-        className="navigatie-links"
-        style={isHome ? undefined : { backgroundImage: `url(${papier})` }}
+        className="navbar-links"
+        style={isHome ? undefined : { backgroundImage: `url(${paper})` }}
       >
         {links.map((link) => (
-          <NavLink key={link.to} to={link.to} className="navigatie-link" viewTransition>
+          <NavLink key={link.to} to={link.to} className="navbar-link" viewTransition>
             <span>{link.nl}</span>
             <span lang="zh">{link.zh}</span>
           </NavLink>
@@ -37,9 +35,9 @@ export default function Navigatie() {
       </nav>
 
       {!isHome && (
-        <div className="navigatie-bellen">
+        <div className="navbar-call">
           <p>bestellingen via de telefoon</p>
-          <a href="tel:0246775634" className="navigatie-telefoon">
+          <a href="tel:0246775634" className="navbar-phone">
             024 6775634
           </a>
         </div>

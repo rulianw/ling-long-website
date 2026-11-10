@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import '../css/Navigatie-mobile.css'
-import CirkelLinksMobile from './CirkelLinks-mobile'
+import '../css/Navbar-mobile.css'
+import CircleLinksMobile from './CircleLinks-mobile'
 import { basePath, isMobilePreview, mobilePath } from '../utils/mobile'
 
-export default function NavigatieMobile() {
+export default function NavbarMobile() {
   const { pathname } = useLocation()
   const [open, setOpen] = useState(false)
   const page = basePath(pathname)
@@ -14,10 +14,10 @@ export default function NavigatieMobile() {
   if (page === '/') return null
 
   return (
-    <header className={`navigatie-mobile ${isDark ? 'navigatie-mobile--donker' : ''}`}>
+    <header className={`navbar-mobile ${isDark ? 'navbar-mobile--dark' : ''}`}>
       <Link
         to={mobilePath('/', isMobilePreview(pathname))}
-        className="navigatie-mobile-logo"
+        className="navbar-mobile-logo"
         onClick={() => setOpen(false)}
         viewTransition
       >
@@ -25,12 +25,12 @@ export default function NavigatieMobile() {
         <span>Ling Long</span>
       </Link>
 
-      <a href="tel:0246775634" className="navigatie-mobile-telefoon">
+      <a href="tel:0246775634" className="navbar-mobile-phone">
         024 6775634
       </a>
 
       <button
-        className="navigatie-mobile-knop"
+        className="navbar-mobile-button"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
         aria-label={open ? 'Menu sluiten' : 'Menu openen'}
@@ -41,8 +41,8 @@ export default function NavigatieMobile() {
       </button>
 
       {open && (
-        <div className="navigatie-mobile-paneel">
-          <CirkelLinksMobile onClick={() => setOpen(false)} />
+        <div className="navbar-mobile-panel">
+          <CircleLinksMobile onClick={() => setOpen(false)} />
         </div>
       )}
     </header>
