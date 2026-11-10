@@ -37,7 +37,9 @@ const router = createBrowserRouter([
       { path: '/over-ons-mobile', element: <AboutUsMobile /> },
     ],
   },
-])
+], {
+  basename: '/ling-long/',
+})
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
