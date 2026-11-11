@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import type { OrderLine } from '../types'
 import { OrderContext } from '../context/OrderContext'
 import { formatPrice, getLineTotal } from '../utils/price'
-import plasticBag from '../images/plasticBagRed.png'
+import plasticBag from '../images/plasticBagRed.webp'
 
 type OrderSummaryProps = {
   order: OrderLine[]

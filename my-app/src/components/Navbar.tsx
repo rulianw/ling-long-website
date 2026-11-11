@@ -1,6 +1,6 @@
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import '../css/Navbar.css'
-import paper from '../images/navbar.png'
+import paper from '../images/navbar.webp'
 
 const links = [
   { to: '/menu', nl: 'menu', zh: '菜单' },

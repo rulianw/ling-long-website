@@ -1,27 +1,20 @@
 import { useState, useEffect } from 'react'
 import type { MenuItem, OrderLine, Variant, Extra, Pending } from '../types'
 import { getMaxExtras } from '../utils/extras'
+import { loadOrder, saveOrder, clearSavedOrder } from '../utils/orderStorage'
 
 export function useOrder() {
-  const [order, setOrder] = useState<OrderLine[]>(() => {
-    const storedOrder = localStorage.getItem('order')
-    try {
-      return storedOrder ? JSON.parse(storedOrder) : []
-    } catch (error) {
-      console.error('Error parsing stored order:', error)
-      return []
-    }
-  })
+  const [order, setOrder] = useState<OrderLine[]>(loadOrder)
 
   useEffect(() => {
-    localStorage.setItem('order', JSON.stringify(order))
+    saveOrder(order)
   }, [order])
 
   const [pendingItem, setPendingItem] = useState<Pending | null>(null)
 
   function deleteOrder() {
     setOrder([])
-    localStorage.removeItem('order')
+    clearSavedOrder()
   }
 
   function addToOrder(newItem: MenuItem, variant?: Variant, extras?: Extra[], choices?: string[]) {
@@ -40,7 +33,7 @@ export function useOrder() {
       .sort()
       .join('+')
 
-    const choicesKey = (choices ?? []).sort().join('+')
+    const choicesKey = [...(choices ?? [])].sort().join('+')
 
     const id = [newItem.id, variant?.name, extrasKey, choicesKey].filter(Boolean).join('-')
 

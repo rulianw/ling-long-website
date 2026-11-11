@@ -1,6 +1,6 @@
 import '../css/TimeLocation-mobile.css'
 import OrderPopup from '../components/OrderPopup'
-import locationIcon from '../images/location.png'
+import locationIcon from '../images/location.webp'
 import { openingHours } from '../data/openingHours'
 
 export default function TimeLocationMobile() {

@@ -1,5 +1,5 @@
 import '../css/Home-mobile.css'
-import homeImage from '../images/home.png'
+import homeImage from '../images/home.webp'
 import CircleLinksMobile from '../components/CircleLinks-mobile'
 import OrderPopup from '../components/OrderPopup'
 
@@ -22,7 +22,7 @@ export default function HomeMobile() {
       <CircleLinksMobile />
 
       <div className="home-mobile-ordering">
-        <p>bestellingen via de telefoon</p>
+        <p>bestellingen graag via de telefoon</p>
         <a href="tel:0246775634">024 6775634</a>
       </div>
     </main>

@@ -1,5 +1,5 @@
 import '../css/Home.css'
-import homeImage from '../images/home.png'
+import homeImage from '../images/home.webp'
 
 export default function Home() {
   return (
@@ -17,7 +17,7 @@ export default function Home() {
         <p className="description">Een klein Chinees afhaal restaurant gelegen in Beuningen.</p>
 
         <div className="ordering">
-          <p>bestellingen via de telefoon</p>
+          <p>bestellingen graag via de telefoon</p>
           <a href="tel:0246775634" className="ordering-button">
             024 6775634
           </a>

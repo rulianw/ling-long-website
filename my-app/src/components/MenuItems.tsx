@@ -3,8 +3,8 @@ import type { MenuItem, Variant, Card, OrderLine, MenuCategory } from '../types'
 import { formatPrice } from '../utils/price'
 import { getMaxExtras } from '../utils/extras'
 import type { OrderApi } from '../context/OrderContext'
-import bowl from '../images/bowl.png'
-import bowlHover from '../images/bowlHover.png'
+import bowl from '../images/bowl.webp'
+import bowlHover from '../images/bowlHover.webp'
 import menuData from '../data/menu.json'
 
 type MenuItemsProps = {
