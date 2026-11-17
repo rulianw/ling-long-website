@@ -754,3 +754,52 @@
     min-height: 3rem;
   }
 }
+
+/* ---------- notice: no online ordering ---------- */
+
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  max-width: 34rem;
+  margin: 0 auto 2rem;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  background: var(--yellow);
+  color: var(--black);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  text-align: left;
+  margin-top: 4rem;
+}
+
+/* small red "!" badge */
+.alert::before {
+  content: "!";
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: var(--red);
+  color: var(--white);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.alert strong {
+  color: var(--red);
+}
+
+/* inside the white order card: no page margins */
+.bestelling .alert {
+  max-width: none;
+  margin: 1.25rem 0 0;
+}
+
+@media (max-width: 40rem) {
+  .menu-mobile > .alert {
+    margin: 0 1.25rem 1.5rem 1.5rem;
+  }
+}

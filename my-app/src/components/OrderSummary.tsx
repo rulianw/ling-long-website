@@ -98,6 +98,11 @@ export default function OrderSummary({ order, totalPrice }: OrderSummaryProps) {
           </div>
         )}
 
+        <p className="alert" role="note">
+            <strong>Let op:</strong> hier bestelt en betaalt u niet online.
+            Stel uw bestelling samen en geef die telefonisch aan ons door.
+        </p>
+
         <div className="order-summary-total">
           <span>Totaal</span>
           <span>{totalPrice}</span>
@@ -115,8 +120,7 @@ export default function OrderSummary({ order, totalPrice }: OrderSummaryProps) {
 
         <div className="order-summary-call">
           <p>
-            I.v.m. de lange en zorgvuldige bereidingstijd verzoeken wij u vriendelijk uw bestelling
-            telefonisch door te geven.
+            Alleen telefonische bestellingen mogelijk i.v.m. de lange en zorgvuldige bereidingstijd. Bedankt voor uw begrip!
           </p>
           <a href="tel:0246775634" className="order-summary-phone">
             024 6775634

@@ -1,11 +1,17 @@
 import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import '../css/Navbar-mobile.css'
-import CircleLinksMobile from './CircleLinks-mobile'
 import { basePath, isMobilePreview, mobilePath } from '../utils/mobile'
+
+const links = [
+  { to: '/menu', nl: 'Menu', zh: '菜单' },
+  { to: '/over-ons', nl: 'Over ons', zh: '我们' },
+  { to: '/tijd-locatie', nl: 'Tijd & locatie', zh: '时间地点' },
+]
 
 export default function NavbarMobile() {
   const { pathname } = useLocation()
+  const preview = isMobilePreview(pathname)
   const [open, setOpen] = useState(false)
   const page = basePath(pathname)
   const isDark = page === '/tijd-locatie'
@@ -40,11 +46,27 @@ export default function NavbarMobile() {
         <span />
       </button>
 
-      {open && (
-        <div className="navbar-mobile-panel">
-          <CircleLinksMobile onClick={() => setOpen(false)} />
-        </div>
-      )}
+      {/* tapping anywhere outside the panel closes it */}
+      {open && <div className="navbar-mobile-backdrop" onClick={() => setOpen(false)} />}
+
+      {/* always rendered so it can slide out again, hidden with CSS when closed */}
+      <nav className={`navbar-mobile-dropdown ${open ? 'is-open' : ''}`} aria-hidden={!open}>
+        {links.map((link) => (
+          <NavLink
+            key={link.to}
+            to={mobilePath(link.to, preview)}
+            className="navbar-mobile-link"
+            onClick={() => setOpen(false)}
+            tabIndex={open ? undefined : -1}
+            viewTransition
+          >
+            <span>{link.nl}</span>
+            <span className="navbar-mobile-link-zh" lang="zh">
+              {link.zh}
+            </span>
+          </NavLink>
+        ))}
+      </nav>
     </header>
   )
 }
