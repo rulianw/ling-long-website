@@ -38,7 +38,8 @@ const router = createBrowserRouter([
     ],
   },
 ], {
-  basename: '/ling-long/',
+  // follows `base` in vite.config.ts, so the two can never get out of sync
+  basename: import.meta.env.BASE_URL,
 })
 
 createRoot(document.getElementById('root')!).render(
