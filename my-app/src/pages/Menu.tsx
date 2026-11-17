@@ -17,6 +17,11 @@ export default function Menu() {
     <div className="menu">
       <OrderPopup />
 
+      <p className="alert" role="note">
+          <strong>Let op:</strong> hier bestelt en betaalt u niet online.
+          Stel uw bestelling samen en geef die telefonisch aan ons door.
+      </p>
+      
       <MenuItems
         order={order}
         setPendingItem={setPendingItem}

@@ -18,6 +18,10 @@ export default function MenuMobile() {
   return (
     <div className="menu-mobile">
       <OrderPopup />
+      <p className="alert" role="note">
+          <strong>Let op:</strong> hier bestelt en betaalt u niet online.
+          Stel uw bestelling samen en geef die telefonisch aan ons door.
+      </p>
       <MenuItems
         order={order}
         setPendingItem={setPendingItem}

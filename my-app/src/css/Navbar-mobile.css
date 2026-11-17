@@ -93,30 +93,73 @@
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* full screen panel with the links, sits behind the logo and buttons */
-.navbar-mobile-panel {
+/* invisible layer behind the dropdown, closes it on tap */
+.navbar-mobile-backdrop {
   position: fixed;
   inset: 0;
   z-index: -1;
+}
+
+/* full height panel that slides in from the right, behind the logo and buttons */
+.navbar-mobile-dropdown {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--red);
-  animation: panel-in 0.25s ease both;
+  flex-direction: column;
+  width: min(75vw, 18rem);
+  padding: 6.5rem 0.75rem 1.5rem;
+  background: var(--black);
+  transform: translateX(100%);
+  visibility: hidden;
+  /* wait for the slide to finish before hiding */
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.65, 0.3, 1),
+    visibility 0s linear 0.3s;
 }
 
-@keyframes panel-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.navbar-mobile-dropdown.is-open {
+  transform: translateX(0);
+  visibility: visible;
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.65, 0.3, 1),
+    visibility 0s;
 }
 
-/* on the dark page (tijd & location) the circles are red */
+.navbar-mobile-link {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 8px;
+  color: var(--yellow);
+  font-size: 1rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.navbar-mobile-link + .navbar-mobile-link {
+  border-top: 1px solid rgb(255 255 255 / 0.1);
+}
+
+.navbar-mobile-link-zh {
+  color: var(--green);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.navbar-mobile-link:active,
+.navbar-mobile-link.active {
+  background: rgb(255 255 255 / 0.08);
+}
+
+/* on the dark page (tijd & location) the circles and dropdown are red */
 .navbar-mobile--dark .navbar-mobile-logo,
-.navbar-mobile--dark .navbar-mobile-button {
+.navbar-mobile--dark .navbar-mobile-button,
+.navbar-mobile--dark .navbar-mobile-dropdown {
   background: var(--red);
 }
 
