@@ -1,11 +1,11 @@
-/* two circles on top, one centered below: an even triangle */
+/* two rectangles on top, one centered below */
 .circles-mobile {
-  --circle: 7.5rem;
+  --circle: 8.5rem;
 
   display: grid;
   grid-template-columns: repeat(2, var(--circle));
   justify-content: center;
-  column-gap: 1.75rem;
+  gap: 1rem;
 }
 
 .circles-mobile > :last-child {
@@ -19,8 +19,8 @@
   align-items: center;
   justify-content: center;
   width: var(--circle);
-  aspect-ratio: 1;
-  border-radius: 50%;
+  aspect-ratio: 4 / 3;
+  border-radius: 12px;
   background: var(--black);
   color: var(--yellow);
   font-size: 1.05rem;
@@ -28,10 +28,7 @@
   line-height: 1.15;
   text-align: center;
   text-decoration: none;
-  box-shadow: -5px 5px 0 var(--yellow);
-  transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease;
+  transition: transform 0.15s ease;
   animation: circle-in 0.5s cubic-bezier(0.2, 0.65, 0.3, 1) both;
 }
 
@@ -43,8 +40,7 @@
 }
 
 .circle-mobile:active {
-  transform: translate(-5px, 5px);
-  box-shadow: 0 0 0 var(--yellow);
+  transform: scale(0.96);
 }
 
 .circle-mobile-zh {
